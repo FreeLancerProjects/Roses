@@ -17,4 +17,8 @@
     <string name="Offers">Offers</string>
     <string name="Occasions">Occasions</string>
     <string name="more">More</string>
+    <string name="store_name">Store Name</string>
+    <string name="the_name_of_the_bouquet">The name of the bouquet</string>
+    <string name="price">Price</string>
+    <string name="quantity">Quantity</string>
 </resources>
