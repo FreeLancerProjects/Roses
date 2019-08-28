@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Roses</string>
+    <string name="code">code</string>
+    <string name="sign_up2">Create Account</string>
+    <string name="login">Login</string>
+    <string name="skip">Skip</string>
+    <string name="user_name">User name</string>
+    <string name="user_password">password</string>
+    <string name="user_email">Email</string>
+    <string name="user_phone">Phone</string>
+    <string name="register">Register</string>
+    <string name="si_su">Sign in or create a new account .</string>
+    <string name="new_user">Create new Account .</string>
+    <string name="home">Home</string>
+    <string name="Shops">Stores</string>
+    <string name="department">Departments</string>
+    <string name="Offers">Offers</string>
+    <string name="Occasions">Occasions</string>
+    <string name="more">More</string>
+</resources>
