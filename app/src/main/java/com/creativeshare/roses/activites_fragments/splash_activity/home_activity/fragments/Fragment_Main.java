@@ -15,7 +15,7 @@ import com.creativeshare.roses.R;
 public class Fragment_Main extends Fragment {
 
 
-    public static Fragment_Main newInstance(String param1, String param2) {
+    public static Fragment_Main newInstance() {
         Fragment_Main fragment = new Fragment_Main();
 
         return fragment;

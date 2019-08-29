@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.activity.Login_Activity;
+import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.share.Common;
@@ -154,18 +155,16 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
     }
 
 
-/*
+
     private void checkData() {
 
         String m_name = edt_name.getText().toString().trim();
         String m_phone = edt_phone.getText().toString().trim();
-        String m_email = edt_email.getText().toString().trim();
         String m_password = edt_password.getText().toString().trim();
 
         if (!TextUtils.isEmpty(m_name) &&
                 !TextUtils.isEmpty(m_phone) &&
-                !TextUtils.isEmpty(m_email) &&
-                Patterns.EMAIL_ADDRESS.matcher(m_email).matches() &&
+
                 !TextUtils.isEmpty(m_password) &&
                 !TextUtils.isEmpty(code)
 
@@ -173,15 +172,14 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
             Common.CloseKeyBoard(activity, edt_name);
             edt_name.setError(null);
             edt_phone.setError(null);
-            edt_email.setError(null);
             edt_password.setError(null);
 
 
-            sign_up(m_name, code, m_phone, m_email, m_password);
+            sign_up(m_name, code, m_phone,  m_password);
 
         } else {
             if (TextUtils.isEmpty(m_name)) {
-              //  edt_name.setError(getString(R.string.field_req));
+               edt_name.setError(getString(R.string.field_req));
             } else {
                 edt_name.setError(null);
 
@@ -189,22 +187,14 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
 
 
             if (TextUtils.isEmpty(m_phone)) {
-                //edt_phone.setError(getString(R.string.field_req));
+                edt_phone.setError(getString(R.string.field_req));
             } else {
                 edt_phone.setError(null);
 
             }
 
 
-            if (TextUtils.isEmpty(m_email)) {
-                //edt_email.setError(getString(R.string.field_req));
-            } else if (!Patterns.EMAIL_ADDRESS.matcher(m_email).matches()) {
-                //edt_email.setError(getString(R.string.inv_email));
 
-            } else {
-                edt_email.setError(null);
-
-            }
 
             if (TextUtils.isEmpty(m_password)) {
                 edt_password.setError(getString(R.string.field_req));
@@ -226,12 +216,12 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
     }
 
 
-  private void sign_up(String m_name, String code, String m_phone, String m_email, String m_password) {
+  private void sign_up(String m_name, String code, String m_phone,  String m_password) {
         final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         Api.getService()
-                .Signup(m_email, m_name, m_phone, code.replace("+", "00"), "1", m_password)
+                .Signup( m_name, m_phone, code.replace("+", "00"), "1", m_password)
                 .enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -241,9 +231,7 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
                             preferences = Preferences.getInstance();
                             preferences.create_update_userdata(activity,response.body());
                             activity.NavigateToHomeActivity();
-                        } else if (response.code() == 422) {
-                                Common.CreateSignAlertDialog(activity,getString(R.string.user_exists));
-                        } else {
+                        }  else {
 
                             try {
                                 Log.e("Error_code",response.code()+"_"+response.errorBody().string());
@@ -264,7 +252,7 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
                     }
                 });
     }
-*/
+
 
 
 }

@@ -12,7 +12,7 @@ import com.creativeshare.roses.R;
 
 public class Fragment_More extends Fragment {
 
-    public static Fragment_More newInstance(String param1, String param2) {
+    public static Fragment_More newInstance() {
         Fragment_More fragment = new Fragment_More();
 
         return fragment;
