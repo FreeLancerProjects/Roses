@@ -76,8 +76,11 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
         image_phone_code = view.findViewById(R.id.image_phone_code);
 
         if (current_language.equals("ar")) {
-            image_back.setRotation(180.0f);
             image_phone_code.setRotation(180.0f);
+        }
+        else {
+            image_back.setRotation(180.0f);
+
         }
 
 
