@@ -30,4 +30,11 @@ public interface Service {
                            @Field("software_type") String software_type,
                            @Field("password") String password
     );
+    @FormUrlEncoded
+    @POST("api/login")
+    Call<UserModel> Signin(
+            @Field("phone") String phone,
+            @Field("phone_code") String phone_code,
+            @Field("password") String password
+    );
 }

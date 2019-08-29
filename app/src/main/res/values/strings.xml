@@ -25,6 +25,9 @@
     <string name="wait">Wait...</string>
     <string name="failed">Failed</string>
     <string name="something">Something went haywire</string>
+    <string name="inc_phone_pas">phone or Password InCorrect</string>
+    <string name="user_not_found">This User Not Register</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="stores">stores</string>

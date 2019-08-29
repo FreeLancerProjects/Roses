@@ -26,6 +26,7 @@ import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.share.Common;
+import com.creativeshare.roses.tags.Tags;
 import com.mukesh.countrypicker.Country;
 import com.mukesh.countrypicker.CountryPicker;
 import com.mukesh.countrypicker.listeners.OnCountryPickerListener;
@@ -107,7 +108,7 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
         btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //checkData();
+                checkData();
             }
         });
 
@@ -220,7 +221,7 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
         final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-        Api.getService()
+        Api.getService(Tags.base_url)
                 .Signup( m_name, m_phone, code.replace("+", "00"), "1", m_password)
                 .enqueue(new Callback<UserModel>() {
                     @Override

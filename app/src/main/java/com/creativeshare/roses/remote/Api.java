@@ -1,8 +1,7 @@
 package com.creativeshare.roses.remote;
 
 
-import com.creativeshare.sals.services.Service;
-import com.creativeshare.sals.tags.Tags;
+import com.creativeshare.roses.services.Service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -59,10 +58,6 @@ public class Api {
     }
 
 
-    public static Service getService()
-    {
-        return getRetrofit(Tags.base_url).create(Service.class);
-    }
     public static Service getService(String base_url)
     {
         return getRetrofit(base_url).create(Service.class);
