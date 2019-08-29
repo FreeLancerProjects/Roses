@@ -8,14 +8,15 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.creativeshare.hand_break.R;
-import com.creativeshare.hand_break.activities_fragments.home_activity.activity.HomeActivity;
-import com.creativeshare.hand_break.activities_fragments.sign_in_sign_up_activity.fragments.Fragment_Language;
-import com.creativeshare.hand_break.activities_fragments.sign_in_sign_up_activity.fragments.Fragment_Login;
-import com.creativeshare.hand_break.activities_fragments.sign_in_sign_up_activity.fragments.Fragment_Signup;
-import com.creativeshare.hand_break.language.Language_Helper;
-import com.creativeshare.hand_break.preferences.Preferences;
-import com.creativeshare.hand_break.tags.Tags;
+
+import com.creativeshare.roses.R;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.fragments.Fragment_Language;
+import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.fragments.Fragment_Login;
+import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.fragments.Fragment_Signup;
+import com.creativeshare.roses.language.Language;
+import com.creativeshare.roses.preferences.Preferences;
+import com.creativeshare.roses.tags.Tags;
 
 import io.paperdb.Paper;
 
@@ -33,7 +34,7 @@ public class Login_Activity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context base)
     {
-        super.attachBaseContext(Language_Helper.updateResources(base, Preferences.getInstance().getLanguage(base)));
+        super.attachBaseContext(Language.updateResources(base, Preferences.getInstance().getLanguage(base)));
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +152,7 @@ public class Login_Activity extends AppCompatActivity {
         Paper.book().write("lang",selected_language);
         preferences.create_update_language(this,selected_language);
         preferences.setIsLanguageSelected(this);
-        Language_Helper.setNewLocale(this,selected_language);
+        Language.setNewLocale(this,selected_language);
         Intent intent = getIntent();
         finish();
         startActivity(intent);

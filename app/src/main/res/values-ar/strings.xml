@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">الورود</string>
+    <string name="code">كود</string>
+    <string name="sign_up2">انشاء حساب </string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="skip">تخطى</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="user_password">كلمة المرور</string>
+    <string name="user_email">البريد الالكترونى</string>
+    <string name="user_phone">رقم الجوال</string>
+    <string name="register">تسجيل</string>
+    <string name="si_su">تسجيل الدخول او انشاء حساب جديد</string>
+    <string name="new_user">انشأ حساب جديد .</string>
+
+    <string name="home">الرئيسية</string>
+    <string name="Shops">المحلات</string>
+    <string name="department">الاقسام</string>
+    <string name="Offers">العروض</string>
+    <string name="Occasions">المناسبات</string>
+    <string name="more">المزيد</string>
+    <string name="store_name">اسم المحل</string>
+    <string name="the_name_of_the_bouquet">اسم البوكيه</string>
+    <string name="price">السعر</string>
+    <string name="quantity">الكميه</string>
+    <string name="field_req">الحقل مطلوب</string>
+    <string name="wait">انتظر قليلا...</string>
+    <string name="failed">فشل</string>
+    <string name="something">حدث خطأ ما تحقق من اتصالك بالانترنت</string>
+    <string name="inc_phone_pas">رقم الجوال وا كلمة المرور خطأ</string>
+    <string name="user_not_found">هذا المستخدم لم يسجل من قبل</string>
+    <string name="notifications">الاشعارات</string>
+    <string name="my_profile">حسابى</string>
+    <string name="edit_profile">تعديل الملف الشخصى</string>
+    <string name="language_setting">اعدادات اللغه</string>
+    <string name="terms_of_use">شروط الاستخدام</string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="register_as_a_company">سجل كشركه</string>
+    <string name="logout">تسجيل الخروج</string>
+</resources>

@@ -19,8 +19,7 @@ import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
-import com.creativeshare.roses.share.Common;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 
 import java.util.Locale;
 

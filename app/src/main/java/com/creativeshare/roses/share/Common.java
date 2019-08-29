@@ -23,7 +23,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
-import com.creativeshare.sals.R;
+
+import com.creativeshare.roses.R;
 
 import java.io.File;
 

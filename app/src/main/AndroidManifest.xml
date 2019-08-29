@@ -15,6 +15,7 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
+        android:largeHeap="true"
         android:name=".share.Local"
 
         android:allowBackup="true"

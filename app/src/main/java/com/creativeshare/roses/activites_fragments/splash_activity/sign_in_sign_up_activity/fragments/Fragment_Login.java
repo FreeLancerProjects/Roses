@@ -67,6 +67,8 @@ public class Fragment_Login extends Fragment  implements OnCountryPickerListener
         activity = (Login_Activity) getActivity();
         btn_login = view.findViewById(R.id.btn_login);
         image_phone_code=view.findViewById(R.id.image_phone_code);
+        edt_phone=view.findViewById(R.id.edt_phone);
+        tv_code=view.findViewById(R.id.tv_code);
         tv_skip = view.findViewById(R.id.tv_skip);
         tv_sign_up = view.findViewById(R.id.tv_sign_in);
         edt_password = view.findViewById(R.id.edt_password);
