@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" >
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+    <FrameLayout
+        android:id="@+id/fr1"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp"
+            app:tabBackground="@drawable/select"
+            app:tabMaxWidth="7dp" />
+
+        <ProgressBar
+            android:id="@+id/progBar"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+<androidx.cardview.widget.CardView
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    app:layout_constraintTop_toBottomOf="@+id/fr1"
+    android:layout_marginTop="20dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="2dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    >
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</androidx.recyclerview.widget.RecyclerView>
+</androidx.cardview.widget.CardView>
+   <FrameLayout
+       android:id="@+id/fr2"
+       android:layout_width="match_parent"
+       android:layout_height="160dp"
+       app:layout_constraintTop_toBottomOf="@+id/card"
+       android:layout_marginTop="15dp"
+       >
+     <androidx.recyclerview.widget.RecyclerView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:padding="10dp"
+         >
+
+     </androidx.recyclerview.widget.RecyclerView>
+
+   </FrameLayout>
+    <TextView
+        android:id="@+id/tv_title_stores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/stores"
+        app:layout_constraintTop_toBottomOf="@+id/fr2"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        />
+    <FrameLayout
+        android:id="@+id/fr3"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_stores"
+        android:layout_marginTop="15dp"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </FrameLayout>
+    <TextView
+        android:id="@+id/tv_title_ocasion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Occasions"
+        app:layout_constraintTop_toBottomOf="@+id/fr3"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        />
+    <FrameLayout
+        android:id="@+id/fr4"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_ocasion"
+        android:layout_marginTop="15dp"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
