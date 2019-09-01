@@ -18,7 +18,10 @@ import androidx.fragment.app.FragmentManager;
 
 
 import com.creativeshare.roses.R;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Catogry;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Home;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Main;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_More;
 import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.activity.Login_Activity;
 import com.creativeshare.roses.language.Language;
 import com.creativeshare.roses.models.UserModel;
@@ -49,6 +52,9 @@ public class HomeActivity extends AppCompatActivity {
     private UserModel userModel;
     private final String gps_perm = Manifest.permission.ACCESS_FINE_LOCATION;
     private final int gps_req = 22;
+    private Fragment_More fragment_more;
+    private Fragment_Main fragment_main;
+    private Fragment_Catogry fragment_catogry;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -110,6 +116,73 @@ public class HomeActivity extends AppCompatActivity {
 
         }
 
+    }
+    public void DisplayFragmentMain() {
+        if (fragment_main == null) {
+            fragment_main = Fragment_Main.newInstance();
+        }
+        if (fragment_more != null && fragment_more.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_more).commit();
+        }
+        if (fragment_catogry != null && fragment_catogry.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_catogry).commit();
+        }
+
+
+        if (fragment_main.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_main).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_main_child, fragment_main, "fragment_main").addToBackStack("fragment_main").commit();
+
+        }
+        if (fragment_home != null && fragment_home.isAdded()) {
+            fragment_home.updateBottomNavigationPosition(0);
+        }
+    }
+    public void DisplayFragmentCatogry() {
+        if (fragment_catogry == null) {
+            fragment_catogry = Fragment_Catogry.newInstance();
+        }
+        if (fragment_more != null && fragment_more.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_more).commit();
+        }
+        if (fragment_main != null && fragment_main.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_main).commit();
+        }
+
+
+        if (fragment_catogry.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_catogry).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_main_child, fragment_catogry, "fragment_catogry").addToBackStack("fragment_catogry").commit();
+
+        }
+        if (fragment_home != null && fragment_home.isAdded()) {
+            fragment_home.updateBottomNavigationPosition(2);
+        }
+    }
+
+    public void DisplayFragmentMore() {
+        if (fragment_more == null) {
+            fragment_more = Fragment_More.newInstance();
+        }
+        if (fragment_main != null && fragment_main.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_main).commit();
+        }
+        if (fragment_catogry != null && fragment_catogry.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_catogry).commit();
+        }
+
+
+        if (fragment_more.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_more).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_main_child, fragment_more, "fragment_more").addToBackStack("fragment_more").commit();
+
+        }
+        if (fragment_home != null && fragment_home.isAdded()) {
+            fragment_home.updateBottomNavigationPosition(3);
+        }
     }
 }
 

@@ -62,22 +62,17 @@ public class Fragment_Home extends Fragment {
             public boolean onTabSelected(int position, boolean wasSelected) {
                 switch (position) {
                     case 0:
-                      //  homeActivity.DisplayFragmentMain();
+                        homeActivity.DisplayFragmentMain();
                         break;
                     case 1:
-                        if (userModel != null) {
-                        //    homeActivity.DisplayFragmentnotifications();
-                        } else {
-                       //     Common.CreateUserNotSignInAlertDialog(homeActivity);
-                        }
 
                         break;
                     case 2:
-                        //homeActivity.DisplayFragmentSearch();
+                        homeActivity.DisplayFragmentCatogry();
 
                         break;
                     case 3:
-                       // homeActivity.DisplayFragmentMore();
+                        homeActivity.DisplayFragmentMore();
                         break;
 
                 }
@@ -88,11 +83,10 @@ public class Fragment_Home extends Fragment {
 
     private void setUpBottomNavigation() {
 
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(getString(R.string.Shops), R.drawable.shops);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(getString(R.string.department), R.drawable.department);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(getString(R.string.Offers), R.drawable.offers);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(getString(R.string.Occasions), R.drawable.occasion);
-        AHBottomNavigationItem item5 = new AHBottomNavigationItem(getString(R.string.more), R.drawable.more);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(getString(R.string.home), R.drawable.shops);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(getString(R.string.Shops), R.drawable.shops);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(getString(R.string.department), R.drawable.department);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(getString(R.string.more), R.drawable.more);
 
         ah_bottom_nav.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
         ah_bottom_nav.setDefaultBackgroundColor(ContextCompat.getColor(homeActivity, R.color.white));
@@ -118,15 +112,12 @@ public class Fragment_Home extends Fragment {
             tv_title.setText(getResources().getString(R.string.Shops));
         }
         else if (pos==2){
-            tv_title.setText(getResources().getString(R.string.Offers));
+            tv_title.setText(getResources().getString(R.string.department));
         }
         else if (pos==3){
-            tv_title.setText(getResources().getString(R.string.Occasions));
-        }
-        else if(pos==4){
             tv_title.setText(getResources().getString(R.string.more));
-
         }
+
     }
 
     public static Fragment_Home newInstance() {
