@@ -73,7 +73,7 @@ public class HomeActivity extends AppCompatActivity {
             //           CheckPermission();
 
             DisplayFragmentHome();
-            //         DisplayFragmentMain();
+                     DisplayFragmentMain();
         }
 
         if (userModel != null) {

@@ -3,6 +3,8 @@ package com.creativeshare.roses.services;
 
 
 
+import com.creativeshare.roses.models.Catogries_Model;
+import com.creativeshare.roses.models.Slider_Model;
 import com.creativeshare.roses.models.UserModel;
 
 import java.util.List;
@@ -36,5 +38,13 @@ public interface Service {
             @Field("phone") String phone,
             @Field("phone_code") String phone_code,
             @Field("password") String password
+    );
+    @GET("api/slider")
+    Call<Slider_Model> get_slider();
+    @GET("api/categories")
+    Call<Catogries_Model> getDepartment(
+            @Query("page") int page
+
+
     );
 }

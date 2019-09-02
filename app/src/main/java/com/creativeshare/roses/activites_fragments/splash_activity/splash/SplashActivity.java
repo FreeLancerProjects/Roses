@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.creativeshare.roses.R;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.activity.Login_Activity;
 import com.creativeshare.roses.language.Language;
 import com.creativeshare.roses.preferences.Preferences;
@@ -52,8 +53,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 if(session.equals(Tags.session_login)){
-                  //  Intent intent = new Intent(SplashActivity.this, Home_Activity.class);
-                    //startActivity(intent);
+                Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+               startActivity(intent);
                 }
                 else {
                     Intent intent = new Intent(SplashActivity.this, Login_Activity.class);

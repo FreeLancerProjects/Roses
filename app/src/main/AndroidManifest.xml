@@ -44,7 +44,16 @@
         </activity>
         <activity
             android:name=".activites_fragments.splash_activity.sign_in_sign_up_activity.activity.Login_Activity"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:configChanges="orientation|screenSize|keyboardHidden"
+
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+
+        </activity>
+        <activity
+            android:name=".activites_fragments.splash_activity.home_activity.activity.HomeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
         </activity>
     </application>
