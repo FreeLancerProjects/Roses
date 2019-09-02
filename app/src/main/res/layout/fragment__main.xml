@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-  xmlns:android="http://schemas.android.com/apk/res/android" >
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/coord1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
->
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffffff">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll">
     <FrameLayout
         android:id="@+id/fr1"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        app:layout_constraintTop_toTopOf="parent"
         >
 
         <androidx.viewpager.widget.ViewPager
@@ -36,94 +41,56 @@
             android:layout_height="25dp"
             android:layout_gravity="center" />
     </FrameLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-<androidx.cardview.widget.CardView
-    android:id="@+id/card"
-    android:layout_width="match_parent"
-    android:layout_height="80dp"
-    app:layout_constraintTop_toBottomOf="@+id/fr1"
-    android:layout_marginTop="20dp"
-    app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="2dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    >
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-</androidx.recyclerview.widget.RecyclerView>
-</androidx.cardview.widget.CardView>
-   <FrameLayout
-       android:id="@+id/fr2"
-       android:layout_width="match_parent"
-       android:layout_height="160dp"
-       app:layout_constraintTop_toBottomOf="@+id/card"
-       android:layout_marginTop="15dp"
-       >
-     <androidx.recyclerview.widget.RecyclerView
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:padding="10dp"
-         >
-
-     </androidx.recyclerview.widget.RecyclerView>
-
-   </FrameLayout>
-    <TextView
-        android:id="@+id/tv_title_stores"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Shops"
-        app:layout_constraintTop_toBottomOf="@+id/fr2"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:paddingRight="8dp"
-        android:paddingLeft="8dp"
-        />
-    <FrameLayout
-        android:id="@+id/fr3"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_stores"
-        android:layout_marginTop="15dp"
-        >
-        <androidx.recyclerview.widget.RecyclerView
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             >
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.cardview.widget.CardView>
 
-    </FrameLayout>
-    <TextView
-        android:id="@+id/tv_title_ocasion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Occasions"
-        app:layout_constraintTop_toBottomOf="@+id/fr3"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:paddingRight="8dp"
-        android:paddingLeft="8dp"
-        />
-    <FrameLayout
-        android:id="@+id/fr4"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_ocasion"
-        android:layout_marginTop="15dp"
-        >
-        <androidx.recyclerview.widget.RecyclerView
+        <TextView
+            android:id="@+id/tv_title_stores"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Shops"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            />
+        <FrameLayout
+            android:id="@+id/fr3"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="15dp"
             >
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                >
 
-        </androidx.recyclerview.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
-    </FrameLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
