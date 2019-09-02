@@ -158,7 +158,7 @@ public class HomeActivity extends AppCompatActivity {
 
         }
         if (fragment_home != null && fragment_home.isAdded()) {
-            fragment_home.updateBottomNavigationPosition(2);
+            fragment_home.updateBottomNavigationPosition(1);
         }
     }
 

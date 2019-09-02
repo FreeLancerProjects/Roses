@@ -65,10 +65,10 @@ public class Fragment_Home extends Fragment {
                         homeActivity.DisplayFragmentMain();
                         break;
                     case 1:
+                        homeActivity.DisplayFragmentCatogry();
 
                         break;
                     case 2:
-                        homeActivity.DisplayFragmentCatogry();
 
                         break;
                     case 3:
@@ -83,9 +83,9 @@ public class Fragment_Home extends Fragment {
 
     private void setUpBottomNavigation() {
 
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(getString(R.string.home), R.drawable.shops);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(getString(R.string.Shops), R.drawable.shops);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(getString(R.string.department), R.drawable.department);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(getString(R.string.Shops), R.drawable.shops);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(getString(R.string.department), R.drawable.department);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(getString(R.string.my_profile), R.drawable.profile);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(getString(R.string.more), R.drawable.more);
 
         ah_bottom_nav.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
@@ -106,13 +106,13 @@ public class Fragment_Home extends Fragment {
     public void updateBottomNavigationPosition(int pos) {
         ah_bottom_nav.setCurrentItem(pos, false);
         if(pos==0){
-            tv_title.setText(getResources().getString(R.string.home));
-        }
-        else if(pos==1){
             tv_title.setText(getResources().getString(R.string.Shops));
         }
-        else if (pos==2){
+        else if(pos==1){
             tv_title.setText(getResources().getString(R.string.department));
+        }
+        else if (pos==2){
+            tv_title.setText(getResources().getString(R.string.my_profile));
         }
         else if (pos==3){
             tv_title.setText(getResources().getString(R.string.more));
