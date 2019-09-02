@@ -159,7 +159,7 @@ public class Fragment_Main extends Fragment {
                     int total_item = market_adapter.getItemCount();
                     int last_item_pos = gridLayoutManager.findLastCompletelyVisibleItemPosition();
                     //  Log.e("msg", total_item + "  " + last_item_pos);
-                    if (last_item_pos >= (total_item - 5) && !isLoading ) {
+                    if (last_item_pos >= (total_item - 15) && !isLoading ) {
                         isLoading = true;
                         dataListmarkets.add(null);
                         market_adapter.notifyItemInserted(dataListmarkets.size() - 1);
