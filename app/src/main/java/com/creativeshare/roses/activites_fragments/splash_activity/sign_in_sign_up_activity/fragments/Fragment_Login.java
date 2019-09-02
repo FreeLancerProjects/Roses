@@ -33,6 +33,7 @@ import com.mukesh.countrypicker.listeners.OnCountryPickerListener;
 import java.io.IOException;
 import java.util.Locale;
 
+import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,6 +46,7 @@ public class Fragment_Login extends Fragment  implements OnCountryPickerListener
     private EditText edt_phone, edt_password;
     private CountryPicker picker;
     private String code = "";
+    private String current_language;
 
     private Login_Activity activity;
     private Preferences preferences;
@@ -65,6 +67,8 @@ public class Fragment_Login extends Fragment  implements OnCountryPickerListener
 
     private void initView(final View view) {
         activity = (Login_Activity) getActivity();
+        Paper.init(activity);
+        current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
         btn_login = view.findViewById(R.id.btn_login);
         image_phone_code=view.findViewById(R.id.image_phone_code);
         edt_phone=view.findViewById(R.id.edt_phone);
@@ -73,7 +77,9 @@ public class Fragment_Login extends Fragment  implements OnCountryPickerListener
         tv_sign_up = view.findViewById(R.id.tv_sign_in);
         edt_password = view.findViewById(R.id.edt_password);
         CreateCountryDialog();
-
+        if (current_language.equals("ar")) {
+            image_phone_code.setRotation(180.0f);
+        }
         tv_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,7 +193,7 @@ public class Fragment_Login extends Fragment  implements OnCountryPickerListener
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .Signin( m_phone, code,m_password)
+                .Signin( m_phone, code.replace("+","00"),m_password)
                 .enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {

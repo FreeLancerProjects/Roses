@@ -4,6 +4,7 @@ package com.creativeshare.roses.services;
 
 
 import com.creativeshare.roses.models.Catogries_Model;
+import com.creativeshare.roses.models.Markets_Model;
 import com.creativeshare.roses.models.Slider_Model;
 import com.creativeshare.roses.models.UserModel;
 
@@ -43,6 +44,12 @@ public interface Service {
     Call<Slider_Model> get_slider();
     @GET("api/categories")
     Call<Catogries_Model> getDepartment(
+            @Query("page") int page
+
+
+    );
+    @GET("api/markets")
+    Call<Markets_Model> getMarkets(
             @Query("page") int page
 
 
