@@ -19,9 +19,11 @@ import androidx.fragment.app.FragmentManager;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Catogry;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Client_profile;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Home;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Main;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_More;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Shop_profile;
 import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.activity.Login_Activity;
 import com.creativeshare.roses.language.Language;
 import com.creativeshare.roses.models.UserModel;
@@ -45,16 +47,15 @@ import retrofit2.Response;
 public class HomeActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private int fragment_count = 0;
-    private Fragment_Home fragment_home;
-
     private String cuurent_language;
     private Preferences preferences;
     private UserModel userModel;
-    private final String gps_perm = Manifest.permission.ACCESS_FINE_LOCATION;
-    private final int gps_req = 22;
-    private Fragment_More fragment_more;
+    private Fragment_Home fragment_home;
     private Fragment_Main fragment_main;
     private Fragment_Catogry fragment_catogry;
+    private Fragment_Client_profile fragment_client_profile;
+    private Fragment_More fragment_more;
+    private Fragment_Shop_profile fragment_shop_profile;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -73,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
             //           CheckPermission();
 
             DisplayFragmentHome();
-                     DisplayFragmentMain();
+            DisplayFragmentMain();
         }
 
         if (userModel != null) {
@@ -117,6 +118,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+
     public void DisplayFragmentMain() {
         if (fragment_main == null) {
             fragment_main = Fragment_Main.newInstance();
@@ -127,7 +129,9 @@ public class HomeActivity extends AppCompatActivity {
         if (fragment_catogry != null && fragment_catogry.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_catogry).commit();
         }
-
+        if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_client_profile).commit();
+        }
 
         if (fragment_main.isAdded()) {
             fragmentManager.beginTransaction().show(fragment_main).commit();
@@ -139,6 +143,7 @@ public class HomeActivity extends AppCompatActivity {
             fragment_home.updateBottomNavigationPosition(0);
         }
     }
+
     public void DisplayFragmentCatogry() {
         if (fragment_catogry == null) {
             fragment_catogry = Fragment_Catogry.newInstance();
@@ -149,7 +154,9 @@ public class HomeActivity extends AppCompatActivity {
         if (fragment_main != null && fragment_main.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_main).commit();
         }
-
+        if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_client_profile).commit();
+        }
 
         if (fragment_catogry.isAdded()) {
             fragmentManager.beginTransaction().show(fragment_catogry).commit();
@@ -159,6 +166,31 @@ public class HomeActivity extends AppCompatActivity {
         }
         if (fragment_home != null && fragment_home.isAdded()) {
             fragment_home.updateBottomNavigationPosition(1);
+        }
+    }
+
+    public void DisplayFragmentclientprofile() {
+        if (fragment_client_profile == null) {
+            fragment_client_profile = Fragment_Client_profile.newInstance();
+        }
+        if (fragment_main != null && fragment_main.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_main).commit();
+        }
+        if (fragment_catogry != null && fragment_catogry.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_catogry).commit();
+        }
+
+        if (fragment_more != null && fragment_more.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_more).commit();
+        }
+        if (fragment_client_profile.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_client_profile).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_main_child, fragment_client_profile, "fragment_client_profile").addToBackStack("fragment_client_profile").commit();
+
+        }
+        if (fragment_home != null && fragment_home.isAdded()) {
+            fragment_home.updateBottomNavigationPosition(2);
         }
     }
 
@@ -173,7 +205,9 @@ public class HomeActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().hide(fragment_catogry).commit();
         }
 
-
+        if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_client_profile).commit();
+        }
         if (fragment_more.isAdded()) {
             fragmentManager.beginTransaction().show(fragment_more).commit();
         } else {
@@ -184,12 +218,24 @@ public class HomeActivity extends AppCompatActivity {
             fragment_home.updateBottomNavigationPosition(3);
         }
     }
-}
+
+    public void DisplayFragmentShopprofile(int id) {
+        fragment_count += 1;
+        if (fragment_shop_profile == null) {
+            fragment_shop_profile = Fragment_Shop_profile.newInstance(id);
+        }
+
+        if (fragment_shop_profile.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_shop_profile).commit();
+
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_shop_profile, "fragment_shop_profile").addToBackStack("fragment_shop_profile").commit();
+
+        }
+
+    }
 
 
-
-
-  /*
     public void onBackPressed() {
         Back();
     }
@@ -203,7 +249,7 @@ public class HomeActivity extends AppCompatActivity {
             if (fragment_home != null && fragment_home.isVisible()) {
                 if (fragment_main != null && fragment_main.isVisible()) {
                     if (userModel == null) {
-            Common.CreateUserNotSignInAlertDialog(this);
+                        //   Common.CreateUserNotSignInAlertDialog(this);
                     } else {
                         finish();
                     }
@@ -217,7 +263,5 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-   */
 
-
-
+}

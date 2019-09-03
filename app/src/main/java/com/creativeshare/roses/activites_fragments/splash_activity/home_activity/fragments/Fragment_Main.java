@@ -396,4 +396,8 @@ progBar.setVisibility(View.GONE);
                     }
                 });
     }
+
+    public void showmarket(int id) {
+        activity.DisplayFragmentShopprofile(id);
+    }
 }

@@ -54,7 +54,6 @@ public class Fragment_Home extends Fragment {
         tv_title = view.findViewById(R.id.tv_title);
 
 
-
         setUpBottomNavigation();
         updateBottomNavigationPosition(0);
         ah_bottom_nav.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
@@ -69,7 +68,7 @@ public class Fragment_Home extends Fragment {
 
                         break;
                     case 2:
-
+                        homeActivity.DisplayFragmentclientprofile();
                         break;
                     case 3:
                         homeActivity.DisplayFragmentMore();
@@ -105,16 +104,13 @@ public class Fragment_Home extends Fragment {
 
     public void updateBottomNavigationPosition(int pos) {
         ah_bottom_nav.setCurrentItem(pos, false);
-        if(pos==0){
+        if (pos == 0) {
             tv_title.setText(getResources().getString(R.string.Shops));
-        }
-        else if(pos==1){
+        } else if (pos == 1) {
             tv_title.setText(getResources().getString(R.string.department));
-        }
-        else if (pos==2){
+        } else if (pos == 2) {
             tv_title.setText(getResources().getString(R.string.my_profile));
-        }
-        else if (pos==3){
+        } else if (pos == 3) {
             tv_title.setText(getResources().getString(R.string.more));
         }
 
