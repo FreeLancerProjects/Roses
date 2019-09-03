@@ -230,7 +230,7 @@ public class Fragment_Main extends Fragment {
                 .enqueue(new Callback<Catogries_Model>() {
                     @Override
                     public void onResponse(Call<Catogries_Model> call, Response<Catogries_Model> response) {
-                        progBar.setVisibility(View.GONE);
+                     //   progBar.setVisibility(View.GONE);
                         if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                             dataList.clear();
                             dataList.addAll(response.body().getData());
