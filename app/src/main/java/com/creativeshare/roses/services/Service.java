@@ -5,6 +5,7 @@ package com.creativeshare.roses.services;
 
 import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Markets_Model;
+import com.creativeshare.roses.models.Offer_Model;
 import com.creativeshare.roses.models.Slider_Model;
 import com.creativeshare.roses.models.UserModel;
 
@@ -45,6 +46,24 @@ public interface Service {
     @GET("api/categories")
     Call<Catogries_Model> getDepartment(
             @Query("page") int page
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/market/cats")
+    Call<Catogries_Model> getDepartment(
+            @Field("page") int page,
+            @Field("market_id") int market_id
+
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/market/offers")
+    Call<Offer_Model> getoffer(
+            @Field("page") int page,
+            @Field("market_id") int market_id
+
 
 
     );
