@@ -56,6 +56,7 @@ private int market_id;
         Fragment_Shop_profile fragment_shop_profile = new Fragment_Shop_profile();
         Bundle bundle = new Bundle();
         bundle.putInt(Tag, id);
+
         fragment_shop_profile.setArguments(bundle);
         return fragment_shop_profile;
     }
@@ -67,6 +68,7 @@ private int market_id;
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shop_profile, container, false);
         initview(view);
+        getsinglemarket();
         return view;
     }
 
