@@ -210,4 +210,7 @@ private int market_id;
     }
 
 
+    public void setid(int market_id) {
+        this.market_id=market_id;
+    }
 }

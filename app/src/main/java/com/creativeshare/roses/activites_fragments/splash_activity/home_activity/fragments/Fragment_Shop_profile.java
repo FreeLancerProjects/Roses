@@ -1,20 +1,40 @@
 package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
 
+import android.app.ProgressDialog;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.adapter.PageAdapter;
+import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
+import com.creativeshare.roses.remote.Api;
+import com.creativeshare.roses.share.Common;
+import com.creativeshare.roses.tags.Tags;
+import com.google.android.material.tabs.TabLayout;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_Shop_profile extends Fragment {
     final static private String Tag = "market_id";
@@ -23,6 +43,15 @@ private int market_id;
     private Preferences preferences;
     private String current_lang;
     private UserModel userModel;
+
+    private Fragment_Shop_Department fragment_shop_department;
+   private Fragment_Shop_Offers fragment_shop_offers;
+    private List<Fragment> fragmentList;
+    private PageAdapter pageAdapter;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private TextView tv_name,tv_address;
+    private ImageView im_banner;
     public static Fragment_Shop_profile newInstance(int id) {
         Fragment_Shop_profile fragment_shop_profile = new Fragment_Shop_profile();
         Bundle bundle = new Bundle();
@@ -37,19 +66,97 @@ private int market_id;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shop_profile, container, false);
-        initview();
+        initview(view);
         return view;
     }
 
-    private void initview() {
+    private void initview(View view) {
+        fragmentList = new ArrayList<>();
+
         market_id=getArguments().getInt(Tag);
         homeActivity = (HomeActivity) getActivity();
         Paper.init(homeActivity);
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(homeActivity);
         current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        tabLayout = view.findViewById(R.id.tab_orders);
+        viewPager = view.findViewById(R.id.pager);
+        tv_name=view.findViewById(R.id.tv_name);
+        tv_address=view.findViewById(R.id.tv_address);
+        im_banner=view.findViewById(R.id.im_banner);
+        intitfragmentspage();
+        pageAdapter = new PageAdapter(homeActivity.getSupportFragmentManager());
+        pageAdapter.addfragments(fragmentList);
+        viewPager.setAdapter(pageAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 
+
+    private void intitfragmentspage() {
+        fragment_shop_department = Fragment_Shop_Department.newInstance();
+        fragment_shop_offers = Fragment_Shop_Offers.newInstance();
+        fragmentList.add(fragment_shop_department);
+        fragmentList.add(fragment_shop_offers);
+        fragment_shop_offers.setid(market_id);
+        fragment_shop_department.setid(market_id);
+    }
+    private void getsinglemarket() {
+        final ProgressDialog dialog = Common.createProgressDialog(homeActivity,getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .getsinglemarkey( market_id)
+                .enqueue(new Callback<Market_model>() {
+                    @Override
+                    public void onResponse(Call<Market_model> call, Response<Market_model> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()&&response.body()!=null) {
+updateprofile(response.body());
+
+                        }  else {
+                            Common.CreateSignAlertDialog(homeActivity,getString(R.string.failed));
+
+                            try {
+                                Log.e("Error_code",response.code()+"_"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Market_model> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            Toast.makeText(homeActivity,getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Log.e("Error",t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+    }
+
+    private void updateprofile(Market_model body) {
+tv_name.setText(body.getData().getName());
+tv_address.setText(body.getData().getAddress());
+        Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL+body.getData().getBanner())).fit().placeholder(R.drawable.profile_client).into(im_banner);
+    }
 
 }
