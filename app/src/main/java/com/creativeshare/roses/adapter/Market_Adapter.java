@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Main;
 import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Markets_Model;
 import com.creativeshare.roses.tags.Tags;
@@ -36,6 +37,7 @@ public class Market_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Context context;
     private HomeActivity activity;
     private Fragment fragment;
+    private Fragment_Main fragment_main;
 private String current_lang;
     public Market_Adapter(List<Markets_Model.Data> data, Context context, Fragment fragment) {
 
@@ -74,9 +76,17 @@ private String current_lang;
     ((MyHolder) holder).tv_title.setText(data1.getName());
 
 
-            Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getBanner())).fit().into(  ((MyHolder) holder).im_depart);
+            Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getLogo())).fit().into(  ((MyHolder) holder).im_depart);
 
-
+((MyHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        if(fragment instanceof  Fragment_Main){
+            fragment_main=(Fragment_Main)fragment;
+            fragment_main.showmarket(data.get((holder.getLayoutPosition())).getId());
+        }
+    }
+});
             //Log.e("msg",advertsing.getMain_image());
         } else {
             LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;
