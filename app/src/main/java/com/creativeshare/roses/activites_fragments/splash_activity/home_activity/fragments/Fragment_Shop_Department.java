@@ -23,9 +23,11 @@ import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.Catogries_Adapter;
 import com.creativeshare.roses.adapter.Market_Adapter;
+import com.creativeshare.roses.adapter.Shop_Department_Adapter;
 import com.creativeshare.roses.adapter.SlidingImage_Adapter;
 import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Markets_Model;
+import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.models.Slider_Model;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.tags.Tags;
@@ -47,15 +49,16 @@ public class Fragment_Shop_Department extends Fragment {
 
     private HomeActivity activity;
 
-    private ProgressBar progBar, progBarAds;
+    private ProgressBar progBar;
     private RecyclerView rec_depart;
     private List<Catogries_Model.Data> dataList;
-    private Catogries_Adapter catogries_adapter;
+    private Shop_Department_Adapter shop_department_adapter;
     private GridLayoutManager gridLayoutManager;
-private LinearLayout ll_no_store;
+    private LinearLayout ll_no_store;
     private boolean isLoading = false;
     private int current_page_depart = 1;
-private int market_id;
+    private int market_id;
+
     public static Fragment_Shop_Department newInstance() {
         Fragment_Shop_Department fragment = new Fragment_Shop_Department();
 
@@ -66,26 +69,24 @@ private int market_id;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-    View view= inflater.inflate(R.layout.fragment_shop_departments, container, false);
-    initview(view);
-    getDepartments();
-    return view;
+        View view = inflater.inflate(R.layout.fragment_shop_departments, container, false);
+        initview(view);
+        getDepartments();
+        return view;
     }
 
 
     private void initview(View view) {
-        dataList=new ArrayList<>();
+        dataList = new ArrayList<>();
         activity = (HomeActivity) getActivity();
 
-
+        market_id = Send_Data.getMarket_id();
         progBar = view.findViewById(R.id.progBar2);
-        ll_no_store=view.findViewById(R.id.ll_no_store);
-        rec_depart=view.findViewById(R.id.rec_departments);
+        ll_no_store = view.findViewById(R.id.ll_no_store);
+        rec_depart = view.findViewById(R.id.rec_departments);
 
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
-        progBarAds = view.findViewById(R.id.progBar);
-        progBarAds.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
         progBar.setVisibility(View.GONE);
         rec_depart.setDrawingCacheEnabled(true);
@@ -93,10 +94,10 @@ private int market_id;
         rec_depart.setItemViewCacheSize(25);
 
 
-        gridLayoutManager=new GridLayoutManager(activity,3);
+        gridLayoutManager = new GridLayoutManager(activity, 3);
         rec_depart.setLayoutManager(gridLayoutManager);
-        catogries_adapter=new Catogries_Adapter(dataList,activity,this);
-        rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        shop_department_adapter = new Shop_Department_Adapter(dataList, activity, this);
+     /*   rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -115,9 +116,9 @@ private int market_id;
                     }
                 }
             }
-        });
+        });*/
 
-        rec_depart.setAdapter(catogries_adapter);
+        rec_depart.setAdapter(shop_department_adapter);
     }
 
     public void getDepartments() {
@@ -125,8 +126,9 @@ private int market_id;
 
         // rec_sent.setVisibility(View.GONE);
 
+        progBar.setVisibility(View.VISIBLE);
         Api.getService(Tags.base_url)
-                .getDepartment(1,market_id)
+                .getDepartment(market_id)
                 .enqueue(new Callback<Catogries_Model>() {
                     @Override
                     public void onResponse(Call<Catogries_Model> call, Response<Catogries_Model> response) {
@@ -136,13 +138,13 @@ private int market_id;
                             dataList.addAll(response.body().getData());
                             if (response.body().getData().size() > 0) {
                                 // rec_sent.setVisibility(View.VISIBLE);
-
-                             //   ll_no_order.setVisibility(View.GONE);
-                                catogries_adapter.notifyDataSetChanged();
+                                Log.e("sss", response.body().getData().get(0).getAr_title());
+                                  ll_no_store.setVisibility(View.GONE);
+                                shop_department_adapter.notifyDataSetChanged();
                                 //   total_page = response.body().getMeta().getLast_page();
 
                             } else {
-                              //  ll_no_order.setVisibility(View.VISIBLE);
+                                  ll_no_store.setVisibility(View.VISIBLE);
 
                             }
                         } else {
@@ -169,7 +171,7 @@ private int market_id;
                 });
 
     }
-    private void loadMore(int page) {
+  /*  private void loadMore(int page) {
         Api.getService(Tags.base_url)
                 .getDepartment(page,market_id)
                 .enqueue(new Callback<Catogries_Model>() {
@@ -208,9 +210,7 @@ private int market_id;
                     }
                 });
     }
+*/
 
 
-    public void setid(int market_id) {
-        this.market_id=market_id;
-    }
 }

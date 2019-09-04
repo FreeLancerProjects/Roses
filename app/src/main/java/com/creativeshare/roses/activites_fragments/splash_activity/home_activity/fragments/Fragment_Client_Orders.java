@@ -74,8 +74,7 @@ private int market_id;
 
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
-        progBarAds = view.findViewById(R.id.progBar);
-        progBarAds.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+
 
         progBar.setVisibility(View.GONE);
         rec_depart.setDrawingCacheEnabled(true);
@@ -114,7 +113,7 @@ private int market_id;
         //   Common.CloseKeyBoard(homeActivity, edt_name);
 
         // rec_sent.setVisibility(View.GONE);
-
+progBar.setVisibility(View.VISIBLE);
         Api.getService(Tags.base_url)
                 .getoffer(1,market_id)
                 .enqueue(new Callback<Offer_Model>() {

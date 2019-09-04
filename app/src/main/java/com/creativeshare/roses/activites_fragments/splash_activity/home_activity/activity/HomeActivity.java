@@ -221,9 +221,9 @@ public class HomeActivity extends AppCompatActivity {
 
     public void DisplayFragmentShopprofile(int id) {
         fragment_count += 1;
-        if (fragment_shop_profile == null) {
+
             fragment_shop_profile = Fragment_Shop_profile.newInstance(id);
-        }
+
 
         if (fragment_shop_profile.isAdded()) {
             fragmentManager.beginTransaction().show(fragment_shop_profile).commit();

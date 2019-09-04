@@ -1,5 +1,6 @@
 package com.creativeshare.roses.adapter;
 
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -15,6 +16,9 @@ public class PageAdapter extends FragmentPagerAdapter {
     }
 public void addfragments(List<Fragment> fragmentList){
         this.fragmentList.addAll(fragmentList);
+    //Log.e("kjjj",this.fragmentList.size()+"");
+
+
 }
     @Override
     public Fragment getItem(int position) {
@@ -25,4 +29,5 @@ public void addfragments(List<Fragment> fragmentList){
     public int getCount() {
         return fragmentList.size();
     }
+
 }

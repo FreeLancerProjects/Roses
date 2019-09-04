@@ -74,9 +74,6 @@ private int market_id;
 
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
-        progBarAds = view.findViewById(R.id.progBar);
-        progBarAds.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
-
         progBar.setVisibility(View.GONE);
         rec_depart.setDrawingCacheEnabled(true);
         rec_depart.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
@@ -86,7 +83,7 @@ private int market_id;
         gridLayoutManager=new GridLayoutManager(activity,3);
         rec_depart.setLayoutManager(gridLayoutManager);
         catogries_adapter=new Catogries_Adapter(dataList,activity,this);
-        rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -105,7 +102,7 @@ private int market_id;
                     }
                 }
             }
-        });
+        });*/
 
         rec_depart.setAdapter(catogries_adapter);
     }
@@ -116,7 +113,7 @@ private int market_id;
         // rec_sent.setVisibility(View.GONE);
 
         Api.getService(Tags.base_url)
-                .getDepartment(1,market_id)
+                .getDepartment(market_id)
                 .enqueue(new Callback<Catogries_Model>() {
                     @Override
                     public void onResponse(Call<Catogries_Model> call, Response<Catogries_Model> response) {
@@ -159,9 +156,10 @@ private int market_id;
                 });
 
     }
+    /*
     private void loadMore(int page) {
         Api.getService(Tags.base_url)
-                .getDepartment(page,market_id)
+                .getDepartment(market_id)
                 .enqueue(new Callback<Catogries_Model>() {
                     @Override
                     public void onResponse(Call<Catogries_Model> call, Response<Catogries_Model> response) {
@@ -197,7 +195,7 @@ private int market_id;
                         }
                     }
                 });
-    }
+    }*/
 
 
     public void setid(int market_id) {

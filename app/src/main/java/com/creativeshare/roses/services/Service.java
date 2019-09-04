@@ -46,7 +46,7 @@ public interface Service {
     Call<Slider_Model> get_slider();
     @GET("api/categories")
     Call<Catogries_Model> getDepartment(
-            @Query("page") int page
+
 
 
     );
@@ -62,7 +62,6 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/market/cats")
     Call<Catogries_Model> getDepartment(
-            @Field("page") int page,
             @Field("market_id") int market_id
 
 

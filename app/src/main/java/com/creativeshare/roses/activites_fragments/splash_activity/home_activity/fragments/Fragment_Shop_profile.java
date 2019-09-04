@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -18,6 +19,7 @@ import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.PageAdapter;
 import com.creativeshare.roses.models.Market_model;
+import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
@@ -46,6 +48,7 @@ private int market_id;
 
     private Fragment_Shop_Department fragment_shop_department;
    private Fragment_Shop_Offers fragment_shop_offers;
+
     private List<Fragment> fragmentList;
     private PageAdapter pageAdapter;
     private TabLayout tabLayout;
@@ -76,6 +79,8 @@ private int market_id;
         fragmentList = new ArrayList<>();
 
         market_id=getArguments().getInt(Tag);
+        Send_Data.setMarket_id(this.market_id);
+
         homeActivity = (HomeActivity) getActivity();
         Paper.init(homeActivity);
         preferences = Preferences.getInstance();
@@ -87,14 +92,16 @@ private int market_id;
         tv_address=view.findViewById(R.id.tv_address);
         im_banner=view.findViewById(R.id.im_banner);
         intitfragmentspage();
-        pageAdapter = new PageAdapter(homeActivity.getSupportFragmentManager());
+        pageAdapter = new PageAdapter(getChildFragmentManager());
         pageAdapter.addfragments(fragmentList);
+        Log.e("lll",fragmentList.size()+"");
         viewPager.setAdapter(pageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+//                Log.e("kk",viewPager.getAdapter().getPageTitle(0).toString());
             }
 
             @Override
@@ -116,8 +123,6 @@ private int market_id;
         fragment_shop_offers = Fragment_Shop_Offers.newInstance();
         fragmentList.add(fragment_shop_department);
         fragmentList.add(fragment_shop_offers);
-        fragment_shop_offers.setid(market_id);
-        fragment_shop_department.setid(market_id);
     }
     private void getsinglemarket() {
         final ProgressDialog dialog = Common.createProgressDialog(homeActivity,getString(R.string.wait));
@@ -156,9 +161,9 @@ updateprofile(response.body());
     }
 
     private void updateprofile(Market_model body) {
-tv_name.setText(body.getData().getName());
-tv_address.setText(body.getData().getAddress());
-        Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL+body.getData().getBanner())).fit().placeholder(R.drawable.profile_client).into(im_banner);
+tv_name.setText(body.getName());
+tv_address.setText(body.getAddress());
+        Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL+body.getBanner())).fit().placeholder(R.drawable.profile_client).into(im_banner);
     }
 
 }

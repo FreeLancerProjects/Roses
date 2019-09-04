@@ -131,7 +131,7 @@ public class Fragment_Main extends Fragment {
         rec_markets.setLayoutManager(gridLayoutManager);
         catogries_adapter=new Catogries_Adapter(dataList,activity,this);
         market_adapter=new Market_Adapter(dataListmarkets,activity,this);
-        rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      /*  rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -150,7 +150,7 @@ public class Fragment_Main extends Fragment {
                     }
                 }
             }
-        });
+        });*/
         rec_markets.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -226,7 +226,7 @@ public class Fragment_Main extends Fragment {
         // rec_sent.setVisibility(View.GONE);
 
         Api.getService(Tags.base_url)
-                .getDepartment(1)
+                .getDepartment()
                 .enqueue(new Callback<Catogries_Model>() {
                     @Override
                     public void onResponse(Call<Catogries_Model> call, Response<Catogries_Model> response) {
@@ -269,6 +269,7 @@ public class Fragment_Main extends Fragment {
                 });
 
     }
+    /*
     private void loadMore(int page) {
         Api.getService(Tags.base_url)
                 .getDepartment(page)
@@ -307,7 +308,7 @@ public class Fragment_Main extends Fragment {
                         }
                     }
                 });
-    }
+    }*/
     public void getMarkets() {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
 

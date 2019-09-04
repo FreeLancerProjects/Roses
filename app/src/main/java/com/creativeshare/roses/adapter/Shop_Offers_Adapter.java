@@ -3,6 +3,7 @@ package com.creativeshare.roses.adapter;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,9 +72,11 @@ private String current_lang;
             final Offer_Model.Data data1 = data.get(myHolder.getAdapterPosition());
 if(current_lang.equals("en")) {
     ((MyHolder) holder).tv_name.setText(data1.getEn_title());
+
 }
 else {
     ((MyHolder) holder).tv_name.setText(data1.getAr_title());
+    Log.e("lll",data1.getAr_title());
 
 }
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(  ((MyHolder) holder).im_offer);
