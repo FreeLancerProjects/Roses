@@ -24,12 +24,14 @@ import com.creativeshare.roses.activites_fragments.splash_activity.home_activity
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Main;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_More;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Shop_profile;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Terms_Conditions;
 import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.activity.Login_Activity;
 import com.creativeshare.roses.language.Language;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.share.Common;
+import com.creativeshare.roses.tags.Tags;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -56,6 +58,7 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_Client_profile fragment_client_profile;
     private Fragment_More fragment_more;
     private Fragment_Shop_profile fragment_shop_profile;
+    private Fragment_Terms_Conditions fragmentTerms_conditions;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -234,6 +237,21 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+    public void DisplayFragmentTerms_Condition() {
+
+        fragment_count += 1;
+        fragmentTerms_conditions = Fragment_Terms_Conditions.newInstance();
+
+
+        if (fragmentTerms_conditions.isAdded()) {
+            fragmentManager.beginTransaction().show(fragmentTerms_conditions).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragmentTerms_conditions, "fragmentTerms_conditions").addToBackStack("fragmentTerms_conditions").commit();
+
+        }
+
+
+    }
 
 
     public void onBackPressed() {
@@ -263,5 +281,86 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    public void NavigateToSignInActivity(boolean isSignIn) {
+
+        Intent intent = new Intent(this, Login_Activity.class);
+        intent.putExtra("sign_up",isSignIn);
+        startActivity(intent);
+        finish();
+
+    }
+    public void Logout() {
+        final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .Logout(userModel.getId()+"")
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            /*new Handler()
+                                    .postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                            manager.cancelAll();
+                                        }
+                                    },1);
+                            userSingleTone.clear(ClientHomeActivity.this);*/
+                            preferences.create_update_userdata(HomeActivity.this, null);
+                            preferences.create_update_session(HomeActivity.this, Tags.session_logout);
+                            Intent intent = new Intent(HomeActivity.this, Login_Activity.class);
+                            startActivity(intent);
+                            finish();
+                            if (cuurent_language.equals("ar")) {
+                                //  overridePendingTransition(R.anim.from_left,R.anim.to_right);
+
+
+                            } else {
+                                //  overridePendingTransition(R.anim.from_right,R.anim.to_left);
+
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+    }
+
+    private void addVisit(final String timeNow) {
+
+        Api.getService()
+                .updateVisit("android", timeNow)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            preferences.saveVisitTime(HomeActivity.this, timeNow);
+                            // Log.e("msg",response.body().toString());
+
+                        } else {
+                            try {
+                                Log.e("error_code", response.code() + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        try {
+                            Log.e("Error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
+    }
 
 }

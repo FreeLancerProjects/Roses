@@ -42,8 +42,8 @@ public class Order_Model implements Serializable {
                 private String market_phone_code;
                private String market_phone;
                private String market_address;
-               private List<OrderDetails> orderDetails;
-            private List<Services> services;
+               private List<OrderDetails> OrderDetails;
+            private List<Services> Services;
 
             public int getId() {
                 return id;
@@ -142,11 +142,11 @@ public class Order_Model implements Serializable {
             }
 
             public List<OrderDetails> getOrderDetails() {
-                return orderDetails;
+                return OrderDetails;
             }
 
             public List<Services> getServices() {
-                return services;
+                return Services;
             }
 
             public class OrderDetails implements Serializable

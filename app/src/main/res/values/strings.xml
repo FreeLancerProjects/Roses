@@ -36,4 +36,9 @@
     <string name="contact_us">Contact Us</string>
     <string name="register_as_a_company">Register as a company</string>
     <string name="logout">Logout</string>
+    <string name="ryal">Ryaal</string>
+    <string name="bouquet">bouquet</string>
+    <string name="about_hand_break">About App</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="cancel">cancel</string>
 </resources>

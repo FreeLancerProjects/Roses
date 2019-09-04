@@ -75,14 +75,16 @@ public class Client_Order_Adapter extends RecyclerView.Adapter<RecyclerView.View
             final MyHolder myHolder = (MyHolder) holder;
             final Order_Model.Data data1 = data.get(myHolder.getAdapterPosition());
          if(data1.getType()==1){
-             ((MyHolder) holder).tv_name.setText(data1.getMarket_name());
+            ((MyHolder) holder).tv_name.setText(data1.getMarket_name());
          }
          else {
              ((MyHolder)holder).tv_name.setText(data1.getTitle());
          }
             ((MyHolder) holder).tv_phone.setText(data1.getMarket_phone());
-            ((MyHolder) holder).tv_price.setText(data1.getTotal_cost());
-            ((MyHolder) holder).tv_quantity.setText(data1.getOrderDetails().size());
+           // ((MyHolder) holder).tv_price.setText("6555");
+
+            ((MyHolder) holder).tv_price.setText(data1.getTotal_cost()+context.getResources().getString(R.string.ryal));
+            ((MyHolder) holder).tv_quantity.setText(data1.getOrderDetails().size()+context.getResources().getString(R.string.bouquet));
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy",Locale.ENGLISH);
             String date = dateFormat.format(new Date(data1.getNext_date()*1000));

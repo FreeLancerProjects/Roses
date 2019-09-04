@@ -33,28 +33,14 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_default="wrap"
-                    app:layout_constraintHorizontal_bias="0"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
-                    android:text='@{lang.equals("ar")?orderModel.event_ar_title:orderModel.event_en_title}'
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    />
+
                 <TextView
                     android:id="@+id/tv1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/im1"
                     app:layout_constraintEnd_toStartOf="@id/tv2"
                     android:textColor="@color/gray4"
@@ -62,6 +48,7 @@
                     android:layout_marginTop="5dp"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
+                    android:gravity="start"
 
                     />
 

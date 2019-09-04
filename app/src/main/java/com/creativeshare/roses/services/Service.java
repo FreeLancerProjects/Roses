@@ -3,6 +3,7 @@ package com.creativeshare.roses.services;
 
 
 
+import com.creativeshare.roses.models.AppDataModel;
 import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.Markets_Model;
@@ -91,6 +92,24 @@ public interface Service {
     Call<Markets_Model> getMarkets(
             @Query("page") int page
 
+
+    );
+    @GET("api/about-us")
+    Call<AppDataModel> getterms(
+
+
+    );
+    @GET("api/about-us")
+    Call<AppDataModel> getabout(
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/visit")
+    Call<ResponseBody> updateVisit(@Field("software_type") String software_type, @Field("date") String date);
+    @FormUrlEncoded
+    @POST("api/logout")
+    Call<ResponseBody> Logout(@Field("user_id") String user_id
 
     );
 }

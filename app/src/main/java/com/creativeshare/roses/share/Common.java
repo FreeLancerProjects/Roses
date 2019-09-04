@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat;
 
 
 import com.creativeshare.roses.R;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 
 import java.io.File;
 
@@ -350,6 +351,58 @@ public class Common {
 
     }
 
+    public static void CreateUserNotSignInAlertDialog(final Context context)
+    {
 
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .setCancelable(true)
+                .create();
+
+
+        View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog,null);
+        Button btn_sign_in = view.findViewById(R.id.btn_sign_in);
+        Button btn_sign_up = view.findViewById(R.id.btn_sign_up);
+        Button btn_cancel = view.findViewById(R.id.btn_cancel);
+
+        TextView tv_msg = view.findViewById(R.id.tv_msg);
+        btn_sign_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+                if (context instanceof HomeActivity)
+                {
+                    HomeActivity activity = (HomeActivity) context;
+                    activity.NavigateToSignInActivity(true);
+                }
+
+            }
+        });
+
+        btn_sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (context instanceof HomeActivity)
+                {
+                    HomeActivity activity = (HomeActivity) context;
+                    activity.NavigateToSignInActivity(false);
+
+                }
+
+            }
+        });
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        // dialog.getWindow().getAttributes().windowAnimations= R.style.custom_dialog_animation;
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(view);
+        dialog.show();
+    }
 
 }

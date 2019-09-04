@@ -37,4 +37,9 @@
     <string name="contact_us">اتصل بنا</string>
     <string name="register_as_a_company">سجل كشركه</string>
     <string name="logout">تسجيل الخروج</string>
+    <string name="ryal">ريال</string>
+    <string name="bouquet">بوكيه</string>
+    <string name="about_hand_break">عن التطبيق</string>
+    <string name="terms_and_conditions">الشروط والاحكام</string>
+    <string name="cancel">cancel</string>
 </resources>

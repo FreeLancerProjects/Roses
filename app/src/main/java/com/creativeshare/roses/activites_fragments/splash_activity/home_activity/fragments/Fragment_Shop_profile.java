@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,6 +56,7 @@ private int market_id;
     private ViewPager viewPager;
     private TextView tv_name,tv_address;
     private ImageView im_banner;
+    private CircleImageView im_logo;
     public static Fragment_Shop_profile newInstance(int id) {
         Fragment_Shop_profile fragment_shop_profile = new Fragment_Shop_profile();
         Bundle bundle = new Bundle();
@@ -91,6 +93,7 @@ private int market_id;
         tv_name=view.findViewById(R.id.tv_name);
         tv_address=view.findViewById(R.id.tv_address);
         im_banner=view.findViewById(R.id.im_banner);
+        im_logo=view.findViewById(R.id.image);
         intitfragmentspage();
         pageAdapter = new PageAdapter(getChildFragmentManager());
         pageAdapter.addfragments(fragmentList);
@@ -164,6 +167,8 @@ updateprofile(response.body());
 tv_name.setText(body.getName());
 tv_address.setText(body.getAddress());
         Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL+body.getBanner())).fit().placeholder(R.drawable.profile_client).into(im_banner);
+        Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL+body.getLogo())).fit().placeholder(R.drawable.logo).into(im_logo);
+
     }
 
 }
