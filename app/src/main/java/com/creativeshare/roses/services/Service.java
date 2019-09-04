@@ -7,6 +7,7 @@ import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.Markets_Model;
 import com.creativeshare.roses.models.Offer_Model;
+import com.creativeshare.roses.models.Order_Model;
 import com.creativeshare.roses.models.Slider_Model;
 import com.creativeshare.roses.models.UserModel;
 
@@ -72,6 +73,16 @@ public interface Service {
     Call<Offer_Model> getoffer(
             @Field("page") int page,
             @Field("market_id") int market_id
+
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/my-orders/type")
+    Call<Order_Model> getorders(
+            @Field("page") int page,
+            @Field("user_id") int user_id,
+            @Field("type")int type
 
 
 

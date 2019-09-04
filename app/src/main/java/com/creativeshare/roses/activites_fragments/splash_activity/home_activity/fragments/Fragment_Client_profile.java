@@ -79,7 +79,7 @@ public class Fragment_Client_profile extends Fragment {
         tabLayout = view.findViewById(R.id.tab_orders);
         viewPager = view.findViewById(R.id.pager);
         intitfragmentspage();
-        pageAdapter = new PageAdapter(homeActivity.getSupportFragmentManager());
+        pageAdapter = new PageAdapter(getChildFragmentManager());
         pageAdapter.addfragments(fragmentList);
         viewPager.setAdapter(pageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -105,8 +105,7 @@ public class Fragment_Client_profile extends Fragment {
         fragment_client_ocasions = Fragment_Client_Ocasions.newInstance();
         fragmentList.add(fragment_client_orders);
         fragmentList.add(fragment_client_ocasions);
-        fragment_client_orders.setid(userModel.getId());
-        fragment_client_ocasions.setid(userModel.getId());
+
     }
 
 
