@@ -52,6 +52,7 @@
             app:cardElevation="2dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:padding="3dp"
             >
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rec_depart"

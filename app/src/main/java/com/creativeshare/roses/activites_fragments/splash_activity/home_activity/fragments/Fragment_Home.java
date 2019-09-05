@@ -33,7 +33,7 @@ public class Fragment_Home extends Fragment {
     private TextView tv_title;
     private Preferences preferences;
     private UserModel userModel;
-
+private ImageView im_cart;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class Fragment_Home extends Fragment {
 
         ah_bottom_nav = view.findViewById(R.id.ah_bottom_nav);
         tv_title = view.findViewById(R.id.tv_title);
-
+im_cart=view.findViewById(R.id.im_cart);
 
         setUpBottomNavigation();
         updateBottomNavigationPosition(0);
@@ -76,6 +76,13 @@ public class Fragment_Home extends Fragment {
 
                 }
                 return false;
+            }
+        });
+        im_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homeActivity.display_Cart();
+
             }
         });
     }

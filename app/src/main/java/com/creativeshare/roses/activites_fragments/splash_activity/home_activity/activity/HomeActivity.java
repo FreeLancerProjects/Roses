@@ -18,11 +18,14 @@ import androidx.fragment.app.FragmentManager;
 
 
 import com.creativeshare.roses.R;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Cart;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Catogry;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Client_profile;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Complete;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Home;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Main;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_More;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Shop_Products;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Shop_profile;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Terms_Conditions;
 import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.activity.Login_Activity;
@@ -59,6 +62,9 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_More fragment_more;
     private Fragment_Shop_profile fragment_shop_profile;
     private Fragment_Terms_Conditions fragmentTerms_conditions;
+    private Fragment_Cart fragment_cart;
+    private Fragment_Shop_Products fragment_shop_product;
+    private Fragment_Complete fragment_complete;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -101,7 +107,7 @@ public class HomeActivity extends AppCompatActivity {
         String date = dateFormat.format(new Date(timeNow));
 
         if (!date.equals(visitTime)) {
-            //   addVisit(date);
+             addVisit(date);
         }
     }
 
@@ -253,7 +259,37 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    public void DisplayFragmentProduct() {
 
+        fragment_count += 1;
+        fragment_shop_product = Fragment_Shop_Products.newInstance();
+
+
+        if (fragment_shop_product.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_shop_product).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_shop_product, "fragment_shop_product").addToBackStack("fragment_shop_product").commit();
+
+        }
+
+
+    }
+
+    public void DisplayFragmentComplete() {
+
+        fragment_count += 1;
+        fragment_complete = Fragment_Complete.newInstance();
+
+
+        if (fragment_complete.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_complete).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_complete, "fragment_complete").addToBackStack("fragment_complete").commit();
+
+        }
+
+
+    }
     public void onBackPressed() {
         Back();
     }
@@ -334,8 +370,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private void addVisit(final String timeNow) {
 
-        Api.getService()
-                .updateVisit("android", timeNow)
+        Api.getService(Tags.base_url)
+                .updateVisit(1, timeNow)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -362,5 +398,15 @@ public class HomeActivity extends AppCompatActivity {
                 });
 
     }
+    public void display_Cart() {
+        fragment_count += 1;
+        fragment_cart = Fragment_Cart.newInstance();
+        if (fragment_cart.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_cart).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_cart, "fragment_cart").addToBackStack("fragment_cart").commit();
 
+        }
+
+    }
 }

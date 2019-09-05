@@ -60,7 +60,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv1"
                     android:textColor="@color/gray4"
-                    android:text="@string/the_name_of_the_bouquet"
+                    android:text="@string/market_phone"
                     />
 
 
@@ -69,7 +69,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toEndOf="@id/im1"
-                    app:layout_constraintEnd_toStartOf="@id/tvPrice"
+                    app:layout_constraintEnd_toStartOf="@id/tvPhone"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintTop_toBottomOf="@id/tv1"
                     android:layout_marginTop="8dp"
@@ -79,7 +79,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/tvPrice"
+                    android:id="@+id/tvPhone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="@id/tvstorename"

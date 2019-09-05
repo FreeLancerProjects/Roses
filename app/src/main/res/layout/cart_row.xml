@@ -68,48 +68,11 @@
 
                 </FrameLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+
 
                     <TextView
                         android:id="@+id/tv_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.35"
-                        android:maxLines="2"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_cost"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".65"
-                        android:gravity="center"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"
-
-
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ll_left"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-
-                    <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.35"
                         android:maxLines="2"
@@ -121,20 +84,8 @@
 
                         />
 
-                    <TextView
-                        android:id="@+id/tv_left_eye_amount"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight=".65"
-                        android:gravity="center"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
 
 
-                        />
-                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/ll_right"
                     android:layout_width="match_parent"
@@ -144,6 +95,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/tv_price"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.35"
@@ -176,6 +128,7 @@
                     >
 
                         <FrameLayout
+
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1">

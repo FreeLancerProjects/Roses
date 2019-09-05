@@ -8,8 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
 
-android:background="@color/gray0"
-        >
+        android:background="@color/gray0">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -229,12 +228,12 @@ android:background="@color/gray0"
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:text="@string/department" />
+                        android:text="@string/my_orders" />
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:text="@string/Offers"
+                        android:text="@string/Occasions"
 
                         />
 
@@ -249,7 +248,9 @@ android:background="@color/gray0"
                 android:layout_height="0dp"
                 android:background="@color/gray3"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lll" />
+                app:layout_constraintTop_toBottomOf="@+id/lll"
+                android:layout_marginBottom="8dp"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

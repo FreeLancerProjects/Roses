@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Roses</string>
+    <string name="map_api_key">AIzaSyCbc2Y5AIwZ8uUeHRUXiozGN3CnpjKT0oI</string>
     <string name="code">code</string>
     <string name="sign_up2">Create Account</string>
     <string name="login">Login</string>
@@ -41,4 +42,26 @@
     <string name="about_hand_break">About App</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="cancel">cancel</string>
+    <string name="market_phone">Market Phone</string>
+    <string name="my_orders">My Orders</string>
+    <string name="products">Products</string>
+    <string name="subject">subject</string>
+    <string name="message">message</string>
+    <string name="send">send</string>
+    <string name="add_details">Add Details</string>
+    <string name="a_word_of_congratulations">A word of congratulations</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="Empty_Cart_First">Empty Cart First</string>
+    <string name="cart">Cart</string>
+    <string name="select_language">select_language</string>
+    <string name="select">select</string>
+    <string name="select_type">select type</string>
+    <string name="defaults">Default</string>
+    <string name="Ocasion">Ocasion</string>
+    <string name="complete">Complete</string>
+    <string name="you_can_now_add_an_occasion_to_your_event">You can now add an occasion to your event</string>
+    <string name="ocasion_name">OCasion Name</string>
+    <string name="date_of_ocasion">Date of Ocasion</string>
+    <string name="address">Address</string>
+    <string name="select_location_on_map">select_location_on_map</string>
 </resources>

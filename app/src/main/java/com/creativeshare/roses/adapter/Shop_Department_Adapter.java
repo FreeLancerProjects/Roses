@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.models.Catogries_Model;
+import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.tags.Tags;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -77,7 +78,13 @@ else {
 
 }
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(  ((MyHolder) holder).im_depart);
-
+            ((MyHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Send_Data.setCat_id(data.get(holder.getLayoutPosition()).getId());
+                    activity.DisplayFragmentProduct();
+                }
+            });
 
             //Log.e("msg",advertsing.getMain_image());
         } else {

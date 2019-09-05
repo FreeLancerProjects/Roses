@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:text="@string/add_details"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+
+        />
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/quantity"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        />
+    <EditText
+        android:id="@+id/edt_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/white"
+        android:hint="@string/quantity"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+android:inputType="number"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/a_word_of_congratulations"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        />
+    <EditText
+        android:id="@+id/edt_cong"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/white"
+        android:hint="@string/a_word_of_congratulations"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        />
+
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/linear_shape"
+            android:textColor="@color/colorPrimary"
+
+            android:text="@string/add_to_cart"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"
+
+
+            />
+
+
+
+</LinearLayout>

@@ -113,10 +113,10 @@ public class Client_Order_Adapter extends RecyclerView.Adapter<RecyclerView.View
         public MyHolder(View itemView) {
             super(itemView);
 
-            tv_name = itemView.findViewById(R.id.tv1);
-            tv_phone = itemView.findViewById(R.id.tv2);
-            tv_price = itemView.findViewById(R.id.tv3);
-            tv_quantity = itemView.findViewById(R.id.tv4);
+            tv_name = itemView.findViewById(R.id.tvstorename);
+            tv_phone = itemView.findViewById(R.id.tvPhone);
+            tv_price = itemView.findViewById(R.id.tvprice);
+            tv_quantity = itemView.findViewById(R.id.tvquantity);
             tv_date=itemView.findViewById(R.id.tv_date);
             im_order = itemView.findViewById(R.id.im1);
 

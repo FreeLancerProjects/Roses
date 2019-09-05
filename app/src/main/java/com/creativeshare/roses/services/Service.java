@@ -3,12 +3,17 @@ package com.creativeshare.roses.services;
 
 
 
+import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.AppDataModel;
 import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.Markets_Model;
 import com.creativeshare.roses.models.Offer_Model;
+import com.creativeshare.roses.models.One_Order_Model;
 import com.creativeshare.roses.models.Order_Model;
+import com.creativeshare.roses.models.PlaceGeocodeData;
+import com.creativeshare.roses.models.PlaceMapDetailsData;
+import com.creativeshare.roses.models.Product_Model;
 import com.creativeshare.roses.models.Slider_Model;
 import com.creativeshare.roses.models.UserModel;
 
@@ -79,6 +84,15 @@ public interface Service {
 
     );
     @FormUrlEncoded
+    @POST("api/products/single-category")
+    Call<Product_Model> getproducts(
+            @Field("page") int page,
+            @Field("cat_id") int cat_id
+
+
+
+    );
+    @FormUrlEncoded
     @POST("api/my-orders/type")
     Call<Order_Model> getorders(
             @Field("page") int page,
@@ -106,10 +120,23 @@ public interface Service {
     );
     @FormUrlEncoded
     @POST("api/visit")
-    Call<ResponseBody> updateVisit(@Field("software_type") String software_type, @Field("date") String date);
+    Call<ResponseBody> updateVisit(@Field("software_type") int software_type, @Field("date") String date);
     @FormUrlEncoded
     @POST("api/logout")
     Call<ResponseBody> Logout(@Field("user_id") String user_id
 
     );
+    @GET("place/findplacefromtext/json")
+    Call<PlaceMapDetailsData> searchOnMap(@Query(value = "inputtype") String inputtype,
+                                          @Query(value = "input") String input,
+                                          @Query(value = "fields") String fields,
+                                          @Query(value = "language") String language,
+                                          @Query(value = "key") String key
+    );
+    @GET("geocode/json")
+    Call<PlaceGeocodeData> getGeoData(@Query(value = "latlng") String latlng,
+                                      @Query(value = "language") String language,
+                                      @Query(value = "key") String key);
+    @POST("api/create-order")
+    Call<One_Order_Model> accept_orders(@Body Add_Order_Model add_order_model);
 }

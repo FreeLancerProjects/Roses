@@ -94,7 +94,7 @@ public class Fragment_Shop_Department extends Fragment {
         rec_depart.setItemViewCacheSize(25);
 
 
-        gridLayoutManager = new GridLayoutManager(activity, 3);
+        gridLayoutManager = new GridLayoutManager(activity, 2);
         rec_depart.setLayoutManager(gridLayoutManager);
         shop_department_adapter = new Shop_Department_Adapter(dataList, activity, this);
      /*   rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {

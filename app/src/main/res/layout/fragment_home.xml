@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/cart"
+            android:id="@+id/im_cart"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:padding="10dp"

@@ -18,10 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Shop_Offers;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Shop_Products;
-import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Offer_Model;
+import com.creativeshare.roses.models.Product_Model;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
@@ -33,19 +32,18 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class Shop_Products_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int ITEM_DATA = 1;
     private final int ITEM_LOAD = 2;
 
-    private List<Offer_Model.Data> data;
+    private List<Product_Model.Data> data;
     private Context context;
     private HomeActivity activity;
     private Fragment fragment;
     private String current_lang;
-    private Fragment_Shop_Offers fragment_shop_offers;
-    private Preferences pr;
-
-    public Shop_Offers_Adapter(List<Offer_Model.Data> data, Context context, Fragment fragment) {
+    private Fragment_Shop_Products fragment_shop_products;
+private Preferences pr;
+    public Shop_Products_Adapter(List<Product_Model.Data> data, Context context, Fragment fragment) {
 
         this.data = data;
         this.context = context;
@@ -53,7 +51,7 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.fragment = fragment;
         Paper.init(activity);
         current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        pr = Preferences.getInstance();
+pr=Preferences.getInstance();
 
     }
 
@@ -77,35 +75,35 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (holder instanceof MyHolder) {
 
             final MyHolder myHolder = (MyHolder) holder;
-            final Offer_Model.Data data1 = data.get(myHolder.getAdapterPosition());
+            final Product_Model.Data data1 = data.get(myHolder.getAdapterPosition());
             if (current_lang.equals("en")) {
-                ((MyHolder) holder).tv_name.setText(data1.getProduct_en_title());
-                ((MyHolder) holder).tv_offer.setText(data1.getEn_title());
-
+                ((MyHolder) holder).tv_name.setText(data1.getEn_title());
 
             } else {
-                ((MyHolder) holder).tv_name.setText(data1.getProduct_ar_title());
-                ((MyHolder) holder).tv_offer.setText(data1.getAr_title());
-
+                ((MyHolder) holder).tv_name.setText(data1.getAr_title());
+                //Log.e("lll", data1.getAr_title());
 
             }
-            ((MyHolder) holder).tv_price.setText(context.getResources().getString(R.string.price) + " " + data1.getProduct_price());
-
-            Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_offer);
+            ((MyHolder) holder).tv_price.setText(context.getResources().getString(R.string.price) + " " + data1.getPrice());
             ((MyHolder) holder).cons_cart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (fragment instanceof Fragment_Shop_Offers) {
-                        if (pr.getUserOrder(activity) != null && pr.getUserOrder(activity).getMarket_id() == data.get(holder.getLayoutPosition()).getMarket_id()||pr.getUserOrder(activity)==null) {
-                            fragment_shop_offers = (Fragment_Shop_Offers) fragment;
-                            fragment_shop_offers.setproduct(data.get(holder.getLayoutPosition()));
-                        } else {
-                            Common.CreateSignAlertDialog(activity, activity.getResources().getString(R.string.Empty_Cart_First));
+                    if(fragment instanceof  Fragment_Shop_Products){
+                        if((pr.getUserOrder(activity)!=null&&pr.getUserOrder(activity).getMarket_id()==data.get(holder.getLayoutPosition()).getMarket_id())||pr.getUserOrder(activity)==null){
+                            fragment_shop_products=(Fragment_Shop_Products)fragment;
+                            fragment_shop_products.setproduct(data.get(holder.getLayoutPosition()));
+                        }
+                        else {
+                            Log.e("msg",pr.getUserOrder(activity).getMarket_id()+" " +data.get(holder.getLayoutPosition()).getMarket_id()+"");
+                            Common.CreateSignAlertDialog(activity,activity.getResources().getString(R.string.Empty_Cart_First));
                         }
 
                     }
                 }
             });
+
+            Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_offer);
+
 
             //Log.e("msg",advertsing.getMain_image());
         } else {
@@ -122,18 +120,22 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class MyHolder extends RecyclerView.ViewHolder {
         private TextView tv_name, tv_price, tv_offer;
-        private RoundedImageView im_offer;
         private ConstraintLayout cons_cart;
+        private View view;
+        private RoundedImageView im_offer;
 
         public MyHolder(View itemView) {
             super(itemView);
-
+            cons_cart = itemView.findViewById(R.id.cons_cart);
             tv_name = itemView.findViewById(R.id.tv_name);
             tv_price = itemView.findViewById(R.id.tv_price);
 
             im_offer = itemView.findViewById(R.id.im_offer);
             tv_offer = itemView.findViewById(R.id.tv_offer);
-            cons_cart = itemView.findViewById(R.id.cons_cart);
+            view = itemView.findViewById(R.id.view);
+            tv_offer.setVisibility(View.GONE);
+            view.setVisibility(View.GONE);
+
         }
 
     }
@@ -150,7 +152,7 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        Offer_Model.Data data1 = data.get(position);
+        Product_Model.Data data1 = data.get(position);
         if (data1 == null) {
             return ITEM_LOAD;
         } else {

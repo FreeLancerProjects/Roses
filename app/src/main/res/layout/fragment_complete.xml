@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray8"
+    android:clickable="true"
+    android:focusable="true"
+
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            app:contentInsetStart="0dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:clickable="false"
+                android:longClickable="false"
+                android:padding="13dp"
+                android:src="@drawable/ic_right_arrow"
+                android:tint="@color/white"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="@string/complete"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+
+                />
+        </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:background="@color/gray0"
+        android:clickable="true"
+        android:focusable="true"
+app:layout_constraintTop_toBottomOf="@+id/toolBar"
+        app:layout_constraintBottom_toTopOf="@+id/btn_send"
+        android:layout_marginBottom="8dp"
+
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            >
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/you_can_now_add_an_occasion_to_your_event"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+
+                />
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ocasion_name"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+
+                />
+            <EditText
+                android:id="@+id/edtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/linear_shape2"
+                android:hint="@string/ocasion_name"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray4"
+                android:singleLine="true"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/date_of_ocasion"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+
+                />
+            <LinearLayout
+                android:id="@+id/llStartdate"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:background="@drawable/linear_shape2"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/tvStartDate"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".85"
+                    android:gravity="center_vertical"
+                    android:hint="@string/date_of_ocasion"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:clickable="false"
+                    android:longClickable="false"
+
+
+
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".15"
+                    android:padding="8dp"
+                    android:rotation="90"
+                    android:src="@drawable/ic_right_arrow"
+                    android:clickable="false"
+                    android:longClickable="false"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/a_word_of_congratulations"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+
+                />
+            <EditText
+                android:id="@+id/edtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/linear_shape2"
+                android:hint="@string/a_word_of_congratulations"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray4"
+                android:singleLine="true"
+                android:gravity="top|start"
+                android:padding="8dp"
+
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+
+                />
+            <EditText
+                android:id="@+id/edtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/linear_shape2"
+                android:hint="@string/address"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray4"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_location_on_map"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                />
+            <fragment
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="15dp"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                />
+
+
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:text="@string/send"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/btn_login_bg"
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+

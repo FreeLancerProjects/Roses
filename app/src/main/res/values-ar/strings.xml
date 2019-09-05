@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">الورود</string>
+    <string name="map_api_key">AIzaSyCbc2Y5AIwZ8uUeHRUXiozGN3CnpjKT0oI</string>
     <string name="code">كود</string>
     <string name="sign_up2">انشاء حساب </string>
     <string name="login">تسجيل الدخول</string>
@@ -14,12 +15,12 @@
     <string name="new_user">انشأ حساب جديد .</string>
 
     <string name="home">الرئيسية</string>
-    <string name="Shops">المحلات</string>
+    <string name="Shops">المتاجر</string>
     <string name="department">الاقسام</string>
     <string name="Offers">العروض</string>
     <string name="Occasions">المناسبات</string>
     <string name="more">المزيد</string>
-    <string name="store_name">اسم المحل</string>
+    <string name="store_name">اسم المتجر</string>
     <string name="the_name_of_the_bouquet">اسم البوكيه</string>
     <string name="price">السعر</string>
     <string name="quantity">الكميه</string>
@@ -41,5 +42,27 @@
     <string name="bouquet">بوكيه</string>
     <string name="about_hand_break">عن التطبيق</string>
     <string name="terms_and_conditions">الشروط والاحكام</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">الغاء</string>
+    <string name="market_phone">رقم الجوال</string>
+    <string name="my_orders">طلباتى</string>
+    <string name="products">المنتجات</string>
+    <string name="subject">محتوى</string>
+    <string name="message">الرساله</string>
+    <string name="send">ارسال</string>
+    <string name="add_details">اضف التفاصيل</string>
+    <string name="a_word_of_congratulations">كلمة التهنئه</string>
+    <string name="add_to_cart">اضف الى السله</string>
+    <string name="Empty_Cart_First">افرغ السله اولا</string>
+    <string name="cart">السله</string>
+    <string name="select_language">اختر اللغه</string>
+    <string name="select">اختر</string>
+    <string name="select_type">اختر النوع</string>
+    <string name="defaults">عادى</string>
+    <string name="Ocasion">مناسبة</string>
+    <string name="complete">إتمام</string>
+    <string name="you_can_now_add_an_occasion_to_your_event">You can now add an occasion to your event</string>
+    <string name="ocasion_name">OCasion Name</string>
+    <string name="date_of_ocasion">Date of Ocasion</string>
+    <string name="address">Address</string>
+    <string name="select_location_on_map">select_location_on_map</string>
 </resources>

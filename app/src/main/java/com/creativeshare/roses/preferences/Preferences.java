@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 
+import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.tags.Tags;
 import com.google.gson.Gson;
@@ -102,6 +103,23 @@ public class Preferences {
         SharedPreferences preferences = context.getSharedPreferences("visit", Context.MODE_PRIVATE);
         return preferences.getString("time","");
     }
+    public void create_update_order(Context context, Add_Order_Model buy_models){
+        SharedPreferences sharedPreferences=context.getSharedPreferences("order",Context.MODE_PRIVATE);
+        Gson gson=new Gson();
+        String user_order=gson.toJson(buy_models);
 
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("user_order",user_order);
+        editor.apply();
+
+    }
+    public Add_Order_Model getUserOrder(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("order",Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String user_order = preferences.getString("user_order",null);
+        Add_Order_Model order_model = gson.fromJson(user_order, Add_Order_Model.class);
+        return order_model;
+    }
 
 }
