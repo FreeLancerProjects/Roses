@@ -137,6 +137,6 @@ public interface Service {
     Call<PlaceGeocodeData> getGeoData(@Query(value = "latlng") String latlng,
                                       @Query(value = "language") String language,
                                       @Query(value = "key") String key);
-    @POST("api/create-order")
+    @POST("api/order/create")
     Call<One_Order_Model> accept_orders(@Body Add_Order_Model add_order_model);
 }

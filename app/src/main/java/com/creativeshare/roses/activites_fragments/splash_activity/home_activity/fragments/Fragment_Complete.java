@@ -145,12 +145,13 @@ gettotal();
         ll_date=view.findViewById(R.id.llStartdate);
         tv1=view.findViewById(R.id.tv1);
         tv2=view.findViewById(R.id.tv2);
+        tv_date = view.findViewById(R.id.tvStartDate);
         if(Send_Data.getType()==1){
             tv1.setVisibility(View.GONE);
             tv2.setVisibility(View.GONE);
                     edt_title.setVisibility(View.GONE);
         }
-        back =  view.findViewById(R.id.arrow_back);
+        back =  view.findViewById(R.id.arrow);
         bt_send=view.findViewById(R.id.btn_send);
         preferences = Preferences.getInstance();
 
