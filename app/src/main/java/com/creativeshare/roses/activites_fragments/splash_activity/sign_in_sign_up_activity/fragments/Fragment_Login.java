@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 
 import com.creativeshare.roses.R;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.activity.Login_Activity;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
@@ -90,8 +91,8 @@ public class Fragment_Login extends Fragment  implements OnCountryPickerListener
         tv_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Intent intent = new Intent(activity, HomeActivity.class);
-                //startActivity(intent);
+               Intent intent = new Intent(activity, HomeActivity.class);
+                startActivity(intent);
             }
         });
         image_phone_code.setOnClickListener(new View.OnClickListener() {

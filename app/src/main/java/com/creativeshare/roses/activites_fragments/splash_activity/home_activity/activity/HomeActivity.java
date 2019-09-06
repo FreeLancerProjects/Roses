@@ -1,27 +1,25 @@
 package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 
 import com.creativeshare.roses.R;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_About;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Bank_Account;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Cart;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Catogry;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Client_profile;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Complete;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Contact_Us;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Upgrade;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Home;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Main;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_More;
@@ -40,7 +38,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
@@ -65,6 +62,10 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_Cart fragment_cart;
     private Fragment_Shop_Products fragment_shop_product;
     private Fragment_Complete fragment_complete;
+    private Fragment_About fragment_about;
+    private Fragment_Contact_Us fragment_contact_us;
+    private Fragment_Bank_Account fragment_bank_account;
+    private Fragment_Upgrade fragment_upgrade;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -258,7 +259,68 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+    public void DisplayFragmentUgrade() {
 
+        fragment_count += 1;
+        fragment_upgrade = Fragment_Upgrade.newInstance();
+
+
+        if (fragment_upgrade.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_upgrade).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_upgrade, "fragment_upgrade").addToBackStack("fragment_upgrade").commit();
+
+        }
+
+
+    }
+    public void DisplayFragmentabout() {
+
+        fragment_count += 1;
+        fragment_about = Fragment_About.newInstance();
+
+
+        if (fragment_about.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_about).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_about, "fragment_about").addToBackStack("fragment_about").commit();
+
+        }
+
+
+    }
+    public void DisplayFragmentContactUS()
+    {
+
+        fragment_count +=1;
+
+        fragment_contact_us = Fragment_Contact_Us.newInstance();
+
+        if (fragment_contact_us.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_contact_us).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_contact_us, "fragment_contact_us").addToBackStack("fragment_contact_us").commit();
+
+        }
+
+
+    }
+    public void DisplayFragmentBankAccount()
+    {
+
+        fragment_count+=1;
+
+        fragment_bank_account = Fragment_Bank_Account.newInstance();
+
+
+        if (fragment_bank_account.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_bank_account).commit();
+
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_bank_account, "fragment_bank_account").addToBackStack("fragment_bank_account").commit();
+        }
+
+    }
     public void DisplayFragmentProduct() {
 
         fragment_count += 1;
@@ -407,6 +469,28 @@ public class HomeActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_cart, "fragment_cart").addToBackStack("fragment_cart").commit();
 
         }
+
+    }
+    public void RefreshActivity(String lang)
+    {
+        //Log.e("lang",selected_language);
+        Paper.book().write("lang",lang);
+        preferences.create_update_language(this,lang);
+        preferences.setIsLanguageSelected(this);
+        Language.setNewLocale(this,lang);
+
+        new Handler()
+                .postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent intent =  getIntent();
+                        finish();
+                        startActivity(intent);
+                    }
+                },1050);
+
+
 
     }
 }

@@ -200,7 +200,51 @@ android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/gray4" />
+        <LinearLayout
+            android:id="@+id/ll_about"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
 
+            >
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/terms"
+
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/about_hand_break"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+
+                />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:clickable="false"
+                android:longClickable="false"
+                android:padding="15dp"
+                android:src="@drawable/ic_right_arrow"
+                android:rotation="90"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray4" />
         <LinearLayout
             android:id="@+id/ll_contact"
             android:layout_width="match_parent"
@@ -231,6 +275,50 @@ android:visibility="gone"
 
             <ImageView
                 android:id="@+id/arrow5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:clickable="false"
+                android:longClickable="false"
+                android:padding="15dp"
+                android:src="@drawable/ic_right_arrow"
+                android:rotation="90"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray4" />
+        <LinearLayout
+            android:id="@+id/ll_bank"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+
+            >
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/contact"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/bank_account"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+
+                />
+
+            <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_vertical"

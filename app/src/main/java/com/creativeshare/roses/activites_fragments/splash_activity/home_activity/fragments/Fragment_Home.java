@@ -19,6 +19,7 @@ import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
+import com.creativeshare.roses.share.Common;
 
 
 import java.util.Locale;
@@ -68,7 +69,11 @@ im_cart=view.findViewById(R.id.im_cart);
 
                         break;
                     case 2:
-                        homeActivity.DisplayFragmentclientprofile();
+                        if(userModel!=null){
+                        homeActivity.DisplayFragmentclientprofile();}
+                        else {
+                            Common.CreateUserNotSignInAlertDialog(homeActivity);
+                        }
                         break;
                     case 3:
                         homeActivity.DisplayFragmentMore();

@@ -5,6 +5,7 @@ package com.creativeshare.roses.services;
 
 import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.AppDataModel;
+import com.creativeshare.roses.models.BankDataModel;
 import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.Markets_Model;
@@ -139,4 +140,14 @@ public interface Service {
                                       @Query(value = "key") String key);
     @POST("api/order/create")
     Call<One_Order_Model> accept_orders(@Body Add_Order_Model add_order_model);
+    @FormUrlEncoded
+    @POST("api/contact-us")
+    Call<ResponseBody> contact_us(@Field("name") String name,
+                                  @Field("email") String email,
+                                  @Field("message") String message,
+                                  @Field("subject") String subject
+
+    );
+    @GET("/Api/banks")
+    Call<BankDataModel> getBankAccount();
 }
