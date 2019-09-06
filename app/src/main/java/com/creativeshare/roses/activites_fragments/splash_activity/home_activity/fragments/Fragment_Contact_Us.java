@@ -65,9 +65,9 @@ public class Fragment_Contact_Us extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        image_back = view.findViewById(R.id.image_back);
+        image_back = view.findViewById(R.id.arrow);
 
-        if (current_language.equals("ar") || current_language.equals("ur")) {
+        if (current_language.equals("en") ) {
             image_back.setRotation(180.0f);
         }
 
