@@ -71,7 +71,7 @@ public class Fragment_Contact_Us extends Fragment {
             image_back.setRotation(180.0f);
         }
 
-        image_back = view.findViewById(R.id.image_back);
+        image_back = view.findViewById(R.id.arrow);
         edt_name = view.findViewById(R.id.edt_name);
         edt_email = view.findViewById(R.id.edt_email);
         edt_subject = view.findViewById(R.id.edtSubject);

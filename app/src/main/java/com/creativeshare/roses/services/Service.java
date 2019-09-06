@@ -149,7 +149,7 @@ public interface Service {
                                   @Field("subject") String subject
 
     );
-    @GET("/Api/banks")
+    @GET("api/banks")
     Call<BankDataModel> getBankAccount();
     @GET("api/all-social")
     Call<SocialDataModel> getSocial();
