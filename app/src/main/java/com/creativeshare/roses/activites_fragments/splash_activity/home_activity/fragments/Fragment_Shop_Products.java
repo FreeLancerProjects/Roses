@@ -40,7 +40,9 @@ import com.creativeshare.roses.tags.Tags;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,7 +67,7 @@ public class Fragment_Shop_Products extends Fragment {
     private ImageView im_back;
     private int quantity;
     private String desc;
-
+    private String cuurent_language;
     public static Fragment_Shop_Products newInstance() {
         Fragment_Shop_Products fragment_shop_offers = new Fragment_Shop_Products();
 
@@ -86,6 +88,8 @@ public class Fragment_Shop_Products extends Fragment {
     private void initview(View view) {
         dataList = new ArrayList<>();
         activity = (HomeActivity) getActivity();
+        Paper.init(activity);
+        cuurent_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         cat_id = Send_Data.getCat_id();
@@ -94,6 +98,9 @@ public class Fragment_Shop_Products extends Fragment {
         ll_no_store = view.findViewById(R.id.ll_no_store);
         rec_depart = view.findViewById(R.id.rec_offers);
         im_back = view.findViewById(R.id.arrow_back);
+        if(cuurent_language.equals("en")){
+            im_back.setRotation(180.0f);
+        }
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
 

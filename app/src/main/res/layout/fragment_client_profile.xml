@@ -247,10 +247,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="@color/gray3"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/llll"
                 app:layout_constraintTop_toBottomOf="@+id/lll"
                 android:layout_marginBottom="8dp"
                 />
+            <LinearLayout
+android:id="@+id/llll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+                <ImageView
+                    android:id="@+id/image_instagram"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:src="@drawable/instagram" />
+
+                <ImageView
+                    android:id="@+id/image_facebook"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:src="@drawable/facebook" />
+
+                <ImageView
+                    android:id="@+id/image_twitter"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:src="@drawable/twitter" />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
