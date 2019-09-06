@@ -72,4 +72,6 @@
     <string name="account_number">Account Number</string>
     <string name="account_name">Account Name</string>
     <string name="bank_account">Bank Account</string>
+    <string name="not_avail">Not available now</string>
+
 </resources>

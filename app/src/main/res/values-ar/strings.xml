@@ -72,5 +72,7 @@
     <string name="account_iban">الايبان</string>
     <string name="account_number">رقم الحساب</string>
     <string name="account_name">إسم الحساب</string>
-    <string name="bank_account">Bank Account</string>
+    <string name="bank_account">الحسابات البنكيه</string>
+    <string name="not_avail">غير متاح الان</string>
+
 </resources>

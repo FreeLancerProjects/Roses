@@ -16,6 +16,7 @@ import com.creativeshare.roses.models.PlaceGeocodeData;
 import com.creativeshare.roses.models.PlaceMapDetailsData;
 import com.creativeshare.roses.models.Product_Model;
 import com.creativeshare.roses.models.Slider_Model;
+import com.creativeshare.roses.models.SocialDataModel;
 import com.creativeshare.roses.models.UserModel;
 
 import java.util.List;
@@ -150,4 +151,6 @@ public interface Service {
     );
     @GET("/Api/banks")
     Call<BankDataModel> getBankAccount();
+    @GET("api/all-social")
+    Call<SocialDataModel> getSocial();
 }
