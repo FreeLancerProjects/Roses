@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -92,10 +94,10 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
     private String cuurent_language;
     private UserModel userModel;
     private Add_Order_Model add_order_model;
-private EditText edt_title,edt_address;
-private LinearLayout ll_date;
-private TextView tv_date,tv1,tv2;
-private Button bt_send;
+    private EditText edt_title, edt_address;
+    private LinearLayout ll_date;
+    private TextView tv_date, tv1, tv2;
+    private Button bt_send;
     private String formated_address;
     private double lat, lang;
     private final String gps_perm = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -108,12 +110,12 @@ private Button bt_send;
     private float zoom = 15.6f;
     private Marker marker;
     private GoogleMap mMap;
-    private double  total_cost=0;
+    private double total_cost = 0;
     private DatePickerDialog datePickerDialog;
     private RecyclerView rec_service;
     private Service_Adapter service_adapter;
     private List<Market_model.MarketService> marketServices;
-private Long date;
+    private Long date;
     private Add_Order_Model.Services ser;
 
     public static Fragment_Complete newInstance() {
@@ -127,9 +129,9 @@ private Long date;
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_complete, container, false);
         updateUI();
-      intitview(view);
-gettotal();
-getsinglemarket();
+        intitview(view);
+        gettotal();
+        getsinglemarket();
         CheckPermission();
         // Inflate the layout for this fragment
 
@@ -137,40 +139,53 @@ getsinglemarket();
     }
 
     private void gettotal() {
-        for(int i=0;i<add_order_model.getOrder_details().size();i++){
-            total_cost+=add_order_model.getOrder_details().get(i).getTotal_price();
+        for (int i = 0; i < add_order_model.getOrder_details().size(); i++) {
+            total_cost += add_order_model.getOrder_details().get(i).getTotal_price();
         }
     }
 
     private void intitview(View view) {
-        marketServices=new ArrayList<>();
+        marketServices = new ArrayList<>();
         activity = (HomeActivity) getActivity();
         Paper.init(activity);
         cuurent_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
         preferences = Preferences.getInstance();
-        userModel=preferences.getUserData(activity);
-        add_order_model=preferences.getUserOrder(activity);
+        userModel = preferences.getUserData(activity);
+        add_order_model = preferences.getUserOrder(activity);
 
-        edt_title=view.findViewById(R.id.edtTitle);
-rec_service=view.findViewById(R.id.rec_service);
-edt_address=view.findViewById(R.id.edtAddress);
-        ll_date=view.findViewById(R.id.llStartdate);
-        tv1=view.findViewById(R.id.tv1);
-        tv2=view.findViewById(R.id.tv2);
+        edt_title = view.findViewById(R.id.edtTitle);
+        rec_service = view.findViewById(R.id.rec_service);
+        edt_address = view.findViewById(R.id.edtAddress);
+        ll_date = view.findViewById(R.id.llStartdate);
+        tv1 = view.findViewById(R.id.tv1);
+        tv2 = view.findViewById(R.id.tv2);
         rec_service.setDrawingCacheEnabled(true);
         rec_service.setItemViewCacheSize(25);
         rec_service.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-        service_adapter=new Service_Adapter(marketServices,activity,this);
-        rec_service.setLayoutManager(new GridLayoutManager(activity,1));
+        service_adapter = new Service_Adapter(marketServices, activity, this);
+        rec_service.setLayoutManager(new GridLayoutManager(activity, 1));
         rec_service.setAdapter(service_adapter);
         tv_date = view.findViewById(R.id.tvStartDate);
-        if(Send_Data.getType()==1){
+        edt_address.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    String query = edt_address.getText().toString();
+                    if (!TextUtils.isEmpty(query)) {
+                        Search(query);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        if (Send_Data.getType() == 1) {
             tv1.setVisibility(View.GONE);
             tv2.setVisibility(View.GONE);
-                    edt_title.setVisibility(View.GONE);
+            edt_title.setVisibility(View.GONE);
         }
-        back =  view.findViewById(R.id.arrow);
-        bt_send=view.findViewById(R.id.btn_send);
+        back = view.findViewById(R.id.arrow);
+        bt_send = view.findViewById(R.id.btn_send);
         preferences = Preferences.getInstance();
 
         if (cuurent_language.equals("en")) {
@@ -217,6 +232,7 @@ edt_address=view.findViewById(R.id.edtAddress);
 
 
     }
+
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         Calendar calendar = Calendar.getInstance();
@@ -231,58 +247,59 @@ edt_address=view.findViewById(R.id.edtAddress);
         //Log.e("kkkk", calendar.getTime().getMonth() + "");
 
         tv_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-        date=calendar.getTimeInMillis()/1000;
+        date = calendar.getTimeInMillis() / 1000;
         // date = calendar.get(Calendar.YEAR) + "-" + (calendar.getTime().getMonth()+calendar.getTime().getMonth():calendar.getTime().getMonth()) + "-" + (calendar.getTime().getDay()<10?"0"+calendar.getTime().getDay():calendar.getTime().getDay());
         //Log.e("kkk", date);
 
     }
+
     private void checkdata() {
-String title=edt_title.getText().toString();
-String dated=tv_date.getText().toString();
-if(Send_Data.getType()==1){
-    if(!TextUtils.isEmpty(dated)&&!TextUtils.isEmpty(formated_address)){
+        Common.CloseKeyBoard(activity,edt_address);
+        String title = edt_title.getText().toString();
+        String dated = tv_date.getText().toString();
+        if (Send_Data.getType() == 1) {
+            if (!TextUtils.isEmpty(dated) && !TextUtils.isEmpty(formated_address)) {
 
-List<Add_Order_Model.Services> services=new ArrayList<>();
-Add_Order_Model.Services ser=new Add_Order_Model.Services();
-ser.setService_id(1);
-services.add(ser);
-        add_order_model.setAddress(formated_address);
-        add_order_model.setLatitude(lat);
-        add_order_model.setLongitude(lang);
-        add_order_model.setNext_date(date);
-        add_order_model.setTitle(null);
-        add_order_model.setType(Send_Data.getType());
-        add_order_model.setServices(services);
-add_order_model.setUser_id(userModel.getId());
-add_order_model.setTotal_cost(total_cost);
-accept_order();
-    }
-}
-else {
-    if(!TextUtils.isEmpty(dated)&&!TextUtils.isEmpty(formated_address)&&!TextUtils.isEmpty(title)){
+                List<Add_Order_Model.Services> services = new ArrayList<>();
+                Add_Order_Model.Services ser = new Add_Order_Model.Services();
+                ser.setService_id(1);
+                services.add(ser);
+                add_order_model.setAddress(formated_address);
+                add_order_model.setLatitude(lat);
+                add_order_model.setLongitude(lang);
+                add_order_model.setNext_date(date);
+                add_order_model.setTitle(null);
+                add_order_model.setType(Send_Data.getType());
+                add_order_model.setServices(services);
+                add_order_model.setUser_id(userModel.getId());
+                add_order_model.setTotal_cost(total_cost);
+                accept_order();
+            }
+        } else {
+            if (!TextUtils.isEmpty(dated) && !TextUtils.isEmpty(formated_address) && !TextUtils.isEmpty(title)) {
 
-        List<Add_Order_Model.Services> services=new ArrayList<>();
-        for (int i = 0; i < services.size(); i++) {
-            View view = rec_service.getChildAt(i);
-            CheckBox checkBox = view.findViewById(R.id.chec_service);
-         if(checkBox.isChecked()) {
-             ser = new Add_Order_Model.Services();
-             ser.setService_id(services.get(0).getService_id());
-             services.add(ser);
-         }
+                List<Add_Order_Model.Services> services = new ArrayList<>();
+                for (int i = 0; i < services.size(); i++) {
+                    View view = rec_service.getChildAt(i);
+                    CheckBox checkBox = view.findViewById(R.id.chec_service);
+                    if (checkBox.isChecked()) {
+                        ser = new Add_Order_Model.Services();
+                        ser.setService_id(services.get(0).getService_id());
+                        services.add(ser);
+                    }
+                }
+                add_order_model.setAddress(formated_address);
+                add_order_model.setLatitude(lat);
+                add_order_model.setLongitude(lang);
+                add_order_model.setNext_date(date);
+                add_order_model.setTitle(title);
+                add_order_model.setType(Send_Data.getType());
+                add_order_model.setServices(services);
+                add_order_model.setUser_id(userModel.getId());
+                add_order_model.setTotal_cost(total_cost);
+                accept_order();
+            }
         }
-        add_order_model.setAddress(formated_address);
-        add_order_model.setLatitude(lat);
-        add_order_model.setLongitude(lang);
-        add_order_model.setNext_date(date);
-        add_order_model.setTitle(title);
-        add_order_model.setType(Send_Data.getType());
-        add_order_model.setServices(services);
-        add_order_model.setUser_id(userModel.getId());
-        add_order_model.setTotal_cost(total_cost);
-        accept_order();
-    }
-}
 
     }
 
@@ -455,20 +472,20 @@ else {
                             /*image_pin.setVisibility(View.VISIBLE);
                             progBar.setVisibility(View.GONE);
 */
-                        //    Fragment_Add_Order_To_Cart.placeMapDetailsData = response.body();
+                            //    Fragment_Add_Order_To_Cart.placeMapDetailsData = response.body();
 
                             if (response.body().getCandidates().size() > 0) {
 
-                                formated_address = response.body().getCandidates().get(0).getFormatted_address().replace("Unnamed Road,","");
+                                formated_address = response.body().getCandidates().get(0).getFormatted_address().replace("Unnamed Road,", "");
                                 //place_id = response.body().getCandidates().get(0).getPlace_id();
-edt_address.setText(formated_address);
+                                edt_address.setText(formated_address);
                                 AddMarker(response.body().getCandidates().get(0).getGeometry().getLocation().getLat(), response.body().getCandidates().get(0).getGeometry().getLocation().getLng());
                             }
                         } else {
 
 
                             try {
-                                Log.e("error_code", response.code()+response.errorBody().string());
+                                Log.e("error_code", response.code() + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -482,13 +499,14 @@ edt_address.setText(formated_address);
                         try {
 
 
-                            Log.e("Error",t.getMessage());
+                            Log.e("Error", t.getMessage());
                         } catch (Exception e) {
 
                         }
                     }
                 });
     }
+
     private void getGeoData(final double lat, final double lng) {
 
         String location = lat + "," + lng;
@@ -533,9 +551,10 @@ edt_address.setText(formated_address);
                     }
                 });
     }
+
     private void accept_order() {
 
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url).accept_orders(add_order_model).enqueue(new Callback<One_Order_Model>() {
@@ -545,15 +564,15 @@ edt_address.setText(formated_address);
                 dialog.dismiss();
                 if (response.isSuccessful()) {
                     preferences.create_update_order(activity, null);
-                   // Common.CreateSignAlertDialog(activity, getResources().getString(R.string.sucess));
+                    // Common.CreateSignAlertDialog(activity, getResources().getString(R.string.sucess));
                     activity.Back();
                     activity.Back();
                     activity.DisplayFragmentclientprofile();
                 } else {
-                    Common.CreateSignAlertDialog(activity,getString(R.string.failed));
+                    Common.CreateSignAlertDialog(activity, getString(R.string.failed));
 
                     try {
-                        Log.e("Error_code",response.code()+"_"+response.errorBody().string());
+                        Log.e("Error_code", response.code() + "_" + response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -564,31 +583,32 @@ edt_address.setText(formated_address);
             public void onFailure(Call<One_Order_Model> call, Throwable t) {
                 try {
                     dialog.dismiss();
-                    Toast.makeText(activity,getString(R.string.something), Toast.LENGTH_SHORT).show();
-                    Log.e("Error",t.getMessage());
+                    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                    Log.e("Error", t.getMessage());
                 } catch (Exception e) {
                 }
             }
         });
     }
+
     private void getsinglemarket() {
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .getsinglemarkey( add_order_model.getMarket_id())
+                .getsinglemarkey(add_order_model.getMarket_id())
                 .enqueue(new Callback<Market_model>() {
                     @Override
                     public void onResponse(Call<Market_model> call, Response<Market_model> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful()&&response.body()!=null) {
+                        if (response.isSuccessful() && response.body() != null) {
                             updateprofile(response.body());
 
-                        }  else {
-                            Common.CreateSignAlertDialog(activity,getString(R.string.failed));
+                        } else {
+                            Common.CreateSignAlertDialog(activity, getString(R.string.failed));
 
                             try {
-                                Log.e("Error_code",response.code()+"_"+response.errorBody().string());
+                                Log.e("Error_code", response.code() + "_" + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -599,8 +619,8 @@ edt_address.setText(formated_address);
                     public void onFailure(Call<Market_model> call, Throwable t) {
                         try {
                             dialog.dismiss();
-                            Toast.makeText(activity,getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            Log.e("Error",t.getMessage());
+                            Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Log.e("Error", t.getMessage());
                         } catch (Exception e) {
                         }
                     }
@@ -609,8 +629,9 @@ edt_address.setText(formated_address);
 
     private void updateprofile(Market_model body) {
         marketServices.clear();
-        if(body.getMarketServices()!=null){
-        marketServices.addAll(body.getMarketServices());}
+        if (body.getMarketServices() != null) {
+            marketServices.addAll(body.getMarketServices());
+        }
         service_adapter.notifyDataSetChanged();
     }
 
