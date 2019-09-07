@@ -13,11 +13,16 @@ import android.widget.Toast;
 
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.PageAdapter;
+import com.creativeshare.roses.adapter.Service_Adapter;
+import com.creativeshare.roses.adapter.Service_Profile_Adapter;
 import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.models.UserModel;
@@ -57,6 +62,9 @@ private int market_id;
     private TextView tv_name,tv_address;
     private ImageView im_banner;
     private CircleImageView im_logo;
+    private RecyclerView rec_service;
+    private Service_Profile_Adapter service_profile_adapter;
+    private List<Market_model.MarketService> marketServices;
     public static Fragment_Shop_profile newInstance(int id) {
         Fragment_Shop_profile fragment_shop_profile = new Fragment_Shop_profile();
         Bundle bundle = new Bundle();
@@ -79,6 +87,7 @@ private int market_id;
 
     private void initview(View view) {
         fragmentList = new ArrayList<>();
+        marketServices=new ArrayList<>();
 
         market_id=getArguments().getInt(Tag);
         Send_Data.setMarket_id(this.market_id);
@@ -94,6 +103,13 @@ private int market_id;
         tv_address=view.findViewById(R.id.tv_address);
         im_banner=view.findViewById(R.id.im_banner);
         im_logo=view.findViewById(R.id.image);
+        rec_service=view.findViewById(R.id.rec_service);
+        rec_service.setDrawingCacheEnabled(true);
+        rec_service.setItemViewCacheSize(25);
+        rec_service.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        service_profile_adapter=new Service_Profile_Adapter(marketServices,homeActivity,this);
+        rec_service.setLayoutManager(new LinearLayoutManager(homeActivity,RecyclerView.HORIZONTAL,false));
+        rec_service.setAdapter(service_profile_adapter);
         intitfragmentspage();
         pageAdapter = new PageAdapter(getChildFragmentManager());
         pageAdapter.addfragments(fragmentList);
@@ -168,7 +184,11 @@ tv_name.setText(body.getName());
 tv_address.setText(body.getAddress());
         Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL+body.getBanner())).fit().placeholder(R.drawable.profile_client).into(im_banner);
         Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL+body.getLogo())).fit().placeholder(R.drawable.logo).into(im_logo);
-
+if(body.getMarketServices()!=null){
+    marketServices.clear();
+    marketServices.addAll(body.getMarketServices());
+    service_profile_adapter.notifyDataSetChanged();
+}
     }
 
 }

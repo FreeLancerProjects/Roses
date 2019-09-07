@@ -76,9 +76,13 @@ public class Client_Order_Adapter extends RecyclerView.Adapter<RecyclerView.View
             final Order_Model.Data data1 = data.get(myHolder.getAdapterPosition());
          if(data1.getType()==1){
             ((MyHolder) holder).tv_name.setText(data1.getMarket_name());
+             ((MyHolder)holder).tv1.setText(activity.getResources().getString(R.string.store_name));
+
          }
          else {
              ((MyHolder)holder).tv_name.setText(data1.getTitle());
+             ((MyHolder)holder).tv1.setText(activity.getResources().getString(R.string.ocasion_name));
+
          }
             ((MyHolder) holder).tv_phone.setText(data1.getMarket_phone());
            // ((MyHolder) holder).tv_price.setText("6555");
@@ -107,12 +111,12 @@ public class Client_Order_Adapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        private TextView tv_name, tv_phone, tv_price, tv_quantity,tv_date;
+        private TextView tv_name, tv_phone, tv_price, tv_quantity,tv_date,tv1;
         private ImageView im_order;
 
         public MyHolder(View itemView) {
             super(itemView);
-
+tv1=itemView.findViewById(R.id.tv1);
             tv_name = itemView.findViewById(R.id.tvstorename);
             tv_phone = itemView.findViewById(R.id.tvPhone);
             tv_price = itemView.findViewById(R.id.tvprice);
