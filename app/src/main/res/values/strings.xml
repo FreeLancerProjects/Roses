@@ -73,5 +73,6 @@
     <string name="account_name">Account Name</string>
     <string name="bank_account">Bank Account</string>
     <string name="not_avail">Not available now</string>
+    <string name="services">Services</string>
 
 </resources>

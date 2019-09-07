@@ -3,6 +3,7 @@ package com.creativeshare.roses.activites_fragments.splash_activity.home_activit
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,9 +26,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.adapter.Service_Adapter;
 import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.AppDataModel;
 import com.creativeshare.roses.models.Market_model;
@@ -87,7 +92,7 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
     private String cuurent_language;
     private UserModel userModel;
     private Add_Order_Model add_order_model;
-private EditText edt_title,edt_desc,edt_address;
+private EditText edt_title,edt_address;
 private LinearLayout ll_date;
 private TextView tv_date,tv1,tv2;
 private Button bt_send;
@@ -105,7 +110,12 @@ private Button bt_send;
     private GoogleMap mMap;
     private double  total_cost=0;
     private DatePickerDialog datePickerDialog;
+    private RecyclerView rec_service;
+    private Service_Adapter service_adapter;
+    private List<Market_model.MarketService> marketServices;
 private Long date;
+    private Add_Order_Model.Services ser;
+
     public static Fragment_Complete newInstance() {
 
         Fragment_Complete about = new Fragment_Complete();
@@ -119,6 +129,7 @@ private Long date;
         updateUI();
       intitview(view);
 gettotal();
+getsinglemarket();
         CheckPermission();
         // Inflate the layout for this fragment
 
@@ -132,6 +143,7 @@ gettotal();
     }
 
     private void intitview(View view) {
+        marketServices=new ArrayList<>();
         activity = (HomeActivity) getActivity();
         Paper.init(activity);
         cuurent_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
@@ -140,11 +152,17 @@ gettotal();
         add_order_model=preferences.getUserOrder(activity);
 
         edt_title=view.findViewById(R.id.edtTitle);
-        edt_desc=view.findViewById(R.id.edtDescription);
-        edt_address=view.findViewById(R.id.edtAddress);
+rec_service=view.findViewById(R.id.rec_service);
+edt_address=view.findViewById(R.id.edtAddress);
         ll_date=view.findViewById(R.id.llStartdate);
         tv1=view.findViewById(R.id.tv1);
         tv2=view.findViewById(R.id.tv2);
+        rec_service.setDrawingCacheEnabled(true);
+        rec_service.setItemViewCacheSize(25);
+        rec_service.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        service_adapter=new Service_Adapter(marketServices,activity,this);
+        rec_service.setLayoutManager(new GridLayoutManager(activity,1));
+        rec_service.setAdapter(service_adapter);
         tv_date = view.findViewById(R.id.tvStartDate);
         if(Send_Data.getType()==1){
             tv1.setVisibility(View.GONE);
@@ -220,10 +238,9 @@ gettotal();
     }
     private void checkdata() {
 String title=edt_title.getText().toString();
-String desc=edt_desc.getText().toString();
 String dated=tv_date.getText().toString();
 if(Send_Data.getType()==1){
-    if(!TextUtils.isEmpty(desc)&&!TextUtils.isEmpty(dated)&&!TextUtils.isEmpty(formated_address)){
+    if(!TextUtils.isEmpty(dated)&&!TextUtils.isEmpty(formated_address)){
 
 List<Add_Order_Model.Services> services=new ArrayList<>();
 Add_Order_Model.Services ser=new Add_Order_Model.Services();
@@ -242,12 +259,18 @@ accept_order();
     }
 }
 else {
-    if(!TextUtils.isEmpty(desc)&&!TextUtils.isEmpty(dated)&&!TextUtils.isEmpty(formated_address)&&!TextUtils.isEmpty(title)){
+    if(!TextUtils.isEmpty(dated)&&!TextUtils.isEmpty(formated_address)&&!TextUtils.isEmpty(title)){
 
         List<Add_Order_Model.Services> services=new ArrayList<>();
-        Add_Order_Model.Services ser=new Add_Order_Model.Services();
-        ser.setService_id(1);
-        services.add(ser);
+        for (int i = 0; i < services.size(); i++) {
+            View view = rec_service.getChildAt(i);
+            CheckBox checkBox = view.findViewById(R.id.chec_service);
+         if(checkBox.isChecked()) {
+             ser = new Add_Order_Model.Services();
+             ser.setService_id(services.get(0).getService_id());
+             services.add(ser);
+         }
+        }
         add_order_model.setAddress(formated_address);
         add_order_model.setLatitude(lat);
         add_order_model.setLongitude(lang);
@@ -512,12 +535,14 @@ edt_address.setText(formated_address);
     }
     private void accept_order() {
 
-
+        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
         Api.getService(Tags.base_url).accept_orders(add_order_model).enqueue(new Callback<One_Order_Model>() {
             @Override
             public void onResponse(Call<One_Order_Model> call, Response<One_Order_Model> response) {
 
-
+                dialog.dismiss();
                 if (response.isSuccessful()) {
                     preferences.create_update_order(activity, null);
                    // Common.CreateSignAlertDialog(activity, getResources().getString(R.string.sucess));
@@ -525,17 +550,68 @@ edt_address.setText(formated_address);
                     activity.Back();
                     activity.DisplayFragmentclientprofile();
                 } else {
+                    Common.CreateSignAlertDialog(activity,getString(R.string.failed));
 
-                    Log.e("Error code", response.code() + "" + response.errorBody());
-
+                    try {
+                        Log.e("Error_code",response.code()+"_"+response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<One_Order_Model> call, Throwable t) {
-                Log.e("Error", t.getMessage());
-
+                try {
+                    dialog.dismiss();
+                    Toast.makeText(activity,getString(R.string.something), Toast.LENGTH_SHORT).show();
+                    Log.e("Error",t.getMessage());
+                } catch (Exception e) {
+                }
             }
         });
     }
+    private void getsinglemarket() {
+        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .getsinglemarkey( add_order_model.getMarket_id())
+                .enqueue(new Callback<Market_model>() {
+                    @Override
+                    public void onResponse(Call<Market_model> call, Response<Market_model> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()&&response.body()!=null) {
+                            updateprofile(response.body());
+
+                        }  else {
+                            Common.CreateSignAlertDialog(activity,getString(R.string.failed));
+
+                            try {
+                                Log.e("Error_code",response.code()+"_"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Market_model> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            Toast.makeText(activity,getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Log.e("Error",t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+    }
+
+    private void updateprofile(Market_model body) {
+        marketServices.clear();
+        if(body.getMarketServices()!=null){
+        marketServices.addAll(body.getMarketServices());}
+        service_adapter.notifyDataSetChanged();
+    }
+
 }

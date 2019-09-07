@@ -74,5 +74,6 @@
     <string name="account_name">إسم الحساب</string>
     <string name="bank_account">الحسابات البنكيه</string>
     <string name="not_avail">غير متاح الان</string>
+    <string name="services">الخدمات</string>
 
 </resources>
