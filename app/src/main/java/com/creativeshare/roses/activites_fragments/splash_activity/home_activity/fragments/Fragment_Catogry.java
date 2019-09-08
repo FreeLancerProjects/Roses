@@ -41,11 +41,12 @@ import retrofit2.Response;
 
 public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
 
-    private RecyclerView rec_depart,rec_markets;
+    private RecyclerView rec_depart, rec_markets;
     private List<Catogries_Model.Data> dataList;
+    private List<Markets_Model.Data> mDataList;
     private Catogries_Text_Adapter catogries_adapter;
     private LinearLayoutManager manager;
-private HomeActivity activity;
+    private HomeActivity activity;
     private float zoom = 15.6f;
     private GoogleMap mMap;
     private double lat, lang;
@@ -60,26 +61,28 @@ private HomeActivity activity;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-    View view= inflater.inflate(R.layout.fragment_catogry, container, false);
-    initview(view);
-    updateUI();
-    getDepartments();
-    return view;
+        View view = inflater.inflate(R.layout.fragment_catogry, container, false);
+        initview(view);
+        updateUI();
+        getDepartments();
+        return view;
     }
 
     private void initview(View view) {
-        rec_depart=view.findViewById(R.id.rec_depart);
-        dataList=new ArrayList<>();
+        rec_depart = view.findViewById(R.id.rec_depart);
+        dataList = new ArrayList<>();
+        mDataList = new ArrayList<>();
         activity = (HomeActivity) getActivity();
         rec_depart.setDrawingCacheEnabled(true);
         rec_depart.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         rec_depart.setItemViewCacheSize(25);
-        manager=new LinearLayoutManager((activity), RecyclerView.HORIZONTAL, false);
+        manager = new LinearLayoutManager((activity), RecyclerView.HORIZONTAL, false);
         rec_depart.setLayoutManager(manager);
-        catogries_adapter=new Catogries_Text_Adapter(dataList,activity,this);
+        catogries_adapter = new Catogries_Text_Adapter(dataList, activity, this);
         rec_depart.setAdapter(catogries_adapter);
 
     }
+
     public void getDepartments() {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
 
@@ -134,6 +137,7 @@ private HomeActivity activity;
                 });
 
     }
+
     public void getMarkets(int cat_id) {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
 
@@ -147,11 +151,12 @@ private HomeActivity activity;
                     @Override
                     public void onResponse(Call<Markets_Model> call, Response<Markets_Model> response) {
                         dialog.dismiss();
-
+                        mDataList.clear();
                         if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                             if (response.body().getData().size() > 0) {
+                                mDataList.addAll(response.body().getData());
                                 // rec_sent.setVisibility(View.VISIBLE);
-addmarkres(response.body());
+                                addmarkres(response.body());
                                 //   total_page = response.body().getMeta().getLast_page();
 
                             } else {
@@ -171,7 +176,7 @@ addmarkres(response.body());
                     @Override
                     public void onFailure(Call<Markets_Model> call, Throwable t) {
                         try {
-dialog.dismiss();
+                            dialog.dismiss();
                             //    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
                             Log.e("error", t.getMessage());
                         } catch (Exception e) {
@@ -182,11 +187,11 @@ dialog.dismiss();
     }
 
     private void addmarkres(Markets_Model body) {
-        Log.e("msg",body.getData().size()+"");
+        Log.e("msg", body.getData().size() + "");
         mMap.clear();
-        for(int i=0;i<body.getData().size();i++){
-            Markets_Model.Data data=body.getData().get(i);
-            AddMarker(data.getLatitude(),data.getLongitude(),i,data.getName());
+        for (int i = 0; i < body.getData().size(); i++) {
+            Markets_Model.Data data = body.getData().get(i);
+            AddMarker(data.getLatitude(), data.getLongitude(), i, data.getName());
         }
     }
 
@@ -211,19 +216,19 @@ dialog.dismiss();
 
     }
 
-    private void AddMarker(double lat, double lang,int index,String title) {
-         Marker marker;
+    private void AddMarker(double lat, double lang, int index, String title) {
+        Marker marker;
 
         this.lat = lat;
         this.lang = lang;
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(new LatLng(lat,lang));
-            marker = mMap.addMarker(markerOptions.title(title));
+        markerOptions.position(new LatLng(lat, lang));
+        marker = mMap.addMarker(markerOptions.title(title));
         marker.setTag(index);
 
         marker.showInfoWindow();
 
-         //   mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lang), zoom));
+        //   mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lang), zoom));
 
     }
 
