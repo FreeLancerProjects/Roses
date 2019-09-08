@@ -257,13 +257,21 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
         Common.CloseKeyBoard(activity,edt_address);
         String title = edt_title.getText().toString();
         String dated = tv_date.getText().toString();
+        List<Add_Order_Model.Services> services = new ArrayList<>();
+        for (int i = 0; i < services.size(); i++) {
+            View view = rec_service.getChildAt(i);
+            CheckBox checkBox = view.findViewById(R.id.chec_service);
+            if (checkBox.isChecked()) {
+                ser = new Add_Order_Model.Services();
+                ser.setService_id(services.get(0).getService_id());
+                services.add(ser);
+            }
+        }
         if (Send_Data.getType() == 1) {
             if (!TextUtils.isEmpty(dated) && !TextUtils.isEmpty(formated_address)) {
+tv_date.setError(null);
+edt_address.setError(null);
 
-                List<Add_Order_Model.Services> services = new ArrayList<>();
-                Add_Order_Model.Services ser = new Add_Order_Model.Services();
-                ser.setService_id(1);
-                services.add(ser);
                 add_order_model.setAddress(formated_address);
                 add_order_model.setLatitude(lat);
                 add_order_model.setLongitude(lang);
@@ -273,21 +281,24 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
                 add_order_model.setServices(services);
                 add_order_model.setUser_id(userModel.getId());
                 add_order_model.setTotal_cost(total_cost);
+                add_order_model.setServices(services);
                 accept_order();
+            }
+            else {
+                if(TextUtils.isEmpty(dated)){
+                    tv_date.setError("");
+                }
+                if(TextUtils.isEmpty(formated_address)){
+                    edt_address.setError(getResources().getString(R.string.field_req));
+                }
             }
         } else {
             if (!TextUtils.isEmpty(dated) && !TextUtils.isEmpty(formated_address) && !TextUtils.isEmpty(title)) {
 
-                List<Add_Order_Model.Services> services = new ArrayList<>();
-                for (int i = 0; i < services.size(); i++) {
-                    View view = rec_service.getChildAt(i);
-                    CheckBox checkBox = view.findViewById(R.id.chec_service);
-                    if (checkBox.isChecked()) {
-                        ser = new Add_Order_Model.Services();
-                        ser.setService_id(services.get(0).getService_id());
-                        services.add(ser);
-                    }
-                }
+
+                tv_date.setError(null);
+                edt_address.setError(null);
+                edt_title.setError(null);
                 add_order_model.setAddress(formated_address);
                 add_order_model.setLatitude(lat);
                 add_order_model.setLongitude(lang);
@@ -297,7 +308,19 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
                 add_order_model.setServices(services);
                 add_order_model.setUser_id(userModel.getId());
                 add_order_model.setTotal_cost(total_cost);
+                add_order_model.setServices(services);
                 accept_order();
+            }
+            else {
+                if(TextUtils.isEmpty(dated)){
+                    tv_date.setError("");
+                }
+                if(TextUtils.isEmpty(formated_address)){
+                    edt_address.setError(getResources().getString(R.string.field_req));
+                }
+                if(TextUtils.isEmpty(title)){
+                    edt_title.setError(getResources().getString(R.string.field_req));
+                }
             }
         }
 

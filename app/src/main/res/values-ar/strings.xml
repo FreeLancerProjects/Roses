@@ -12,7 +12,7 @@
     <string name="user_phone">رقم الجوال</string>
     <string name="register">تسجيل</string>
     <string name="si_su">تسجيل الدخول او انشاء حساب جديد</string>
-    <string name="new_user">انشأ حساب جديد .</string>
+    <string name="new_user">انشاء حساب جديد .</string>
 
     <string name="home">الرئيسية</string>
     <string name="Shops">المتاجر</string>
@@ -59,7 +59,7 @@
     <string name="select_type">اختر النوع</string>
     <string name="defaults">عادى</string>
     <string name="Ocasion">مناسبة</string>
-    <string name="complete">إتمام</string>
+    <string name="complete">إتمام الطلب</string>
     <string name="you_can_now_add_an_occasion_to_your_event">يمكنك اضافة مناسبه الى طلبك</string>
     <string name="ocasion_name">اسم المناسبه</string>
     <string name="date_of_ocasion">تاريخ المناسبه</string>
@@ -75,5 +75,6 @@
     <string name="bank_account">الحسابات البنكيه</string>
     <string name="not_avail">غير متاح الان</string>
     <string name="services">الخدمات</string>
+    <string name="add_to_cart_suc">تم الاضافة الى السله بنجاح</string>
 
 </resources>

@@ -244,6 +244,7 @@ CreateSignAlertDialog(activity);
                     quantity = Integer.parseInt(quant);
                     addtocart();
                     dialog.dismiss();
+                    Common.CreateSignAlertDialog(activity,getResources().getString(R.string.add_to_cart_suc));
 
                 } else {
                     if (TextUtils.isEmpty(quant)) {
@@ -283,7 +284,7 @@ CreateSignAlertDialog(activity);
             order_details1.setAmount(quantity);
             order_details1.setDes(desc);
             order_details1.setProduct_id(data.getProduct_id());
-            order_details1.setTotal_price(quantity * ((Double.parseDouble(data.getProduct_price())*data.getValue())/100));
+            order_details1.setTotal_price(quantity*(Double.parseDouble(data.getProduct_price())-( ((Double.parseDouble(data.getProduct_price())*data.getValue())/100))));
            // order_details.add(order_details1);
             order_details1.setOffer_id(data.getId());
             order_details1.setImage(data.getImage());

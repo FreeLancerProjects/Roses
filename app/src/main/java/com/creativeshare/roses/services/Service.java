@@ -86,20 +86,30 @@ public interface Service {
 
     );
     @FormUrlEncoded
-    @POST("api/products/single-category")
+    @POST("api/products/cat/market")
     Call<Product_Model> getproducts(
             @Field("page") int page,
-            @Field("cat_id") int cat_id
+            @Field("cat_id") int cat_id,
+            @Field("market_id") int market_id
 
 
 
-    );
+
+            );
     @FormUrlEncoded
     @POST("api/my-orders/type")
     Call<Order_Model> getorders(
             @Field("page") int page,
             @Field("user_id") int user_id,
             @Field("type")int type
+
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/cat/markets")
+    Call<Markets_Model> getmarkets(
+            @Field("cat_id") int cat_id
 
 
 

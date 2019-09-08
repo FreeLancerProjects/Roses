@@ -106,9 +106,9 @@ Fragment_About about=new Fragment_About();
     private void updateTermsContent(AppDataModel appDataModel) {
 
         if(cuurent_language.equals("ar")){
-            tv_content.setText(appDataModel.getData().getConditions().getAr_title());}
+            tv_content.setText(appDataModel.getData().getAbout().getAr_content());}
         else {
-            tv_content.setText(appDataModel.getData().getConditions().getEn_content());
+            tv_content.setText(appDataModel.getData().getAbout().getEn_content());
         }
 
     }

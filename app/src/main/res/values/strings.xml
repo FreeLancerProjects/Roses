@@ -58,7 +58,7 @@
     <string name="select_type">select type</string>
     <string name="defaults">Default</string>
     <string name="Ocasion">Ocasion</string>
-    <string name="complete">Complete</string>
+    <string name="complete">Complete Order</string>
     <string name="you_can_now_add_an_occasion_to_your_event">You can now add an occasion to your event</string>
     <string name="ocasion_name">OCasion Name</string>
     <string name="date_of_ocasion">Date of Ocasion</string>
@@ -74,5 +74,6 @@
     <string name="bank_account">Bank Account</string>
     <string name="not_avail">Not available now</string>
     <string name="services">Services</string>
+    <string name="add_to_cart_suc">Add To Cart Succes</string>
 
 </resources>

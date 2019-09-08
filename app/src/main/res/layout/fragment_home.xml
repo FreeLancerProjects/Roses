@@ -19,9 +19,9 @@
             android:id="@+id/im_cart"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:padding="10dp"
-            android:src="@drawable/card"
+            android:src="@drawable/cart"
             android:tint="@color/white"
+            android:padding="4dp"
             />
 
         <TextView

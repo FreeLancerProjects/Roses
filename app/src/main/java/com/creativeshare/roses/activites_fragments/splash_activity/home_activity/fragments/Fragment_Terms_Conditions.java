@@ -114,7 +114,7 @@ public class Fragment_Terms_Conditions extends Fragment {
 
     private void updateTermsContent(AppDataModel appDataModel) {
 if(cuurent_language.equals("ar")){
-        tv_content.setText(appDataModel.getData().getConditions().getAr_title());}
+        tv_content.setText(appDataModel.getData().getConditions().getAr_content());}
 else {
     tv_content.setText(appDataModel.getData().getConditions().getEn_content());
 }

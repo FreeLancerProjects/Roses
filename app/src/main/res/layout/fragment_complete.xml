@@ -166,11 +166,14 @@ app:layout_constraintTop_toBottomOf="@+id/toolBar"
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rec_service"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="0dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:layout_marginTop="8dp"
-            ></androidx.recyclerview.widget.RecyclerView>
+android:layout_weight="1"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
                 android:layout_width="match_parent"
@@ -180,7 +183,6 @@ app:layout_constraintTop_toBottomOf="@+id/toolBar"
                 android:textSize="15sp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
 
                 />
@@ -232,6 +234,7 @@ app:layout_constraintTop_toBottomOf="@+id/toolBar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:background="@drawable/btn_login_bg"
+        android:layout_marginBottom="8dp"
         />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

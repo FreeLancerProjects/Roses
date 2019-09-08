@@ -149,7 +149,7 @@ public class Fragment_Shop_Products extends Fragment {
         // rec_sent.setVisibility(View.GONE);
         Log.e("id", cat_id + "");
         Api.getService(Tags.base_url)
-                .getproducts(1, cat_id)
+                .getproducts(1, cat_id,Send_Data.getMarket_id())
                 .enqueue(new Callback<Product_Model>() {
                     @Override
                     public void onResponse(Call<Product_Model> call, Response<Product_Model> response) {
@@ -196,7 +196,7 @@ public class Fragment_Shop_Products extends Fragment {
 
     private void loadMore(int page) {
         Api.getService(Tags.base_url)
-                .getproducts(page, cat_id)
+                .getproducts(page, cat_id,Send_Data.getMarket_id())
                 .enqueue(new Callback<Product_Model>() {
                     @Override
                     public void onResponse(Call<Product_Model> call, Response<Product_Model> response) {
