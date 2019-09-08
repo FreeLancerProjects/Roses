@@ -219,15 +219,16 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
             mMap.setBuildingsEnabled(false);
             mMap.setIndoorEnabled(true);
 
-mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
     @Override
-    public void onInfoWindowClick(Marker marker) {
+    public boolean onMarkerClick(Marker marker) {
         Infowindows_Adapter adapter = new Infowindows_Adapter(activity,mDataList);
 
         mMap.setInfoWindowAdapter(adapter);
-
+        adapter.getInfoContents(marker);
 
         marker.showInfoWindow();
+        return false;
     }
 });
 
