@@ -1,11 +1,14 @@
 package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
 
 import android.app.ProgressDialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +20,7 @@ import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.Catogries_Adapter;
 import com.creativeshare.roses.adapter.Catogries_Text_Adapter;
+import com.creativeshare.roses.adapter.Infowindows_Adapter;
 import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Markets_Model;
 import com.creativeshare.roses.remote.Api;
@@ -29,18 +33,23 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
 public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
-
+    private ViewGroup infoWindow;
     private RecyclerView rec_depart, rec_markets;
     private List<Catogries_Model.Data> dataList;
     private List<Markets_Model.Data> mDataList;
@@ -50,6 +59,7 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
     private float zoom = 15.6f;
     private GoogleMap mMap;
     private double lat, lang;
+    private String current_lang;
 
     public static Fragment_Catogry newInstance() {
         Fragment_Catogry fragment = new Fragment_Catogry();
@@ -73,6 +83,9 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
         dataList = new ArrayList<>();
         mDataList = new ArrayList<>();
         activity = (HomeActivity) getActivity();
+        Paper.init(activity);
+        current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+
         rec_depart.setDrawingCacheEnabled(true);
         rec_depart.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         rec_depart.setItemViewCacheSize(25);
@@ -189,6 +202,7 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
     private void addmarkres(Markets_Model body) {
         Log.e("msg", body.getData().size() + "");
         mMap.clear();
+        mMap.setInfoWindowAdapter(null);
         for (int i = 0; i < body.getData().size(); i++) {
             Markets_Model.Data data = body.getData().get(i);
             AddMarker(data.getLatitude(), data.getLongitude(), i, data.getName());
@@ -205,9 +219,20 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
             mMap.setBuildingsEnabled(false);
             mMap.setIndoorEnabled(true);
 
+mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Infowindows_Adapter adapter = new Infowindows_Adapter(activity,mDataList);
+        mMap.setInfoWindowAdapter(adapter);
+        marker.showInfoWindow();
+        marker.setInfoWindowAnchor(200,200);
+    }
+});
 
         }
     }
+
+
 
     private void updateUI() {
 

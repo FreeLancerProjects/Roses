@@ -216,7 +216,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="8dp"
-                    app:tabBackground="@color/colorAccent"
+                    app:tabBackground="@drawable/tab_selected"
                     app:tabIndicatorColor="@color/white"
                     app:tabIndicatorHeight="5dp"
                     app:tabRippleColor="@color/colorPrimaryDark"

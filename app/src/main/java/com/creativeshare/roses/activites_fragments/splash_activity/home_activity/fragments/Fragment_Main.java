@@ -211,11 +211,17 @@ public class Fragment_Main extends Fragment {
 
             @Override
             public void onFailure(Call<Slider_Model> call, Throwable t) {
-                Log.e("Error", t.getMessage());
-                progBarAds.setVisibility(View.GONE);
-                //error.setText(activity.getString(R.string.faild));
-                //recc.setVisibility(View.GONE);
-                mPager.setVisibility(View.GONE);
+                try {
+                    Log.e("Error", t.getMessage());
+                    progBarAds.setVisibility(View.GONE);
+                    //error.setText(activity.getString(R.string.faild));
+                    //recc.setVisibility(View.GONE);
+                    mPager.setVisibility(View.GONE);
+                }
+                catch (Exception e){
+
+                }
+
             }
         });
 

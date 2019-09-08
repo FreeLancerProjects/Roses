@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -97,12 +98,12 @@ else {
 
     public class MyHolder extends RecyclerView.ViewHolder {
         private TextView tv_name;
-
+private LinearLayout ll;
         public MyHolder(View itemView) {
             super(itemView);
 
             tv_name = itemView.findViewById(R.id.tv_name);
-
+ll=itemView.findViewById(R.id.ll);
 
         }
 

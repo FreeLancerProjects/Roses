@@ -94,11 +94,14 @@ cart=view.findViewById(R.id.rec_cart);
             linearLayout.setVisibility(View.VISIBLE);
             cart.setVisibility(View.GONE);
         }
-
+if(preferences.getUserOrder(activity)==null){
+    bt_com.setVisibility(View.INVISIBLE);
+}
 bt_com.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         if(userModel!=null){
+            if(preferences.getUserOrder(activity)!=null)
         CreateTypeDialog();}
         else {
             Common.CreateUserNotSignInAlertDialog(activity);

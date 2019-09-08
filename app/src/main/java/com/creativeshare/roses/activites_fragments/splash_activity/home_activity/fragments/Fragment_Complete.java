@@ -142,6 +142,7 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
         for (int i = 0; i < add_order_model.getOrder_details().size(); i++) {
             total_cost += add_order_model.getOrder_details().get(i).getTotal_price();
         }
+        total_cost=Math.round(total_cost);
     }
 
     private void intitview(View view) {
