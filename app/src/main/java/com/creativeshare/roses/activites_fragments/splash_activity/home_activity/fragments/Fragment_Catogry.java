@@ -224,8 +224,9 @@ mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
     public void onInfoWindowClick(Marker marker) {
         Infowindows_Adapter adapter = new Infowindows_Adapter(activity,mDataList);
         mMap.setInfoWindowAdapter(adapter);
-        marker.showInfoWindow();
         marker.setInfoWindowAnchor(200,200);
+
+        marker.showInfoWindow();
     }
 });
 
