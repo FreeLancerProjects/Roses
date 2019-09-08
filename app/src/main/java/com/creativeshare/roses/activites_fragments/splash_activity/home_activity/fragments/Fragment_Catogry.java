@@ -223,8 +223,10 @@ mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
     @Override
     public void onInfoWindowClick(Marker marker) {
         Infowindows_Adapter adapter = new Infowindows_Adapter(activity,mDataList);
-        mMap.setInfoWindowAdapter(adapter);
         marker.setInfoWindowAnchor(200,200);
+
+        mMap.setInfoWindowAdapter(adapter);
+
 
         marker.showInfoWindow();
     }
