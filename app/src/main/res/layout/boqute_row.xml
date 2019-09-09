@@ -12,30 +12,31 @@
     app:cardCornerRadius="10dp"
 
     app:cardElevation="2dp">
+    <TextView
+        android:id="@+id/tv_offer"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:alpha=".8"
+        android:gravity="center|center_horizontal"
+        android:text="10%"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:background="@drawable/text_shape"
+        android:rotation="45"
+        android:paddingLeft="20dp"
+        android:paddingBottom="8dp"
+
+        android:layout_gravity="end|top"
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-
+android:layout_marginTop="40dp"
         >
 
 
-        <TextView
-            android:id="@+id/tv_offer"
-            android:layout_width="45dp"
-            android:layout_height="35dp"
-            android:alpha=".8"
-android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="@string/Occasions"
-            android:textColor="@color/white"
-            android:textSize="13sp"
-            android:background="@drawable/text_shape"
-            android:rotation="45
-"
-            android:layout_gravity="end"
-            />
 
 
 

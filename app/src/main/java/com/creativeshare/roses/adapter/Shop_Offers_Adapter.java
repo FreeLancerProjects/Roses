@@ -134,6 +134,9 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
             im_offer = itemView.findViewById(R.id.im_offer);
             tv_offer = itemView.findViewById(R.id.tv_offer);
             cons_cart = itemView.findViewById(R.id.cons_cart);
+            if(current_lang.equals("ar")){
+                tv_offer.setRotation(135);
+            }
         }
 
     }
