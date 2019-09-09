@@ -20,6 +20,7 @@ import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.models.Offer_Model;
 import com.creativeshare.roses.models.Order_Model;
+import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.tags.Tags;
 import com.squareup.picasso.Picasso;
 
@@ -95,7 +96,12 @@ public class Client_Order_Adapter extends RecyclerView.Adapter<RecyclerView.View
             ((MyHolder) holder).tv_date.setText(date);
 
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getMarket_image())).fit().into(((MyHolder) holder).im_order);
-
+            ((MyHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Send_Data.setData(data.get(holder.getLayoutPosition()));
+                }
+            });
 
             //Log.e("msg",advertsing.getMain_image());
         } else {

@@ -4,6 +4,7 @@ public class Send_Data {
     private static int market_id;
 private static  int cat_id;
 private static int type;
+private static Order_Model.Data data;
     public static int getMarket_id() {
         return market_id;
     }
@@ -26,5 +27,13 @@ private static int type;
 
     public static void setType(int type) {
         Send_Data.type = type;
+    }
+
+    public static Order_Model.Data getData() {
+        return data;
+    }
+
+    public static void setData(Order_Model.Data data) {
+        Send_Data.data = data;
     }
 }

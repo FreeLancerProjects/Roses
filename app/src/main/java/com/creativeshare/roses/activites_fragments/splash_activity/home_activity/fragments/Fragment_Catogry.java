@@ -26,13 +26,16 @@ import com.creativeshare.roses.models.Markets_Model;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -60,6 +63,14 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private double lat, lang;
     private String current_lang;
+    List<Marker> list = new ArrayList<>();
+
+    private final double initLat1 = 40.462740;
+    private final double initLng1 = 30.039572;
+    private final double initLat2 = 48.462740;
+    private final double initLng2 = 35.039572;
+    private static final int MAP_ZOOM_LEVEL = 4;
+    private Marker marker;
 
     public static Fragment_Catogry newInstance() {
         Fragment_Catogry fragment = new Fragment_Catogry();
@@ -207,6 +218,12 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
             Markets_Model.Data data = body.getData().get(i);
             AddMarker(data.getLatitude(), data.getLongitude(), i, data.getName());
         }
+        LatLng position = new LatLng(initLat2, initLng2);
+ marker=mMap.addMarker(new MarkerOptions().position(position));
+marker.setTitle(body.getData().size()+"");
+marker.setTag("t");
+marker.showInfoWindow();
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, MAP_ZOOM_LEVEL));
     }
 
 
@@ -219,16 +236,38 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
             mMap.setBuildingsEnabled(false);
             mMap.setIndoorEnabled(true);
 
+
 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
     @Override
     public boolean onMarkerClick(Marker marker) {
+        if(!marker.getTag().equals("t")){
         Infowindows_Adapter adapter = new Infowindows_Adapter(activity,mDataList);
 
         mMap.setInfoWindowAdapter(adapter);
         adapter.getInfoContents(marker);
 
-        marker.showInfoWindow();
+        marker.showInfoWindow();}
         return false;
+    }
+});
+mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+    @Override
+    public void onCameraIdle() {
+        // Cleaning all the markers.
+
+if(mMap.getCameraPosition().zoom>MAP_ZOOM_LEVEL){
+    if(marker!=null)
+    marker.setVisible(true);
+    marker.showInfoWindow();
+}
+else if(mMap.getCameraPosition().zoom<MAP_ZOOM_LEVEL){
+
+    if(marker!=null)
+        marker.setVisible(false);
+
+}
+
+
     }
 });
 
@@ -253,7 +292,6 @@ mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
         markerOptions.position(new LatLng(lat, lang));
         marker = mMap.addMarker(markerOptions.title(title));
         marker.setTag(index);
-
         marker.showInfoWindow();
 
         //   mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lang), zoom));
