@@ -155,7 +155,7 @@ progBar.setVisibility(View.VISIBLE);
                     public void onFailure(Call<Order_Model> call, Throwable t) {
                         try {
 
-
+progBar.setVisibility(View.GONE);
                             //    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
                             Log.e("error", t.getMessage());
                         } catch (Exception e) {

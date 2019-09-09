@@ -214,6 +214,7 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
         Log.e("msg", body.getData().size() + "");
         mMap.clear();
         mMap.setInfoWindowAdapter(null);
+        list.clear();
         for (int i = 0; i < body.getData().size(); i++) {
             Markets_Model.Data data = body.getData().get(i);
             AddMarker(data.getLatitude(), data.getLongitude(), i, data.getName());
@@ -274,9 +275,9 @@ mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
         marker = mMap.addMarker(markerOptions.title(title));
         marker.setTag(index);
         marker.showInfoWindow();
-
-        //   mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lang), zoom));
-
+        if(index==0) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lang), zoom));
+        }
     }
 
 

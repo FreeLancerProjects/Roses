@@ -399,7 +399,7 @@ public class HomeActivity extends AppCompatActivity {
             if (fragment_home != null && fragment_home.isVisible()) {
                 if (fragment_main != null && fragment_main.isVisible()) {
                     if (userModel == null) {
-                        //   Common.CreateUserNotSignInAlertDialog(this);
+                           Common.CreateUserNotSignInAlertDialog(this);
                     } else {
                         finish();
                     }

@@ -2,6 +2,7 @@ package com.creativeshare.roses.adapter;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ activity=(HomeActivity)context;
         else {
          view= context.getLayoutInflater().inflate(R.layout.info_window_map_en, null);
         }
-        view.setLayoutParams(new ViewGroup.LayoutParams(activity.getWindow().getWindowManager().getDefaultDisplay().getWidth(), 300));
+        view.setLayoutParams(new ViewGroup.LayoutParams(activity.getWindow().getWindowManager().getDefaultDisplay().getWidth(), 270));
 
         TextView infotv1 =  view.findViewById(R.id.tv1);
         TextView infotv4 =  view.findViewById(R.id.tv4);
@@ -70,7 +71,7 @@ activity=(HomeActivity)context;
         tv_phone.setText(mDataList.get((Integer) marker.getTag()).getPhone());
         bt_details.setText(activity.getResources().getString(R.string.add_details));
         bt_cancell.setText(activity.getResources().getString(R.string.cancel));
-        Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL+mDataList.get((Integer)marker.getTag()).getLogo())).fit().centerCrop().placeholder(R.drawable.logo).into(infim);
+        Picasso.with(context).load(Tags.IMAGE_URL+mDataList.get((Integer)marker.getTag()).getLogo()).into(infim);
 
    /*     infoButtonListener = new OnInfoWindowElemTouchListener(bt_details,
                 activity.getResources().getDrawable(R.drawable.btn_login_bg),

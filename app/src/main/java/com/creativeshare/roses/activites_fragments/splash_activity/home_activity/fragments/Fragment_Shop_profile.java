@@ -198,9 +198,20 @@ public class Fragment_Shop_profile extends Fragment {
         Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL + body.getBanner())).fit().placeholder(R.drawable.profile_client).into(im_banner);
         Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL + body.getLogo())).fit().placeholder(R.drawable.logo).into(im_logo);
         if (body.getMarketServices() != null) {
+if(body.getMarketServices().size()>0){
             marketServices.clear();
             marketServices.addAll(body.getMarketServices());
             service_profile_adapter.notifyDataSetChanged();
+
+}
+else {
+    rec_service.setVisibility(View.GONE);
+   // Log.e("kkkk","llllll");
+
+}
+        }
+        else {
+            rec_service.setVisibility(View.GONE);
         }
     }
 

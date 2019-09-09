@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="5dp"
@@ -18,25 +19,24 @@
         android:orientation="vertical"
 
         >
+
+
         <TextView
             android:id="@+id/tv_offer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="45dp"
+            android:layout_height="35dp"
             android:alpha=".8"
+android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="@string/Occasions"
-            android:textColor="@color/colorAccent"
-            android:textSize="15sp"
-
-
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:background="@drawable/text_shape"
+            android:rotation="45
+"
+            android:layout_gravity="end"
             />
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="5dp"
-            android:background="@color/black"
-          />
+
 
 
             <com.makeramen.roundedimageview.RoundedImageView
@@ -46,7 +46,9 @@
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                app:riv_corner_radius="10dp" />
+                app:riv_corner_radius="10dp"
+
+                />
 
 
 

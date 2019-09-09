@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/cart"
+            android:text="@string/Shops"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -76,7 +76,7 @@
                 android:id="@+id/ll_no_store"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="gone">

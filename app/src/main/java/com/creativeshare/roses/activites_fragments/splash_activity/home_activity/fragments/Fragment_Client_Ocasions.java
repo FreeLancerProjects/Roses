@@ -172,6 +172,7 @@ public class Fragment_Client_Ocasions extends Fragment {
                     @Override
                     public void onFailure(Call<Order_Model> call, Throwable t) {
                         try {
+                            progBar.setVisibility(View.GONE);
 
 
                             //    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
