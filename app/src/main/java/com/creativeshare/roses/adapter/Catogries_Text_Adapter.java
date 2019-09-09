@@ -87,6 +87,19 @@ else {
                     fragment_catogry=(Fragment_Catogry)fragment;
                     fragment_catogry.getMarkets(data.get(holder.getLayoutPosition()).getId());
                     index=position;
+                    for(int i=0;i<data.size();i++){
+                        if(index==i){
+                            ((MyHolder) holder).ll.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimaryDark));
+                            ((MyHolder) holder).tv_name.setTextColor(activity.getResources().getColor(R.color.black));
+                        }
+                        else
+                        {
+                            ((MyHolder) holder).ll.setBackgroundColor(activity.getResources().getColor(R.color.colorAccent));
+                            ((MyHolder) holder).tv_name.setTextColor(activity.getResources().getColor(R.color.white));
+
+                            // holder.tv.setTextColor(Color.parseColor("#6200EA"));
+                        }
+                    }
                 }
             }
         });
