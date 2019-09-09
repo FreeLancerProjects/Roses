@@ -19,6 +19,8 @@ import com.creativeshare.roses.activites_fragments.splash_activity.home_activity
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Client_profile;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Complete;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Contact_Us;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Markets;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Product_Details;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Upgrade;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Home;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Main;
@@ -66,6 +68,8 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_Contact_Us fragment_contact_us;
     private Fragment_Bank_Account fragment_bank_account;
     private Fragment_Upgrade fragment_upgrade;
+    private Fragment_Product_Details fragment_product_detials;
+    private Fragment_Markets Fragment_markets;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -240,6 +244,36 @@ public class HomeActivity extends AppCompatActivity {
 
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_shop_profile, "fragment_shop_profile").addToBackStack("fragment_shop_profile").commit();
+
+        }
+
+    }
+    public void DisplayFragmentProductdetials() {
+        fragment_count += 1;
+
+        fragment_product_detials = Fragment_Product_Details.newInstance();
+
+
+        if (fragment_product_detials.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_product_detials).commit();
+
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_product_detials, "fragment_product_detials").addToBackStack("fragment_product_detials").commit();
+
+        }
+
+    }
+    public void DisplayFragmentMarkets() {
+        fragment_count += 1;
+
+        Fragment_markets = Fragment_Markets.newInstance();
+
+
+        if (Fragment_markets.isAdded()) {
+            fragmentManager.beginTransaction().show(Fragment_markets).commit();
+
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, Fragment_markets, "Fragment_markets").addToBackStack("Fragment_markets").commit();
 
         }
 

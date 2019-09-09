@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Cart;
 import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.tags.Tags;
@@ -32,14 +33,15 @@ public class Cart_Adpter extends RecyclerView.Adapter<Cart_Adpter.Eyas_Holder> {
     HomeActivity activity;
     Preferences preferences;
     private String current_lang;
-
-    public Cart_Adpter(List<Add_Order_Model.Order_details> list, Context context) {
+private Fragment_Cart fragment_cart;
+    public Cart_Adpter(List<Add_Order_Model.Order_details> list, Context context, Fragment_Cart fragment_cart) {
         this.list = list;
         this.context = context;
         activity = (HomeActivity) context;
         preferences = Preferences.getInstance();
         Paper.init(activity);
         current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        this.fragment_cart=fragment_cart;
     }
 
     @Override
@@ -113,10 +115,14 @@ viewHolder.im_increase.setOnClickListener(new View.OnClickListener() {
         notifyItemRangeChanged(position, list.size());
         add_order_model.setOrder_details(list);
         if(!list.isEmpty()){
-        preferences.create_update_order(activity, add_order_model);}
+        preferences.create_update_order(activity, add_order_model);
+
+        }
         else {
             preferences.create_update_order(activity,null);
         }
+        fragment_cart.gettotal();
+
     }
     private void updateincrease(int position) {
         Add_Order_Model add_order_model = preferences.getUserOrder(activity);
@@ -128,6 +134,7 @@ viewHolder.im_increase.setOnClickListener(new View.OnClickListener() {
        notifyDataSetChanged();
         add_order_model.setOrder_details(list);
         preferences.create_update_order(activity, add_order_model);
+        fragment_cart.gettotal();
     }
     private void updatedecrease(int position) {
         Add_Order_Model add_order_model = preferences.getUserOrder(activity);
@@ -140,7 +147,9 @@ viewHolder.im_increase.setOnClickListener(new View.OnClickListener() {
         notifyDataSetChanged();
         add_order_model.setOrder_details(list);
         preferences.create_update_order(activity, add_order_model);
-    }}
+            fragment_cart.gettotal();
+
+        }}
 }
 
 

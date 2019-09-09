@@ -48,6 +48,8 @@ public class Fragment_Cart extends Fragment {
     private String cuurent_language;
 private Button bt_com;
 private ImageView im_back;
+    private double total_cost;
+    private TextView tv_total;
     public static Fragment_Cart newInstance() {
         return new Fragment_Cart();
     }
@@ -59,9 +61,22 @@ private ImageView im_back;
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         intitview(view);
+        gettotal();
+
         return view;
     }
-
+    public void gettotal() {
+        total_cost=0.0;
+        if(preferences.getUserOrder(activity)!=null){
+        for (int i = 0; i < preferences.getUserOrder(activity).getOrder_details().size(); i++) {
+            total_cost += preferences.getUserOrder(activity).getOrder_details().get(i).getTotal_price();
+        }
+        total_cost=Math.round(total_cost);}
+        else {
+            total_cost=0.0;
+        }
+        tv_total.setText(activity.getResources().getString(R.string.price)+":"+total_cost);
+    }
     private void intitview(View view) {
       //  item_cart_model = new Item_Cart_Model();
         activity = (HomeActivity) getActivity();
@@ -72,6 +87,7 @@ private ImageView im_back;
         linearLayout = view.findViewById(R.id.ll_no_store);
         im_back=view.findViewById(R.id.arrow_back);
         type_array = new String[]{getResources().getString(R.string.Ocasion),getResources().getString(R.string.defaults)};
+        tv_total=view.findViewById(R.id.tv_total);
 
 cart=view.findViewById(R.id.rec_cart);
         bt_com=view.findViewById(R.id.bt_com);
@@ -84,7 +100,7 @@ cart=view.findViewById(R.id.rec_cart);
        }
         if (add_order_model != null) {
 
-            cart_adpter = new Cart_Adpter(add_order_model.getOrder_details(), activity);
+            cart_adpter = new Cart_Adpter(add_order_model.getOrder_details(), activity,this);
             cart.setLayoutManager(new GridLayoutManager(activity, 1));
             cart.setAdapter(cart_adpter);
             linearLayout.setVisibility(View.GONE);

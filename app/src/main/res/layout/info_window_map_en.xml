@@ -64,7 +64,9 @@ android:longClickable="false"
         android:text="@string/quantity"
         android:textColor="@color/gray4"
         app:layout_constraintStart_toEndOf="@id/im1"
-        app:layout_constraintTop_toBottomOf="@id/tv1" />
+        app:layout_constraintTop_toBottomOf="@id/tv1"
+        android:layout_marginTop="5dp"
+        />
 
     <TextView
         android:id="@+id/tv_address"
@@ -80,6 +82,19 @@ android:longClickable="false"
         app:layout_constraintStart_toEndOf="@id/tv4"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="start"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="@string/store_name"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toEndOf="@+id/im1"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/tv4" />
 
 
         <Button
@@ -94,6 +109,7 @@ android:longClickable="false"
             android:text="@string/add_details"
             android:textColor="@color/white"
             android:layout_marginEnd="8dp"
+            android:visibility="gone"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
             app:layout_constraintTop_toBottomOf="@+id/im1"
@@ -109,6 +125,7 @@ android:longClickable="false"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:layout_marginEnd="20dp"
+            android:visibility="gone"
             app:layout_constraintHorizontal_weight="1"
             android:text="@string/cancel"
             android:textColor="@color/white"

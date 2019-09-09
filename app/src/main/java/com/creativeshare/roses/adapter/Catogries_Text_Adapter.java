@@ -1,6 +1,7 @@
 package com.creativeshare.roses.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.util.Log;
@@ -38,6 +39,8 @@ public class Catogries_Text_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
     private Fragment fragment;
     private Fragment_Catogry fragment_catogry;
 private String current_lang;
+    private int index=0;
+
     public Catogries_Text_Adapter(List<Catogries_Model.Data> data, Context context, Fragment fragment) {
 
         this.data = data;
@@ -83,11 +86,22 @@ else {
                 if(fragment instanceof  Fragment_Catogry){
                     fragment_catogry=(Fragment_Catogry)fragment;
                     fragment_catogry.getMarkets(data.get(holder.getLayoutPosition()).getId());
+                    index=position;
                 }
             }
         });
             //Log.e("msg",advertsing.getMain_image());
+        if(index==position){
+            ((MyHolder) holder).ll.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimaryDark));
+            ((MyHolder) holder).tv_name.setTextColor(activity.getResources().getColor(R.color.black));
+        }
+        else
+        {
+            ((MyHolder) holder).ll.setBackgroundColor(activity.getResources().getColor(R.color.colorAccent));
+            ((MyHolder) holder).tv_name.setTextColor(activity.getResources().getColor(R.color.white));
 
+            // holder.tv.setTextColor(Color.parseColor("#6200EA"));
+        }
     }
 
 

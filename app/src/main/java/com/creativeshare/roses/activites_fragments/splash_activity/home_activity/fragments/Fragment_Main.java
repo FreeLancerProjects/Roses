@@ -319,6 +319,7 @@ public class Fragment_Main extends Fragment {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
 
         // rec_sent.setVisibility(View.GONE);
+        progBar.setVisibility(View.VISIBLE);
 
         Api.getService(Tags.base_url)
                 .getMarkets(1)

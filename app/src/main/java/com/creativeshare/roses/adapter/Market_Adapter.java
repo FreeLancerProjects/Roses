@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Main;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Markets;
 import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Markets_Model;
 import com.creativeshare.roses.tags.Tags;
@@ -38,6 +39,7 @@ public class Market_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private HomeActivity activity;
     private Fragment fragment;
     private Fragment_Main fragment_main;
+    private Fragment_Markets fragment_markets;
 private String current_lang;
     public Market_Adapter(List<Markets_Model.Data> data, Context context, Fragment fragment) {
 
@@ -84,6 +86,10 @@ private String current_lang;
         if(fragment instanceof  Fragment_Main){
             fragment_main=(Fragment_Main)fragment;
             fragment_main.showmarket(data.get((holder.getLayoutPosition())).getId());
+        }
+        else if(fragment instanceof  Fragment_Markets){
+            fragment_markets=(Fragment_Markets)fragment;
+            fragment_markets.showmarket(data.get(holder.getLayoutPosition()).getId());
         }
     }
 });

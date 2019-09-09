@@ -84,7 +84,20 @@
         app:layout_constraintEnd_toStartOf="@id/tv4"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="start"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
 
+        android:text="@string/store_name"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toStartOf="@id/im1"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/tv4" />
     <Button
         android:id="@+id/btn_detilas"
         android:layout_width="wrap_content"
@@ -100,7 +113,10 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/btn_cancel"
         app:layout_constraintTop_toBottomOf="@+id/im1"
-        tools:ignore="RtlCompat" />
+        android:visibility="gone"
+        tools:ignore="RtlCompat"
+
+        />
 
     <Button
         android:id="@+id/btn_cancel"
@@ -115,7 +131,9 @@
         android:textColor="@color/white"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/im1" />
+        app:layout_constraintTop_toBottomOf="@+id/im1"
+        android:visibility="gone"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

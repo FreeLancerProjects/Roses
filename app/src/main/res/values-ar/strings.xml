@@ -76,5 +76,7 @@
     <string name="not_avail">غير متاح الان</string>
     <string name="services">الخدمات</string>
     <string name="add_to_cart_suc">تم الاضافة الى السله بنجاح</string>
+    <string name="shop_profile">Shop Profile</string>
+    <string name="product_detials">Product Detials</string>
 
 </resources>

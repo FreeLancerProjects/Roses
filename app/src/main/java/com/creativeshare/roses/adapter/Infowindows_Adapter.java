@@ -27,7 +27,7 @@ private String current_lang;
     private Activity context;
     private HomeActivity activity;
 List<Markets_Model.Data> mDataList;
-    private OnInfoWindowElemTouchListener infoButtonListener;
+   // private OnInfoWindowElemTouchListener infoButtonListener;
 
     public Infowindows_Adapter(Activity context,List<Markets_Model.Data> mDataList){
         this.context = context;
@@ -58,6 +58,8 @@ activity=(HomeActivity)context;
         TextView infotv4 =  view.findViewById(R.id.tv4);
         TextView infoTitle =  view.findViewById(R.id.tv_title);
         TextView infoaddress =  view.findViewById(R.id.tv_address);
+        TextView tv_phone =  view.findViewById(R.id.tv_phone);
+
         ImageView infim=view.findViewById(R.id.im1);
         Button bt_details=view.findViewById(R.id.btn_detilas);
         Button bt_cancell=view.findViewById(R.id.btn_cancel);
@@ -65,11 +67,12 @@ activity=(HomeActivity)context;
         infotv4.setText(context.getResources().getString(R.string.address)+":");
         infoTitle.setText(mDataList.get((Integer) marker.getTag()).getName());
         infoaddress.setText(mDataList.get((Integer) marker.getTag()).getAddress());
+        tv_phone.setText(mDataList.get((Integer) marker.getTag()).getPhone());
         bt_details.setText(activity.getResources().getString(R.string.add_details));
         bt_cancell.setText(activity.getResources().getString(R.string.cancel));
         Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL+mDataList.get((Integer)marker.getTag()).getLogo())).fit().centerCrop().placeholder(R.drawable.logo).into(infim);
 
-        infoButtonListener = new OnInfoWindowElemTouchListener(bt_details,
+   /*     infoButtonListener = new OnInfoWindowElemTouchListener(bt_details,
                 activity.getResources().getDrawable(R.drawable.btn_login_bg),
                activity.getResources().getDrawable(R.drawable.btn_login_bg))
         {
@@ -79,7 +82,7 @@ activity=(HomeActivity)context;
                 activity.DisplayFragmentShopprofile(mDataList.get((Integer) marker.getTag()).getId())  ;          }
         };
         bt_details.setOnTouchListener(infoButtonListener);
-
+*/
         bt_cancell.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {

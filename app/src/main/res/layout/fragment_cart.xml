@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/products"
+            android:text="@string/cart"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -41,10 +41,11 @@
 
 
     <FrameLayout
+
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/gray8"
-        app:layout_constraintBottom_toTopOf="@+id/bt_com"
+        app:layout_constraintBottom_toTopOf="@+id/tv_total"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         android:layout_marginBottom="8dp"
         >
@@ -77,6 +78,13 @@
         </androidx.recyclerview.widget.RecyclerView>
 
     </FrameLayout>
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_com"
+        android:layout_marginBottom="8dp"
+        />
     <Button
         android:id="@+id/bt_com"
         android:layout_width="180dp"

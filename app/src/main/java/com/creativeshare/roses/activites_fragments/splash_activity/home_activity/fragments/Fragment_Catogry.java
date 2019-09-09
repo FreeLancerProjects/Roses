@@ -218,12 +218,7 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
             Markets_Model.Data data = body.getData().get(i);
             AddMarker(data.getLatitude(), data.getLongitude(), i, data.getName());
         }
-        LatLng position = new LatLng(initLat2, initLng2);
- marker=mMap.addMarker(new MarkerOptions().position(position));
-marker.setTitle(body.getData().size()+"");
-marker.setTag("t");
-marker.showInfoWindow();
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, MAP_ZOOM_LEVEL));
+
     }
 
 
@@ -250,24 +245,10 @@ mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
         return false;
     }
 });
-mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
     @Override
-    public void onCameraIdle() {
-        // Cleaning all the markers.
-
-if(mMap.getCameraPosition().zoom>MAP_ZOOM_LEVEL){
-    if(marker!=null)
-    marker.setVisible(true);
-    marker.showInfoWindow();
-}
-else if(mMap.getCameraPosition().zoom<MAP_ZOOM_LEVEL){
-
-    if(marker!=null)
-        marker.setVisible(false);
-
-}
-
-
+    public void onInfoWindowClick(Marker marker) {
+        activity.DisplayFragmentShopprofile(mDataList.get((Integer) marker.getTag()).getId());
     }
 });
 

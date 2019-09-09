@@ -75,24 +75,23 @@ public class Client_Order_Adapter extends RecyclerView.Adapter<RecyclerView.View
 
             final MyHolder myHolder = (MyHolder) holder;
             final Order_Model.Data data1 = data.get(myHolder.getAdapterPosition());
-         if(data1.getType()==1){
-            ((MyHolder) holder).tv_name.setText(data1.getMarket_name());
-             ((MyHolder)holder).tv1.setText(activity.getResources().getString(R.string.store_name));
+            if (data1.getType() == 1) {
+                ((MyHolder) holder).tv_name.setText(data1.getMarket_name());
+                ((MyHolder) holder).tv1.setText(activity.getResources().getString(R.string.store_name));
 
-         }
-         else {
-             ((MyHolder)holder).tv_name.setText(data1.getTitle());
-             ((MyHolder)holder).tv1.setText(activity.getResources().getString(R.string.ocasion_name));
+            } else {
+                ((MyHolder) holder).tv_name.setText(data1.getTitle());
+                ((MyHolder) holder).tv1.setText(activity.getResources().getString(R.string.ocasion_name));
 
-         }
+            }
             ((MyHolder) holder).tv_phone.setText(data1.getMarket_phone());
-           // ((MyHolder) holder).tv_price.setText("6555");
+            // ((MyHolder) holder).tv_price.setText("6555");
 
-            ((MyHolder) holder).tv_price.setText(data1.getTotal_cost()+context.getResources().getString(R.string.ryal));
-            ((MyHolder) holder).tv_quantity.setText(data1.getOrderDetails().size()+context.getResources().getString(R.string.bouquet));
+            ((MyHolder) holder).tv_price.setText(data1.getTotal_cost() + context.getResources().getString(R.string.ryal));
+            ((MyHolder) holder).tv_quantity.setText(data1.getOrderDetails().size() + context.getResources().getString(R.string.bouquet));
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy",Locale.ENGLISH);
-            String date = dateFormat.format(new Date(data1.getNext_date()*1000));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+            String date = dateFormat.format(new Date(data1.getNext_date() * 1000));
             ((MyHolder) holder).tv_date.setText(date);
 
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getMarket_image())).fit().into(((MyHolder) holder).im_order);
@@ -100,6 +99,7 @@ public class Client_Order_Adapter extends RecyclerView.Adapter<RecyclerView.View
                 @Override
                 public void onClick(View view) {
                     Send_Data.setData(data.get(holder.getLayoutPosition()));
+                    activity.DisplayFragmentProductdetials();
                 }
             });
 
@@ -117,17 +117,17 @@ public class Client_Order_Adapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        private TextView tv_name, tv_phone, tv_price, tv_quantity,tv_date,tv1;
+        private TextView tv_name, tv_phone, tv_price, tv_quantity, tv_date, tv1;
         private ImageView im_order;
 
         public MyHolder(View itemView) {
             super(itemView);
-tv1=itemView.findViewById(R.id.tv1);
+            tv1 = itemView.findViewById(R.id.tv1);
             tv_name = itemView.findViewById(R.id.tvstorename);
             tv_phone = itemView.findViewById(R.id.tvPhone);
             tv_price = itemView.findViewById(R.id.tvprice);
             tv_quantity = itemView.findViewById(R.id.tvquantity);
-            tv_date=itemView.findViewById(R.id.tv_date);
+            tv_date = itemView.findViewById(R.id.tv_date);
             im_order = itemView.findViewById(R.id.im1);
 
 
@@ -147,7 +147,7 @@ tv1=itemView.findViewById(R.id.tv1);
 
     @Override
     public int getItemViewType(int position) {
-      Order_Model.Data data1 = data.get(position);
+        Order_Model.Data data1 = data.get(position);
         if (data1 == null) {
             return ITEM_LOAD;
         } else {
