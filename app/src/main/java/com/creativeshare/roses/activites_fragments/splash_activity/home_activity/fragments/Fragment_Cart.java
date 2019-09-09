@@ -76,6 +76,13 @@ private ImageView im_back;
             total_cost=0.0;
         }
         tv_total.setText(activity.getResources().getString(R.string.price)+":"+total_cost);
+        if(total_cost==0.0){
+            tv_total.setVisibility(View.INVISIBLE);
+        }
+        else {
+            tv_total.setVisibility(View.VISIBLE);
+
+        }
     }
     private void intitview(View view) {
       //  item_cart_model = new Item_Cart_Model();

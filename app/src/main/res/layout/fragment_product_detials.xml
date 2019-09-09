@@ -32,11 +32,11 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cons_data"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@drawable/linear_shape"
                     android:padding="10dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="150dp"
+                    android:layout_marginTop="200dp"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
 
