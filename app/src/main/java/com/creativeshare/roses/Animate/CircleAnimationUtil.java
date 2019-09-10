@@ -117,7 +117,7 @@ this.current_lang=current_lang;
             int[] src = new int[2];
 
             mTarget.getLocationOnScreen(src);
-            Log.e("llll",src[0]+ "  "+src[1]);
+            Log.e("llll",src[0]+ "  "+src[1]+" "+mContextReference.get().getWindow().getWindowManager().getDefaultDisplay().getWidth());
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(mTarget.getWidth(), mTarget.getHeight());
             if(current_lang.equals("en")) {
                 params.setMargins(src[0], src[1], 0, 0);
