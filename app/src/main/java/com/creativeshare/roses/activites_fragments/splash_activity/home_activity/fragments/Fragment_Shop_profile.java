@@ -34,6 +34,7 @@ import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
 import com.google.android.material.tabs.TabLayout;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -220,10 +221,10 @@ else {
             rec_service.setVisibility(View.GONE);
         }
     }
-    public void makeFlyAnimation(ImageView targetView) {
+    public void makeFlyAnimation(RoundedImageView targetView) {
 
 
-        new CircleAnimationUtil().attachActivity(homeActivity).setTargetView(targetView).setMoveDuration(1000).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
+        new CircleAnimationUtil().attachActivity(homeActivity).setTargetView(targetView,current_lang).setMoveDuration(1000).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 

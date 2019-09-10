@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -25,9 +26,7 @@ import java.lang.ref.WeakReference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by DK on 2015/3/19.
- */
+
 public class CircleAnimationUtil {
     private static final int DEFAULT_DURATION = 1000;
     private static final int DEFAULT_DURATION_DISAPPEAR = 200;
@@ -50,17 +49,18 @@ public class CircleAnimationUtil {
     private Bitmap mBitmap;
     private CircleImageView mImageView;
     private Animator.AnimatorListener mAnimationListener;
-
+private String current_lang;
     public CircleAnimationUtil() {
     }
 
     public CircleAnimationUtil attachActivity(Activity activity) {
-        mContextReference = new WeakReference<Activity>(activity);
+        mContextReference = new WeakReference<>(activity);
         return this;
     }
 
-    public CircleAnimationUtil setTargetView(View view) {
+    public CircleAnimationUtil setTargetView(View view,String current_lang) {
         mTarget = view;
+this.current_lang=current_lang;
         setOriginRect(mTarget.getWidth(), mTarget.getHeight());
         return this;
     }
@@ -115,9 +115,17 @@ public class CircleAnimationUtil {
             mImageView.setBorderColor(mBorderColor);
 
             int[] src = new int[2];
+
             mTarget.getLocationOnScreen(src);
+            Log.e("llll",src[0]+ "  "+src[1]);
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(mTarget.getWidth(), mTarget.getHeight());
-            params.setMargins(src[0], src[1], 0, 0);
+            if(current_lang.equals("en")) {
+                params.setMargins(src[0], src[1], 0, 0);
+            }
+            else {
+                params.setMargins(src[0]/2, src[1], 0, 0);
+
+            }
             if (mImageView.getParent() == null)
                 decoreView.addView(mImageView, params);
         }

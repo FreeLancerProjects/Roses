@@ -343,7 +343,7 @@ public class Fragment_Shop_Products extends Fragment {
     public void makeFlyAnimation(ImageView targetView) {
 
 
-        new CircleAnimationUtil().attachActivity(activity).setTargetView(targetView).setMoveDuration(1000).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
+        new CircleAnimationUtil().attachActivity(activity).setTargetView(targetView,cuurent_language).setMoveDuration(1000).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 
