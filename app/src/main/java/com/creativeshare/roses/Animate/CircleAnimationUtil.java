@@ -115,11 +115,15 @@ this.current_lang=current_lang;
             mImageView.setBorderColor(mBorderColor);
 
             int[] src = new int[2];
+            int[] src2 = new int[2];
 
             mTarget.getLocationOnScreen(src);
-            Log.e("llll",src[0]+ "  "+src[1]+" "+mContextReference.get().getWindow().getWindowManager().getDefaultDisplay().getWidth());
+            mTarget.getLocationInWindow(src2);
+
+            Log.e("llll",src2[0]+ "  "+src[1]+" "+mContextReference.get().getWindow().getWindowManager().getDefaultDisplay().getWidth());
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(mTarget.getWidth(), mTarget.getHeight());
             if(current_lang.equals("en")) {
+
                 params.setMargins(src[0], src[1], 0, 0);
             }
             else {

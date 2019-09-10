@@ -122,6 +122,12 @@ public class Fragment_Edit_profile extends Fragment {
                 checkdata();
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homeActivity.Back();
+            }
+        });
     }
 
     private void Check_ReadPermission(int img_req) {
