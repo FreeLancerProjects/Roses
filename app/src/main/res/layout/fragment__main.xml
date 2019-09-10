@@ -33,7 +33,9 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="5dp"
             app:tabBackground="@drawable/select"
-            app:tabMaxWidth="7dp" />
+            app:tabMaxWidth="7dp"
+            android:visibility="gone"
+            />
 
         <ProgressBar
             android:id="@+id/progBar"
@@ -46,7 +48,7 @@
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="10dp"
             app:cardElevation="2dp"
@@ -76,7 +78,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="vertical"
-           android:layout_marginTop="8dp"
+           android:layout_marginTop="5dp"
            >
 
 
@@ -94,7 +96,7 @@
             android:id="@+id/fr3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             >
 
             <ProgressBar

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +18,10 @@ import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Cart;
 import com.creativeshare.roses.models.Add_Order_Model;
+import com.creativeshare.roses.models.Markets_Model;
+import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.preferences.Preferences;
+import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
 import com.squareup.picasso.Picasso;
 
@@ -34,7 +38,9 @@ public class Cart_Adpter extends RecyclerView.Adapter<Cart_Adpter.Eyas_Holder> {
     Preferences preferences;
     private String current_lang;
 private Fragment_Cart fragment_cart;
-    public Cart_Adpter(List<Add_Order_Model.Order_details> list, Context context, Fragment_Cart fragment_cart) {
+int index;
+Data_Cart_Adapter data_cart_adapter;
+    public Cart_Adpter(List<Add_Order_Model.Order_details> list, Context context, Fragment_Cart fragment_cart, int index, Data_Cart_Adapter data_cart_adapter) {
         this.list = list;
         this.context = context;
         activity = (HomeActivity) context;
@@ -42,6 +48,8 @@ private Fragment_Cart fragment_cart;
         Paper.init(activity);
         current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         this.fragment_cart=fragment_cart;
+        this.index=index;
+        this.data_cart_adapter=data_cart_adapter;
     }
 
     @Override
@@ -83,6 +91,8 @@ viewHolder.im_increase.setOnClickListener(new View.OnClickListener() {
                 updatedecrease(viewHolder.getLayoutPosition());
             }
         });
+
+
     }
 
     @Override
@@ -93,7 +103,6 @@ viewHolder.im_increase.setOnClickListener(new View.OnClickListener() {
     class Eyas_Holder extends RecyclerView.ViewHolder {
         private TextView tv_name, tv_price, tv_amount;
         private ImageView im_produce, im_delete, im_increase, im_decrease;
-
         public Eyas_Holder(@NonNull View itemView) {
             super(itemView);
             tv_name = itemView.findViewById(R.id.tv_name);
@@ -109,35 +118,38 @@ viewHolder.im_increase.setOnClickListener(new View.OnClickListener() {
     }
 
     private void deleteItem(int position) {
-        Add_Order_Model add_order_model = preferences.getUserOrder(activity);
+        List<Add_Order_Model> add_order_model = preferences.getUserOrder(activity);
         list.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, list.size());
-        add_order_model.setOrder_details(list);
+        add_order_model.get(index).setOrder_details(list);
+
         if(!list.isEmpty()){
-        preferences.create_update_order(activity, add_order_model);
+        preferences.create_update_order(activity,add_order_model );
 
         }
         else {
             preferences.create_update_order(activity,null);
         }
         fragment_cart.gettotal();
-
+data_cart_adapter.notifyDataSetChanged();
     }
     private void updateincrease(int position) {
-        Add_Order_Model add_order_model = preferences.getUserOrder(activity);
+        List<Add_Order_Model> add_order_model = preferences.getUserOrder(activity);
         Add_Order_Model.Order_details order_details=list.get(position);
         order_details.setTotal_price(order_details.getTotal_price()+(order_details.getTotal_price()/order_details.getAmount()));
         order_details.setAmount(order_details.getAmount()+1);
 
         list.set(position,order_details);
        notifyDataSetChanged();
-        add_order_model.setOrder_details(list);
+        add_order_model.get(index).setOrder_details(list);
         preferences.create_update_order(activity, add_order_model);
         fragment_cart.gettotal();
+        data_cart_adapter.notifyDataSetChanged();
+
     }
     private void updatedecrease(int position) {
-        Add_Order_Model add_order_model = preferences.getUserOrder(activity);
+       List< Add_Order_Model> add_order_model = preferences.getUserOrder(activity);
         Add_Order_Model.Order_details order_details=list.get(position);
         if(order_details.getAmount()>1){
         order_details.setTotal_price(order_details.getTotal_price()-(order_details.getTotal_price()/order_details.getAmount()));
@@ -145,11 +157,15 @@ viewHolder.im_increase.setOnClickListener(new View.OnClickListener() {
 
             list.set(position,order_details);
         notifyDataSetChanged();
-        add_order_model.setOrder_details(list);
+        add_order_model.get(index).setOrder_details(list);
         preferences.create_update_order(activity, add_order_model);
             fragment_cart.gettotal();
+            data_cart_adapter.notifyDataSetChanged();
 
-        }}
+        }
+
+    }
+
 }
 
 

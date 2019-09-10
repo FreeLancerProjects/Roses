@@ -1,5 +1,6 @@
 package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.creativeshare.roses.Animate.CircleAnimationUtil;
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.Shop_Offers_Adapter;
@@ -36,6 +39,7 @@ import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,6 +72,8 @@ public class Fragment_Shop_Products extends Fragment {
     private int quantity;
     private String desc;
     private String cuurent_language;
+    private RelativeLayout destView;
+
     public static Fragment_Shop_Products newInstance() {
         Fragment_Shop_Products fragment_shop_offers = new Fragment_Shop_Products();
 
@@ -98,9 +104,11 @@ public class Fragment_Shop_Products extends Fragment {
         ll_no_store = view.findViewById(R.id.ll_no_store);
         rec_depart = view.findViewById(R.id.rec_offers);
         im_back = view.findViewById(R.id.arrow_back);
-        if(cuurent_language.equals("en")){
+        if (cuurent_language.equals("en")) {
             im_back.setRotation(180.0f);
         }
+        destView = view.findViewById(R.id.cartRelativeLayout);
+
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
 
@@ -149,7 +157,7 @@ public class Fragment_Shop_Products extends Fragment {
         // rec_sent.setVisibility(View.GONE);
         Log.e("id", cat_id + "");
         Api.getService(Tags.base_url)
-                .getproducts(1, cat_id,Send_Data.getMarket_id())
+                .getproducts(1, cat_id, Send_Data.getMarket_id())
                 .enqueue(new Callback<Product_Model>() {
                     @Override
                     public void onResponse(Call<Product_Model> call, Response<Product_Model> response) {
@@ -196,7 +204,7 @@ public class Fragment_Shop_Products extends Fragment {
 
     private void loadMore(int page) {
         Api.getService(Tags.base_url)
-                .getproducts(page, cat_id,Send_Data.getMarket_id())
+                .getproducts(page, cat_id, Send_Data.getMarket_id())
                 .enqueue(new Callback<Product_Model>() {
                     @Override
                     public void onResponse(Call<Product_Model> call, Response<Product_Model> response) {
@@ -235,13 +243,13 @@ public class Fragment_Shop_Products extends Fragment {
     }
 
 
-    public void setproduct(Product_Model.Data data) {
+    public void setproduct(Product_Model.Data data, RoundedImageView im_cart) {
         this.data = data;
-        CreateSignAlertDialog(activity);
+        CreateSignAlertDialog(activity, im_cart);
 
     }
 
-    public void CreateSignAlertDialog(Context context) {
+    public void CreateSignAlertDialog(Context context, RoundedImageView im_cart) {
         final AlertDialog dialog = new AlertDialog.Builder(context)
                 .setCancelable(true)
                 .create();
@@ -263,6 +271,7 @@ public class Fragment_Shop_Products extends Fragment {
                     addtocart();
 
                     dialog.dismiss();
+                    makeFlyAnimation(im_cart);
 
                 } else {
                     if (TextUtils.isEmpty(quant)) {
@@ -283,34 +292,81 @@ public class Fragment_Shop_Products extends Fragment {
     }
 
     private void addtocart() {
-        int apply = 0;
+        int target = -1;
         Add_Order_Model add_order_model;
         List<Add_Order_Model.Order_details> order_details;
+        add_order_model = new Add_Order_Model();
+        List<Add_Order_Model> add_order_models = new ArrayList<>();
+        add_order_models.clear();
         if (preferences.getUserOrder(activity) != null) {
-            add_order_model = preferences.getUserOrder(activity);
-        } else {
-            add_order_model = new Add_Order_Model();
+            add_order_models.addAll(preferences.getUserOrder(activity));
+        }
+        if (add_order_models != null) {
+            for (int i = 0; i < add_order_models.size(); i++) {
+                if (add_order_models.get(i).getMarket_id() == data.getMarket_id()) {
+                    add_order_model = add_order_models.get(i);
+                    target = 0;
+                    break;
+                }
+            }
         }
 
-            add_order_model.setMarket_id(data.getMarket_id());
-            if (add_order_model.getOrder_details() != null) {
-                order_details = add_order_model.getOrder_details();
-            } else {
-                order_details = new ArrayList<>();
-            }
-            Add_Order_Model.Order_details order_details1 = new Add_Order_Model.Order_details();
+        add_order_model.setMarket_id(data.getMarket_id());
+        if (add_order_model.getOrder_details() != null) {
+            order_details = add_order_model.getOrder_details();
+        } else {
+            order_details = new ArrayList<>();
+        }
+        Add_Order_Model.Order_details order_details1 = new Add_Order_Model.Order_details();
 
-            order_details1.setAmount(quantity);
-            order_details1.setDes(desc);
-            order_details1.setProduct_id(data.getId());
-            order_details1.setTotal_price(quantity * Double.parseDouble(data.getPrice()));
-         //   order_details.add(order_details1);
-            order_details1.setImage(data.getImage());
-            order_details1.setAr_name(data.getAr_title());
-            order_details1.setEn_name(data.getEn_title());
-            order_details.add(order_details1);
-            add_order_model.setOrder_details(order_details);
-            preferences.create_update_order(activity, add_order_model);
+        order_details1.setAmount(quantity);
+        order_details1.setDes(desc);
+        order_details1.setProduct_id(data.getId());
+        order_details1.setTotal_price(quantity * Double.parseDouble(data.getPrice()));
+        //   order_details.add(order_details1);
+        order_details1.setImage(data.getImage());
+        order_details1.setAr_name(data.getAr_title());
+        order_details1.setEn_name(data.getEn_title());
+        order_details.add(order_details1);
+        add_order_model.setOrder_details(order_details);
+        add_order_model.setname(data.getName_of_market());
+
+        if (target == -1) {
+            add_order_models.add(add_order_model);
+        } else {
+            add_order_models.set(target, add_order_model);
+        }
+        preferences.create_update_order(activity, add_order_models);
 
     }
+
+    public void makeFlyAnimation(ImageView targetView) {
+
+
+        new CircleAnimationUtil().attachActivity(activity).setTargetView(targetView).setMoveDuration(1000).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                //     addItemToCart();
+                Toast.makeText(activity, "Continue Shopping...", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        }).startAnimation();
+
+
+    }
+
 }

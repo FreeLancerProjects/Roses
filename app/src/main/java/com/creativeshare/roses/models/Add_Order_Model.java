@@ -18,6 +18,11 @@ public class Add_Order_Model implements Serializable {
     private double total_cost;
     private List<Order_details> order_details;
     private List<Services> services;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
 
     public int getType() {
         return type;
@@ -113,6 +118,10 @@ public class Add_Order_Model implements Serializable {
 
     public void setServices(List<Services> services) {
         this.services = services;
+    }
+
+    public void setname(String name_of_market) {
+        this.name=name_of_market;
     }
 
     public static class Order_details implements Serializable {

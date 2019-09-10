@@ -152,7 +152,7 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
         cuurent_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
-        add_order_model = preferences.getUserOrder(activity);
+        add_order_model = preferences.getUserOrder(activity).get(Send_Data.getIndex());
 
         edt_title = view.findViewById(R.id.edtTitle);
         rec_service = view.findViewById(R.id.rec_service);
@@ -255,6 +255,7 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
     }
 
     private void checkdata() {
+        Add_Order_Model add_order_model1=add_order_model;
         Common.CloseKeyBoard(activity,edt_address);
         String title = edt_title.getText().toString();
         String dated = tv_date.getText().toString();
@@ -273,16 +274,16 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
 tv_date.setError(null);
 edt_address.setError(null);
 
-                add_order_model.setAddress(formated_address);
-                add_order_model.setLatitude(lat);
-                add_order_model.setLongitude(lang);
-                add_order_model.setNext_date(date);
-                add_order_model.setTitle(null);
-                add_order_model.setType(Send_Data.getType());
-                add_order_model.setServices(services);
-                add_order_model.setUser_id(userModel.getId());
-                add_order_model.setTotal_cost(total_cost);
-                add_order_model.setServices(services);
+                add_order_model1.setAddress(formated_address);
+                add_order_model1.setLatitude(lat);
+                add_order_model1.setLongitude(lang);
+                add_order_model1.setNext_date(date);
+                add_order_model1.setTitle("");
+                add_order_model1.setType(Send_Data.getType());
+                add_order_model1.setServices(services);
+                add_order_model1.setUser_id(userModel.getId());
+                add_order_model1.setTotal_cost(total_cost);
+                add_order_model1.setServices(services);
                 accept_order();
             }
             else {
@@ -300,16 +301,16 @@ edt_address.setError(null);
                 tv_date.setError(null);
                 edt_address.setError(null);
                 edt_title.setError(null);
-                add_order_model.setAddress(formated_address);
-                add_order_model.setLatitude(lat);
-                add_order_model.setLongitude(lang);
-                add_order_model.setNext_date(date);
-                add_order_model.setTitle(title);
-                add_order_model.setType(Send_Data.getType());
-                add_order_model.setServices(services);
-                add_order_model.setUser_id(userModel.getId());
-                add_order_model.setTotal_cost(total_cost);
-                add_order_model.setServices(services);
+                add_order_model1.setAddress(formated_address);
+                add_order_model1.setLatitude(lat);
+                add_order_model1.setLongitude(lang);
+                add_order_model1.setNext_date(date);
+                add_order_model1.setTitle(title);
+                add_order_model1.setType(Send_Data.getType());
+                add_order_model1.setServices(services);
+                add_order_model1.setUser_id(userModel.getId());
+                add_order_model1.setTotal_cost(total_cost);
+                add_order_model1.setServices(services);
                 accept_order();
             }
             else {
@@ -587,7 +588,9 @@ edt_address.setError(null);
 
                 dialog.dismiss();
                 if (response.isSuccessful()) {
-                    preferences.create_update_order(activity, null);
+                    List<Add_Order_Model> add_order_models=preferences.getUserOrder(activity);
+                    add_order_models.remove(Send_Data.getIndex());
+                    preferences.create_update_order(activity, add_order_models);
                     // Common.CreateSignAlertDialog(activity, getResources().getString(R.string.sucess));
                     activity.Back();
                     activity.Back();

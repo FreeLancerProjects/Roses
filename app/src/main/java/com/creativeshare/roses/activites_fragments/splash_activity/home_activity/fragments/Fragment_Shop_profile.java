@@ -1,5 +1,6 @@
 package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
 
+import android.animation.Animator;
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.creativeshare.roses.Animate.CircleAnimationUtil;
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.PageAdapter;
@@ -65,6 +68,7 @@ public class Fragment_Shop_profile extends Fragment {
     private RecyclerView rec_service;
     private Service_Profile_Adapter service_profile_adapter;
     private List<Market_model.MarketService> marketServices;
+    private RelativeLayout destView;
 
     public static Fragment_Shop_profile newInstance(int id) {
         Fragment_Shop_profile fragment_shop_profile = new Fragment_Shop_profile();
@@ -98,6 +102,8 @@ public class Fragment_Shop_profile extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(homeActivity);
         current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        destView = view.findViewById(R.id.cartRelativeLayout);
+
         tabLayout = view.findViewById(R.id.tab_orders);
         viewPager = view.findViewById(R.id.pager);
         tv_name = view.findViewById(R.id.tv_name);
@@ -213,6 +219,34 @@ else {
         else {
             rec_service.setVisibility(View.GONE);
         }
+    }
+    public void makeFlyAnimation(ImageView targetView) {
+
+
+        new CircleAnimationUtil().attachActivity(homeActivity).setTargetView(targetView).setMoveDuration(1000).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                //     addItemToCart();
+                Toast.makeText(homeActivity, "Continue Shopping...", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        }).startAnimation();
+
+
     }
 
 }

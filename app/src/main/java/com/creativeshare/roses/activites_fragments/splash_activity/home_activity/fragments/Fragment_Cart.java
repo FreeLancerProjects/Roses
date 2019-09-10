@@ -19,12 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.Cart_Adpter;
+import com.creativeshare.roses.adapter.Data_Cart_Adapter;
 import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.share.Common;
 
+import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
@@ -39,8 +41,8 @@ public class Fragment_Cart extends Fragment {
 
     private LinearLayout linearLayout;
     private TextView error;
-    private Cart_Adpter cart_adpter;
-    private Add_Order_Model add_order_model;
+    private Data_Cart_Adapter cart_adpter;
+    private List<Add_Order_Model >add_order_model;
     private Preferences preferences;
     private UserModel userModel;
     private HomeActivity activity;
@@ -68,9 +70,10 @@ private ImageView im_back;
     public void gettotal() {
         total_cost=0.0;
         if(preferences.getUserOrder(activity)!=null){
-        for (int i = 0; i < preferences.getUserOrder(activity).getOrder_details().size(); i++) {
-            total_cost += preferences.getUserOrder(activity).getOrder_details().get(i).getTotal_price();
-        }
+            for(int j=0;j<preferences.getUserOrder(activity).size();j++){
+        for (int i = 0; i < preferences.getUserOrder(activity).get(j).getOrder_details().size(); i++) {
+            total_cost += preferences.getUserOrder(activity).get(j).getOrder_details().get(i).getTotal_price();
+        }}
         total_cost=Math.round(total_cost);}
         else {
             total_cost=0.0;
@@ -107,7 +110,7 @@ cart=view.findViewById(R.id.rec_cart);
        }
         if (add_order_model != null) {
 
-            cart_adpter = new Cart_Adpter(add_order_model.getOrder_details(), activity,this);
+            cart_adpter = new Data_Cart_Adapter(add_order_model, activity,this);
             cart.setLayoutManager(new GridLayoutManager(activity, 1));
             cart.setAdapter(cart_adpter);
             linearLayout.setVisibility(View.GONE);
@@ -140,7 +143,7 @@ bt_com.setOnClickListener(new View.OnClickListener() {
 
     }
 
-    private void CreateTypeDialog()
+    public void CreateTypeDialog()
     {
         final AlertDialog dialog = new AlertDialog.Builder(activity)
                 .setCancelable(true)

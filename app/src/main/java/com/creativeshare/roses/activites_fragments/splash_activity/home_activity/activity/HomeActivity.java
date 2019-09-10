@@ -19,6 +19,7 @@ import com.creativeshare.roses.activites_fragments.splash_activity.home_activity
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Client_profile;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Complete;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Contact_Us;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Edit_profile;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Markets;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Product_Details;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Upgrade;
@@ -35,6 +36,7 @@ import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -70,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_Upgrade fragment_upgrade;
     private Fragment_Product_Details fragment_product_detials;
     private Fragment_Markets Fragment_markets;
+    private Fragment_Edit_profile fragment_edit_profile;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -108,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         long timeNow = calendar.getTimeInMillis();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
         String date = dateFormat.format(new Date(timeNow));
 
         if (!date.equals(visitTime)) {
@@ -244,6 +247,22 @@ public class HomeActivity extends AppCompatActivity {
 
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_shop_profile, "fragment_shop_profile").addToBackStack("fragment_shop_profile").commit();
+
+        }
+
+    }
+    public void DisplayFragmentEditprofile() {
+        fragment_count += 1;
+
+        fragment_edit_profile = Fragment_Edit_profile.newInstance();
+
+
+        if (fragment_edit_profile.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_edit_profile).commit();
+
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_edit_profile, "fragment_edit_profile").addToBackStack("fragment_edit_profile").commit();
+          //  Log.e("llll","edits");
 
         }
 
@@ -526,5 +545,11 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void animate(RoundedImageView im_cart) {
+        if(fragment_shop_profile!=null&&fragment_shop_profile.isAdded()){
+            fragment_shop_profile.makeFlyAnimation(im_cart);
+        }
     }
 }

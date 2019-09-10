@@ -5,6 +5,12 @@ public class Send_Data {
 private static  int cat_id;
 private static int type;
 private static Order_Model.Data data;
+    private static int index;
+
+    public static int getIndex() {
+        return index;
+    }
+
     public static int getMarket_id() {
         return market_id;
     }
@@ -35,5 +41,9 @@ private static Order_Model.Data data;
 
     public static void setData(Order_Model.Data data) {
         Send_Data.data = data;
+    }
+
+    public static void setindex(int i) {
+        Send_Data.index=i;
     }
 }

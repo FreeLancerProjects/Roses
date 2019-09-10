@@ -35,6 +35,7 @@ import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -219,12 +220,12 @@ public class Fragment_Shop_Offers extends Fragment {
     }
 
 
-    public void setproduct(Offer_Model.Data data) {
+    public void setproduct(Offer_Model.Data data, RoundedImageView im_cart) {
         this.data=data;
-CreateSignAlertDialog(activity);
+CreateSignAlertDialog(activity,im_cart);
     }
 
-    public void CreateSignAlertDialog(Context context) {
+    public void CreateSignAlertDialog(Context context, RoundedImageView im_cart) {
         final AlertDialog dialog = new AlertDialog.Builder(context)
                 .setCancelable(true)
                 .create();
@@ -244,7 +245,8 @@ CreateSignAlertDialog(activity);
                     quantity = Integer.parseInt(quant);
                     addtocart();
                     dialog.dismiss();
-                    Common.CreateSignAlertDialog(activity,getResources().getString(R.string.add_to_cart_suc));
+                   // Common.CreateSignAlertDialog(activity,getResources().getString(R.string.add_to_cart_suc));
+                    activity.animate(im_cart);
 
                 } else {
                     if (TextUtils.isEmpty(quant)) {
@@ -265,34 +267,51 @@ CreateSignAlertDialog(activity);
     }
 
     private void addtocart() {
+        int target=-1;
         Add_Order_Model add_order_model;
         List<Add_Order_Model.Order_details> order_details;
-        if (preferences.getUserOrder(activity) != null) {
-            add_order_model = preferences.getUserOrder(activity);
+        add_order_model=new Add_Order_Model();
+        List<Add_Order_Model> add_order_models=new ArrayList<>();
+        add_order_models.clear();
+        if(preferences.getUserOrder(activity)!=null){
+            add_order_models.addAll(preferences.getUserOrder(activity));}
+        if(add_order_models!=null){
+            for(int i=0;i<add_order_models.size();i++){
+                if(add_order_models.get(i).getMarket_id()==data.getMarket_id()){
+                    add_order_model=add_order_models.get(i);
+                    target=0;
+                    break;
+                }
+            }}
+
+        add_order_model.setMarket_id(data.getMarket_id());
+        if (add_order_model.getOrder_details() != null) {
+            order_details = add_order_model.getOrder_details();
         } else {
-            add_order_model = new Add_Order_Model();
+            order_details = new ArrayList<>();
         }
+        Add_Order_Model.Order_details order_details1 = new Add_Order_Model.Order_details();
 
+        order_details1.setAmount(quantity);
+        order_details1.setDes(desc);
+        order_details1.setProduct_id(data.getProduct_id());
+        order_details1.setTotal_price(quantity * (Double.parseDouble(data.getProduct_price())-((data.getValue()*Double.parseDouble(data.getProduct_price()))/100)));
+        //   order_details.add(order_details1);
+        order_details1.setImage(data.getImage());
+        order_details1.setAr_name(data.getProduct_ar_title());
+        order_details1.setEn_name(data.getProduct_en_title());
+        order_details1.setOffer_id(data.getId());
 
-            add_order_model.setMarket_id(data.getMarket_id());
-            if (add_order_model.getOrder_details() != null) {
-                order_details = add_order_model.getOrder_details();
-            } else {
-                order_details = new ArrayList<>();
-            }
-            Add_Order_Model.Order_details order_details1 = new Add_Order_Model.Order_details();
-            order_details1.setAmount(quantity);
-            order_details1.setDes(desc);
-            order_details1.setProduct_id(data.getProduct_id());
-            order_details1.setTotal_price(quantity*(Double.parseDouble(data.getProduct_price())-( ((Double.parseDouble(data.getProduct_price())*data.getValue())/100))));
-           // order_details.add(order_details1);
-            order_details1.setOffer_id(data.getId());
-            order_details1.setImage(data.getImage());
-            order_details1.setAr_name(data.getProduct_ar_title());
-            order_details1.setEn_name(data.getProduct_en_title());
-order_details.add(order_details1);
-add_order_model.setOrder_details(order_details);
-            preferences.create_update_order(activity, add_order_model);
+        order_details.add(order_details1);
+        add_order_model.setname(data.getName_of_market());
+        add_order_model.setOrder_details(order_details);
+        if(target==-1){
+            add_order_models.add(add_order_model);
+        }
+        else {
+            add_order_models.set(target,add_order_model);
+        }
+        preferences.create_update_order(activity, add_order_models);
 
     }
 }

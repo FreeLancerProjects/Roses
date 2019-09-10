@@ -89,18 +89,14 @@ pr=Preferences.getInstance();
                 @Override
                 public void onClick(View view) {
                     if(fragment instanceof  Fragment_Shop_Products){
-                        if((pr.getUserOrder(activity)!=null&&pr.getUserOrder(activity).getMarket_id()==data.get(holder.getLayoutPosition()).getMarket_id())||pr.getUserOrder(activity)==null){
                             fragment_shop_products=(Fragment_Shop_Products)fragment;
-                            fragment_shop_products.setproduct(data.get(holder.getLayoutPosition()));
-                        }
-                        else {
-                            Log.e("msg",pr.getUserOrder(activity).getMarket_id()+" " +data.get(holder.getLayoutPosition()).getMarket_id()+"");
-                            Common.CreateSignAlertDialog(activity,activity.getResources().getString(R.string.Empty_Cart_First));
-                        }
+                            fragment_shop_products.setproduct(data.get(holder.getLayoutPosition()),((MyHolder) holder).im_cart);
+
 
                     }
                 }
             });
+            Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_cart);
 
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_offer);
 
@@ -122,7 +118,7 @@ pr=Preferences.getInstance();
         private TextView tv_name, tv_price, tv_offer;
         private ConstraintLayout cons_cart;
       //  private View view;
-        private RoundedImageView im_offer;
+        private RoundedImageView im_offer,im_cart;
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -131,6 +127,8 @@ pr=Preferences.getInstance();
             tv_price = itemView.findViewById(R.id.tv_price);
 
             im_offer = itemView.findViewById(R.id.im_offer);
+            im_cart = itemView.findViewById(R.id.im_cart);
+
             tv_offer = itemView.findViewById(R.id.tv_offer);
           //  view = itemView.findViewById(R.id.view);
             tv_offer.setVisibility(View.GONE);

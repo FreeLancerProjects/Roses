@@ -8,7 +8,11 @@ import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.tags.Tags;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class Preferences {
@@ -103,7 +107,7 @@ public class Preferences {
         SharedPreferences preferences = context.getSharedPreferences("visit", Context.MODE_PRIVATE);
         return preferences.getString("time","");
     }
-    public void create_update_order(Context context, Add_Order_Model buy_models){
+    public void create_update_order(Context context, List<Add_Order_Model> buy_models){
         SharedPreferences sharedPreferences=context.getSharedPreferences("order",Context.MODE_PRIVATE);
         Gson gson=new Gson();
         String user_order=gson.toJson(buy_models);
@@ -113,13 +117,14 @@ public class Preferences {
         editor.apply();
 
     }
-    public Add_Order_Model getUserOrder(Context context)
+    public ArrayList<Add_Order_Model> getUserOrder(Context context)
     {
         SharedPreferences preferences = context.getSharedPreferences("order",Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String user_order = preferences.getString("user_order",null);
-        Add_Order_Model order_model = gson.fromJson(user_order, Add_Order_Model.class);
-        return order_model;
+        Type type=new TypeToken<ArrayList<Add_Order_Model>>(){}.getType();
+        ArrayList<Add_Order_Model> buy_models=gson.fromJson(user_order,type);
+        return buy_models;
     }
 
 }

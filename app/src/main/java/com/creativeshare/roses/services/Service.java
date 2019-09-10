@@ -22,6 +22,8 @@ import com.creativeshare.roses.models.UserModel;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -30,7 +32,9 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 
@@ -163,4 +167,28 @@ public interface Service {
     Call<BankDataModel> getBankAccount();
     @GET("api/all-social")
     Call<SocialDataModel> getSocial();
+    @Multipart
+    @POST("api/profile/edit")
+    Call<UserModel> udateprofile(@Part("user_id") RequestBody user_id,
+                                 @Part("name") RequestBody name,
+                                 @Part("phone") RequestBody phone,
+                                 @Part("phone_code") RequestBody phone_code,
+                                 @Part("password") RequestBody password,
+                                 @Part MultipartBody.Part advertisement_images
+
+    );
+    @FormUrlEncoded
+    @POST("api/profile/edit")
+    Call<UserModel> updateprofile(
+            @Field("user_id") String user_id,
+
+            @Field("name") String name,
+            @Field("phone") String phone,
+            @Field("phone_code") String phone_code,
+            @Field("password") String password
+
+
+
+    );
 }
+

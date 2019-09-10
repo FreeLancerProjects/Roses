@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import java.util.Locale;
 import io.paperdb.Paper;
 
 public class Fragment_More extends Fragment {
-    private LinearLayout ll_lang, ll_terms, ll_about, ll_contact, ll_register_as_a_company, ll_logout,ll_bank;
+    private LinearLayout ll_lang, ll_terms, ll_about, ll_contact, ll_register_as_a_company, ll_logout,ll_bank, ll_edit_profile;
     private HomeActivity homeActivity;
     private Preferences preferences;
     private UserModel userModel;
@@ -59,6 +60,7 @@ public class Fragment_More extends Fragment {
         ll_contact=view.findViewById(R.id.ll_contact);
         ll_register_as_a_company = view.findViewById(R.id.ll_register_as_a_company);
         ll_logout = view.findViewById(R.id.ll_logout);
+        ll_edit_profile =view.findViewById(R.id.ll_edit_profile);
 ll_bank=view.findViewById(R.id.ll_bank);
         ll_terms.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +102,14 @@ ll_bank=view.findViewById(R.id.ll_bank);
                 homeActivity.DisplayFragmentBankAccount();
             }
         });
+        ll_edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("llll","edit");
+                homeActivity.DisplayFragmentEditprofile();
+            }
+        });
+
         ll_register_as_a_company.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -92,16 +92,15 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((MyHolder) holder).tv_price.setText(context.getResources().getString(R.string.price) + " " + data1.getProduct_price());
 
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_offer);
+            Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_cart);
+
             ((MyHolder) holder).cons_cart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (fragment instanceof Fragment_Shop_Offers) {
-                        if (pr.getUserOrder(activity) != null && pr.getUserOrder(activity).getMarket_id() == data.get(holder.getLayoutPosition()).getMarket_id()||pr.getUserOrder(activity)==null) {
                             fragment_shop_offers = (Fragment_Shop_Offers) fragment;
-                            fragment_shop_offers.setproduct(data.get(holder.getLayoutPosition()));
-                        } else {
-                            Common.CreateSignAlertDialog(activity, activity.getResources().getString(R.string.Empty_Cart_First));
-                        }
+                            fragment_shop_offers.setproduct(data.get(holder.getLayoutPosition()),((MyHolder) holder).im_cart);
+
 
                     }
                 }
@@ -122,7 +121,7 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class MyHolder extends RecyclerView.ViewHolder {
         private TextView tv_name, tv_price, tv_offer;
-        private RoundedImageView im_offer;
+        private RoundedImageView im_offer,im_cart;
         private ConstraintLayout cons_cart;
 
         public MyHolder(View itemView) {
@@ -132,10 +131,14 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_price = itemView.findViewById(R.id.tv_price);
 
             im_offer = itemView.findViewById(R.id.im_offer);
+            im_cart = itemView.findViewById(R.id.im_cart);
+
             tv_offer = itemView.findViewById(R.id.tv_offer);
             cons_cart = itemView.findViewById(R.id.cons_cart);
             if(current_lang.equals("ar")){
                 tv_offer.setRotation(135);
+
+                tv_offer.setBackground(activity.getResources().getDrawable(R.drawable.text_shape2));
             }
         }
 

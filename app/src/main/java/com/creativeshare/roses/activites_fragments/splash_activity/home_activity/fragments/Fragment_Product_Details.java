@@ -1,5 +1,6 @@
 package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
 
+import android.animation.Animator;
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -137,5 +139,6 @@ public class Fragment_Product_Details extends Fragment {
         client_order_detials_adapter.notifyDataSetChanged();
 
     }
+
 
 }

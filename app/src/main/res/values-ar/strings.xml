@@ -29,6 +29,9 @@
     <string name="failed">فشل</string>
     <string name="something">حدث خطأ ما تحقق من اتصالك بالانترنت</string>
     <string name="inc_phone_pas">رقم الجوال وا كلمة المرور خطأ</string>
+    <string name="inc_phone">رقم الجوال  خطأ</string>
+    <string name="inc_pass">كلمة المرور خطأ</string>
+
     <string name="user_not_found">هذا المستخدم لم يسجل من قبل</string>
     <string name="notifications">الاشعارات</string>
     <string name="my_profile">حسابى</string>
@@ -76,7 +79,9 @@
     <string name="not_avail">غير متاح الان</string>
     <string name="services">الخدمات</string>
     <string name="add_to_cart_suc">تم الاضافة الى السله بنجاح</string>
-    <string name="shop_profile">Shop Profile</string>
-    <string name="product_detials">Product Detials</string>
+    <string name="shop_profile">صفحة المحل</string>
+    <string name="product_detials">تفاصيل الطلب</string>
+    <string name="save">حفظ</string>
+    <string name="perm_image_denied">لم يتمكن التطبيق للوصل الى الصور</string>
 
 </resources>
