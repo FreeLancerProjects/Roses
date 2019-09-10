@@ -123,7 +123,7 @@ this.current_lang=current_lang;
                 params.setMargins(src[0], src[1], 0, 0);
             }
             else {
-                params.setMargins(src[0]/2, src[1], 0, 0);
+                params.setMargins(src[0]/4, src[1], 0, 0);
 
             }
             if (mImageView.getParent() == null)
