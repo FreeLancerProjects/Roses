@@ -90,6 +90,7 @@ pr=Preferences.getInstance();
                 public void onClick(View view) {
                     if(fragment instanceof  Fragment_Shop_Products){
                             fragment_shop_products=(Fragment_Shop_Products)fragment;
+                            Log.e("lll",data.get(holder.getLayoutPosition()).getMarket_id()+"");
                             fragment_shop_products.setproduct(data.get(holder.getLayoutPosition()),((MyHolder) holder).im_cart);
 
 

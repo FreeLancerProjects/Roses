@@ -117,7 +117,12 @@ public class Fragment_Shop_Products extends Fragment {
         rec_depart.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         rec_depart.setItemViewCacheSize(25);
 
-
+destView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        activity.display_Cart();
+    }
+});
         gridLayoutManager = new GridLayoutManager(activity, 2);
         rec_depart.setLayoutManager(gridLayoutManager);
         shop_offers_adapter = new Shop_Products_Adapter(dataList, activity, this);
@@ -305,7 +310,7 @@ public class Fragment_Shop_Products extends Fragment {
             for (int i = 0; i < add_order_models.size(); i++) {
                 if (add_order_models.get(i).getMarket_id() == data.getMarket_id()) {
                     add_order_model = add_order_models.get(i);
-                    target = 0;
+                    target = i;
                     break;
                 }
             }

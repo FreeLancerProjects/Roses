@@ -115,7 +115,7 @@ public class Preferences {
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putString("user_order",user_order);
         editor.apply();
-
+editor.commit();
     }
     public ArrayList<Add_Order_Model> getUserOrder(Context context)
     {

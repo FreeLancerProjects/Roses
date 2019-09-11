@@ -272,6 +272,7 @@ CreateSignAlertDialog(activity,im_cart);
         List<Add_Order_Model.Order_details> order_details;
         add_order_model=new Add_Order_Model();
         List<Add_Order_Model> add_order_models=new ArrayList<>();
+
         add_order_models.clear();
         if(preferences.getUserOrder(activity)!=null){
             add_order_models.addAll(preferences.getUserOrder(activity));}
@@ -279,7 +280,8 @@ CreateSignAlertDialog(activity,im_cart);
             for(int i=0;i<add_order_models.size();i++){
                 if(add_order_models.get(i).getMarket_id()==data.getMarket_id()){
                     add_order_model=add_order_models.get(i);
-                    target=0;
+                    Log.e("kkkk",add_order_model.getName()+" "+data.getName_of_market());
+                    target=i;
                     break;
                 }
             }}

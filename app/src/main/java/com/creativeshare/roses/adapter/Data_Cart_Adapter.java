@@ -58,6 +58,7 @@ private Cart_Adpter cart_adpter;
     public void onBindViewHolder(@NonNull final Data_Cart_Adapter.Eyas_Holder viewHolder, int i) {
         Add_Order_Model model = list.get(i);
             viewHolder.tv_name.setText(model.getName() + "");
+            Log.e("ll",model.getMarket_id()+"");
         viewHolder. tv_total.setText(activity.getResources().getString(R.string.price)+":"+gettotal(model.getOrder_details()));
 
         cart_adpter = new Cart_Adpter(list.get(i).getOrder_details(), context,fragment_cart,i,this);

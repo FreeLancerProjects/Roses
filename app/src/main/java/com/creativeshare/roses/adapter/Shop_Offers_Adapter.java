@@ -98,7 +98,9 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 @Override
                 public void onClick(View view) {
                     if (fragment instanceof Fragment_Shop_Offers) {
-                            fragment_shop_offers = (Fragment_Shop_Offers) fragment;
+                        Log.e("lll",data.get(holder.getLayoutPosition()).getMarket_id()+"");
+
+                        fragment_shop_offers = (Fragment_Shop_Offers) fragment;
                             fragment_shop_offers.setproduct(data.get(holder.getLayoutPosition()),((MyHolder) holder).im_cart);
 
 

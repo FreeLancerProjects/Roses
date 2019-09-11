@@ -121,7 +121,12 @@ public class Fragment_Shop_profile extends Fragment {
                 homeActivity.Back();
             }
         });
-
+destView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        homeActivity.display_Cart();
+    }
+});
         rec_service = view.findViewById(R.id.rec_service);
         rec_service.setDrawingCacheEnabled(true);
         rec_service.setItemViewCacheSize(25);

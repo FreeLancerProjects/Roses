@@ -122,19 +122,37 @@ viewHolder.im_increase.setOnClickListener(new View.OnClickListener() {
         list.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, list.size());
-        add_order_model.get(index).setOrder_details(list);
+        Log.e("kk",index+"");
+        try {
+            add_order_model.get(index).setOrder_details(list);
 
-        if(!list.isEmpty()){
-        preferences.create_update_order(activity,add_order_model );
+            if(!list.isEmpty()){
+                Log.e("kkk",list.get(0).getAr_name()+add_order_model.size());
+               // preferences.create_update_order(activity,null);
+                preferences.create_update_order(activity,add_order_model );
 
-        }
-        else {
-            preferences.create_update_order(activity,null);
-            data_cart_adapter.list.remove(index);
+            }
+
+            else {
+                if(add_order_model.size()>1){
+                    add_order_model.remove(index);
+                    preferences.create_update_order(activity,add_order_model );
+                    data_cart_adapter.list.remove(index);
+                    data_cart_adapter.notifyDataSetChanged();
+                }
+                else {
+                preferences.create_update_order(activity,null);
+                data_cart_adapter.list.remove(index);
+                data_cart_adapter.notifyDataSetChanged();}
+            }
+            fragment_cart.gettotal();
+            // data_cart_adapter.list=add_order_model;
             data_cart_adapter.notifyDataSetChanged();
         }
-        fragment_cart.gettotal();
-data_cart_adapter.notifyDataSetChanged();
+        catch (Exception e){
+//Log.e("lll",e.getMessage());
+        }
+
     }
     private void updateincrease(int position) {
         List<Add_Order_Model> add_order_model = preferences.getUserOrder(activity);
