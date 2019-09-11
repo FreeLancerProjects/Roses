@@ -21,7 +21,7 @@
     >
 <TextView
     android:id="@+id/tv_name"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="45dp"
     android:text="@string/send"
     android:textColor="@color/black"
@@ -29,6 +29,7 @@
 android:padding="8dp"
     android:singleLine="true"
     android:textStyle="bold"
+    android:gravity="center"
     />
 
     <androidx.recyclerview.widget.RecyclerView

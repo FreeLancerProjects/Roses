@@ -82,5 +82,11 @@
     <string name="product_detials">Product Detials</string>
     <string name="save">Save</string>
     <string name="perm_image_denied">Permision Images Deined</string>
+    <string name="no_prouduct_found">No Prouduct Found</string>
+    <string name="no_offer_found">No Offer Found</string>
+    <string name="no_departments_found">No Departments Found</string>
+    <string name="no_ocassions_found">No Ocassions Found</string>
+    <string name="no_orders_found">No Orders Found</string>
+    <string name="no_market_found">No Market Found</string>
 
 </resources>

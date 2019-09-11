@@ -28,7 +28,15 @@
             android:src="@drawable/ic_nav_store"
             />
 
-
+        <TextView
+            android:id="@+id/tvNoEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="@string/no_orders_found"
+            />
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rec_offers"

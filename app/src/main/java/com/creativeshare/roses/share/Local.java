@@ -18,10 +18,10 @@ public class Local extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        TypefaceUtil.overrideFont(this, "SERIF", "fonts/GE-SS-Two-Bold.otf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
-        TypefaceUtil.overrideFont(this, "DEFAULT", "fonts/GE-SS-Two-Bold.otf");
-        TypefaceUtil.overrideFont(this, "MONOSPACE", "fonts/GE-SS-Two-Bold.otf");
-        TypefaceUtil.overrideFont(this, "SANS_SERIF", "fonts/GE-SS-Two-Bold.otf");
+        TypefaceUtil.overrideFont(this, "SERIF", "fonts/din-next-lt-w23-regular.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
+        TypefaceUtil.overrideFont(this, "DEFAULT", "fonts/din-next-lt-w23-regular.ttf");
+        TypefaceUtil.overrideFont(this, "MONOSPACE", "fonts/din-next-lt-w23-regular.ttf");
+        TypefaceUtil.overrideFont(this, "SANS_SERIF", "fonts/din-next-lt-w23-regular.ttf");
     }
 }
 

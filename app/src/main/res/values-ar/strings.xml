@@ -83,5 +83,11 @@
     <string name="product_detials">تفاصيل الطلب</string>
     <string name="save">حفظ</string>
     <string name="perm_image_denied">لم يتمكن التطبيق للوصل الى الصور</string>
+    <string name="no_prouduct_found">لايوجد منتجات</string>
+    <string name="no_offer_found">لا يوجد عروض</string>
+    <string name="no_departments_found">لا يوجد اقسام</string>
+    <string name="no_ocassions_found">لا يوجد مناسبات</string>
+    <string name="no_orders_found">لا يوجد طلبات</string>
+    <string name="no_market_found">لا يوجد متاجر</string>
 
 </resources>

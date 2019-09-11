@@ -55,7 +55,10 @@
             android:layout_height="45dp"
             android:background="@null"
             android:clickable="false"
-            android:src="@drawable/cart" />
+            android:src="@drawable/cart"
+            android:scaleType="fitXY"
+            android:padding="5dp"
+            />
 
         <TextView
             android:id="@+id/textNotify"
@@ -113,7 +116,14 @@
                 android:layout_height="90dp"
                 android:src="@drawable/ic_nav_store"
                 android:tint="@color/colorPrimary" />
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:text="@string/no_prouduct_found"
+                />
 
         </LinearLayout>
 

@@ -172,7 +172,11 @@
                             android:layout_height="45dp"
                             android:background="@null"
                             android:clickable="false"
-                            android:src="@drawable/cart" />
+                            android:src="@drawable/cart"
+                            android:scaleType="fitXY"
+                            android:padding="5dp"
+
+                            />
 
                         <TextView
                             android:id="@+id/textNotify"
