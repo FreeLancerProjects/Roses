@@ -16,7 +16,6 @@ import com.creativeshare.roses.language.Language;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.tags.Tags;
 
-
 public class SplashActivity extends AppCompatActivity {
 
     private ConstraintLayout cons_spalash;
