@@ -130,6 +130,8 @@ viewHolder.im_increase.setOnClickListener(new View.OnClickListener() {
         }
         else {
             preferences.create_update_order(activity,null);
+            data_cart_adapter.list.remove(index);
+            data_cart_adapter.notifyDataSetChanged();
         }
         fragment_cart.gettotal();
 data_cart_adapter.notifyDataSetChanged();

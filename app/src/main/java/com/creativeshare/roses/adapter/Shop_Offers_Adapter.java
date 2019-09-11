@@ -123,7 +123,7 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private TextView tv_name, tv_price, tv_offer;
         private RoundedImageView im_offer,im_cart;
         private ConstraintLayout cons_cart;
-
+private View view;
         public MyHolder(View itemView) {
             super(itemView);
 
@@ -135,10 +135,11 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             tv_offer = itemView.findViewById(R.id.tv_offer);
             cons_cart = itemView.findViewById(R.id.cons_cart);
+            view=itemView.findViewById(R.id.view);
             if(current_lang.equals("ar")){
-                tv_offer.setRotation(135);
+                tv_offer.setRotation(-45f);
+                view.setRotation(-45f);
 
-                tv_offer.setBackground(activity.getResources().getDrawable(R.drawable.text_shape2));
             }
         }
 

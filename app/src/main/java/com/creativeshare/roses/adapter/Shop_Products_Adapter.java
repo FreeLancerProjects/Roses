@@ -117,7 +117,7 @@ pr=Preferences.getInstance();
     public class MyHolder extends RecyclerView.ViewHolder {
         private TextView tv_name, tv_price, tv_offer;
         private ConstraintLayout cons_cart;
-      //  private View view;
+        private View view;
         private RoundedImageView im_offer,im_cart;
 
         public MyHolder(View itemView) {
@@ -130,9 +130,9 @@ pr=Preferences.getInstance();
             im_cart = itemView.findViewById(R.id.im_cart);
 
             tv_offer = itemView.findViewById(R.id.tv_offer);
-          //  view = itemView.findViewById(R.id.view);
+           view = itemView.findViewById(R.id.view);
             tv_offer.setVisibility(View.GONE);
-            //view.setVisibility(View.GONE);
+            view.setVisibility(View.GONE);
 
         }
 

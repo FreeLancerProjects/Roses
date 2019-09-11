@@ -105,8 +105,12 @@ ll_bank=view.findViewById(R.id.ll_bank);
         ll_edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(userModel!=null){
                 Log.e("llll","edit");
-                homeActivity.DisplayFragmentEditprofile();
+                homeActivity.DisplayFragmentEditprofile();}
+                else {
+                    Common.CreateUserNotSignInAlertDialog(homeActivity);
+                }
             }
         });
 
