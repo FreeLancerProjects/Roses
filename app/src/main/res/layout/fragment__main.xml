@@ -51,12 +51,11 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:elevation="10dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="10dp"
-            app:cardElevation="2dp">
+            app:cardElevation="10dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rec_depart"
