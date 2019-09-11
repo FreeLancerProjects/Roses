@@ -142,7 +142,7 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
         for (int i = 0; i < add_order_model.getOrder_details().size(); i++) {
             total_cost += add_order_model.getOrder_details().get(i).getTotal_price();
         }
-        total_cost=Math.round(total_cost);
+        total_cost = Math.round(total_cost);
     }
 
     private void intitview(View view) {
@@ -255,8 +255,8 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
     }
 
     private void checkdata() {
-        Add_Order_Model add_order_model1=add_order_model;
-        Common.CloseKeyBoard(activity,edt_address);
+        Add_Order_Model add_order_model1 = add_order_model;
+        Common.CloseKeyBoard(activity, edt_address);
         String title = edt_title.getText().toString();
         String dated = tv_date.getText().toString();
         List<Add_Order_Model.Services> services = new ArrayList<>();
@@ -271,8 +271,8 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
         }
         if (Send_Data.getType() == 1) {
             if (!TextUtils.isEmpty(dated) && !TextUtils.isEmpty(formated_address)) {
-tv_date.setError(null);
-edt_address.setError(null);
+                tv_date.setError(null);
+                edt_address.setError(null);
 
                 add_order_model1.setAddress(formated_address);
                 add_order_model1.setLatitude(lat);
@@ -285,12 +285,11 @@ edt_address.setError(null);
                 add_order_model1.setTotal_cost(total_cost);
                 add_order_model1.setServices(services);
                 accept_order();
-            }
-            else {
-                if(TextUtils.isEmpty(dated)){
+            } else {
+                if (TextUtils.isEmpty(dated)) {
                     tv_date.setError("");
                 }
-                if(TextUtils.isEmpty(formated_address)){
+                if (TextUtils.isEmpty(formated_address)) {
                     edt_address.setError(getResources().getString(R.string.field_req));
                 }
             }
@@ -312,15 +311,14 @@ edt_address.setError(null);
                 add_order_model1.setTotal_cost(total_cost);
                 add_order_model1.setServices(services);
                 accept_order();
-            }
-            else {
-                if(TextUtils.isEmpty(dated)){
+            } else {
+                if (TextUtils.isEmpty(dated)) {
                     tv_date.setError("");
                 }
-                if(TextUtils.isEmpty(formated_address)){
+                if (TextUtils.isEmpty(formated_address)) {
                     edt_address.setError(getResources().getString(R.string.field_req));
                 }
-                if(TextUtils.isEmpty(title)){
+                if (TextUtils.isEmpty(title)) {
                     edt_title.setError(getResources().getString(R.string.field_req));
                 }
             }
@@ -588,7 +586,7 @@ edt_address.setError(null);
 
                 dialog.dismiss();
                 if (response.isSuccessful()) {
-                    List<Add_Order_Model> add_order_models=preferences.getUserOrder(activity);
+                    List<Add_Order_Model> add_order_models = preferences.getUserOrder(activity);
                     add_order_models.remove(Send_Data.getIndex());
                     preferences.create_update_order(activity, add_order_models);
                     // Common.CreateSignAlertDialog(activity, getResources().getString(R.string.sucess));
