@@ -1,4 +1,4 @@
-package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
+package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_client_profile;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,6 +17,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_client_profile.fragmnet_client_order.Fragment_Client_Ocasions;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_client_profile.fragmnet_client_order.Fragment_Client_Orders;
 import com.creativeshare.roses.adapter.PageAdapter;
 import com.creativeshare.roses.models.SocialDataModel;
 import com.creativeshare.roses.models.UserModel;

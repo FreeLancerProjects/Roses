@@ -1,8 +1,7 @@
-package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
+package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_shop_profile.fragment_shop_data.fragment_shop_department;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,33 +10,22 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.adapter.Catogries_Adapter;
-import com.creativeshare.roses.adapter.Market_Adapter;
 import com.creativeshare.roses.adapter.Shop_Department_Adapter;
-import com.creativeshare.roses.adapter.SlidingImage_Adapter;
 import com.creativeshare.roses.models.Catogries_Model;
-import com.creativeshare.roses.models.Markets_Model;
 import com.creativeshare.roses.models.Send_Data;
-import com.creativeshare.roses.models.Slider_Model;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.tags.Tags;
-import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;

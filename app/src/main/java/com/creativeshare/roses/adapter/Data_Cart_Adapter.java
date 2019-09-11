@@ -1,13 +1,11 @@
 package com.creativeshare.roses.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,13 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Cart;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_cart_complete.Fragment_Cart;
 import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.share.Common;
-import com.creativeshare.roses.tags.Tags;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Locale;

@@ -18,12 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Shop_Offers;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Shop_Products;
-import com.creativeshare.roses.models.Catogries_Model;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_shop_profile.fragment_shop_data.Fragment_Shop_Offers;
 import com.creativeshare.roses.models.Offer_Model;
 import com.creativeshare.roses.preferences.Preferences;
-import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;

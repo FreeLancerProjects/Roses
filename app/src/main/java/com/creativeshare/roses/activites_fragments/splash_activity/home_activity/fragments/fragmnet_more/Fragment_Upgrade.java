@@ -1,4 +1,4 @@
-package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
+package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_more;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

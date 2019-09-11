@@ -1,4 +1,4 @@
-package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
+package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_cart_complete;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -35,7 +35,6 @@ import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.Service_Adapter;
 import com.creativeshare.roses.models.Add_Order_Model;
-import com.creativeshare.roses.models.AppDataModel;
 import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.One_Order_Model;
 import com.creativeshare.roses.models.PlaceGeocodeData;
@@ -44,7 +43,6 @@ import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
-import com.creativeshare.roses.services.Service;
 import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
 import com.google.android.gms.common.ConnectionResult;
@@ -67,11 +65,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.ui.IconGenerator;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

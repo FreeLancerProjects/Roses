@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Main;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_main.Fragment_Main;
 import com.creativeshare.roses.models.Market_model;
 
 import java.util.List;

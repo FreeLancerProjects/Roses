@@ -16,9 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Main;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Markets;
-import com.creativeshare.roses.models.Catogries_Model;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_main.Fragment_Main;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_main.Fragment_Markets;
 import com.creativeshare.roses.models.Markets_Model;
 import com.creativeshare.roses.tags.Tags;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -27,7 +26,6 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 import java.util.Locale;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
 public class Market_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

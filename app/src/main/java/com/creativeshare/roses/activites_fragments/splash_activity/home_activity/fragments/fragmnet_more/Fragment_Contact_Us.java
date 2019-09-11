@@ -1,4 +1,4 @@
-package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
+package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_more;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;

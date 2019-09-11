@@ -1,4 +1,4 @@
-package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
+package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_client_profile.fragmnet_client_order;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -18,9 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.adapter.Catogries_Adapter;
 import com.creativeshare.roses.adapter.Client_Order_Adapter;
-import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Order_Model;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
@@ -36,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Fragment_Client_Ocasions extends Fragment {
+public class Fragment_Client_Orders extends Fragment {
 
 
     private HomeActivity activity;
@@ -46,13 +44,13 @@ public class Fragment_Client_Ocasions extends Fragment {
     private List<Order_Model.Data> dataList;
     private Client_Order_Adapter client_order_adapter;
     private GridLayoutManager gridLayoutManager;
-    private LinearLayout ll_no_store;
+private LinearLayout ll_no_store;
     private boolean isLoading = false;
     private int current_page_depart = 1;
-    private UserModel userModel;
-    private Preferences preferences;
-    public static Fragment_Client_Ocasions newInstance() {
-        Fragment_Client_Ocasions fragment = new Fragment_Client_Ocasions();
+private UserModel userModel;
+private Preferences preferences;
+    public static Fragment_Client_Orders newInstance() {
+        Fragment_Client_Orders fragment = new Fragment_Client_Orders();
 
         return fragment;
     }
@@ -61,9 +59,9 @@ public class Fragment_Client_Ocasions extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-    View view= inflater.inflate(R.layout.fragment_client_ocassion, container, false);
+    View view= inflater.inflate(R.layout.fragment_client_orders, container, false);
     initview(view);
-  getOrders();
+    getOrders();
     return view;
     }
 
@@ -71,14 +69,16 @@ public class Fragment_Client_Ocasions extends Fragment {
     private void initview(View view) {
         dataList=new ArrayList<>();
         activity = (HomeActivity) getActivity();
-        preferences=Preferences.getInstance();
-        userModel=preferences.getUserData(activity);
+preferences=Preferences.getInstance();
+userModel=preferences.getUserData(activity);
 
         progBar = view.findViewById(R.id.progBar2);
         ll_no_store=view.findViewById(R.id.ll_no_store);
-        rec_depart=view.findViewById(R.id.rec_departments);
+        rec_depart=view.findViewById(R.id.rec_offers);
 
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+
+
 
         progBar.setVisibility(View.GONE);
         rec_depart.setDrawingCacheEnabled(true);
@@ -89,26 +89,6 @@ public class Fragment_Client_Ocasions extends Fragment {
         gridLayoutManager=new GridLayoutManager(activity,1);
         rec_depart.setLayoutManager(gridLayoutManager);
         client_order_adapter=new Client_Order_Adapter(dataList,activity,this);
-        /*rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (dx> 0) {
-                    int total_item = catogries_adapter.getItemCount();
-                    int last_item_pos = gridLayoutManager.findLastCompletelyVisibleItemPosition();
-                    //  Log.e("msg", total_item + "  " + last_item_pos);
-                    if (last_item_pos >= (total_item - 15) && !isLoading ) {
-                        isLoading = true;
-                        dataList.add(null);
-                        catogries_adapter.notifyItemInserted(dataList.size() - 1);
-                        int page = current_page_depart + 1;
-
-                        loadMore(page);
-
-                    }
-                }
-            }
-        });*/
         rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -137,9 +117,9 @@ public class Fragment_Client_Ocasions extends Fragment {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
 
         // rec_sent.setVisibility(View.GONE);
-        progBar.setVisibility(View.VISIBLE);
+progBar.setVisibility(View.VISIBLE);
         Api.getService(Tags.base_url)
-                .getorders(1,userModel.getId(),2)
+                .getorders(1,userModel.getId(),1)
                 .enqueue(new Callback<Order_Model>() {
                     @Override
                     public void onResponse(Call<Order_Model> call, Response<Order_Model> response) {
@@ -150,12 +130,12 @@ public class Fragment_Client_Ocasions extends Fragment {
                             if (response.body().getData().size() > 0) {
                                 // rec_sent.setVisibility(View.VISIBLE);
 
-                                ll_no_store.setVisibility(View.GONE);
+                              ll_no_store.setVisibility(View.GONE);
                                 client_order_adapter.notifyDataSetChanged();
                                 //   total_page = response.body().getMeta().getLast_page();
 
                             } else {
-                                ll_no_store.setVisibility(View.VISIBLE);
+                              ll_no_store.setVisibility(View.VISIBLE);
 
                             }
                         } else {
@@ -172,9 +152,8 @@ public class Fragment_Client_Ocasions extends Fragment {
                     @Override
                     public void onFailure(Call<Order_Model> call, Throwable t) {
                         try {
-                            progBar.setVisibility(View.GONE);
 
-
+progBar.setVisibility(View.GONE);
                             //    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
                             Log.e("error", t.getMessage());
                         } catch (Exception e) {
@@ -185,7 +164,7 @@ public class Fragment_Client_Ocasions extends Fragment {
     }
     private void loadMore(int page) {
         Api.getService(Tags.base_url)
-                .getorders(page,userModel.getId(),2)
+                .getorders(page,userModel.getId(),1)
                 .enqueue(new Callback<Order_Model>() {
                     @Override
                     public void onResponse(Call<Order_Model> call, Response<Order_Model> response) {
@@ -222,4 +201,7 @@ public class Fragment_Client_Ocasions extends Fragment {
                     }
                 });
     }
+
+
+
 }

@@ -1,50 +1,36 @@
-package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
+package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_client_profile.fragmnet_client_order.fragment_ordres_detials;
 
-import android.animation.Animator;
-import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.Client_Order_Detials_Adapter;
-import com.creativeshare.roses.adapter.PageAdapter;
 import com.creativeshare.roses.adapter.Service_Profile_Adapter;
 import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.Order_Model;
 import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
-import com.creativeshare.roses.remote.Api;
-import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
-import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Fragment_Product_Details extends Fragment {
     private HomeActivity homeActivity;

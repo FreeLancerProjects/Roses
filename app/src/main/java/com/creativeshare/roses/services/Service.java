@@ -112,7 +112,7 @@ public interface Service {
     );
     @FormUrlEncoded
     @POST("api/cat/markets")
-    Call<Markets_Model> getmarkets(
+    Call<Markets_Model> getmarketsbycat(
             @Field("cat_id") int cat_id
 
 

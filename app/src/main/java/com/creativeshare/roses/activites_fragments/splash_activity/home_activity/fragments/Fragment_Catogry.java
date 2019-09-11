@@ -1,24 +1,19 @@
 package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
 
 import android.app.ProgressDialog;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.adapter.Catogries_Adapter;
 import com.creativeshare.roses.adapter.Catogries_Text_Adapter;
 import com.creativeshare.roses.adapter.Infowindows_Adapter;
 import com.creativeshare.roses.models.Catogries_Model;
@@ -26,19 +21,13 @@ import com.creativeshare.roses.models.Markets_Model;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.TileOverlayOptions;
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -170,7 +159,7 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .getmarkets(cat_id)
+                .getmarketsbycat(cat_id)
                 .enqueue(new Callback<Markets_Model>() {
                     @Override
                     public void onResponse(Call<Markets_Model> call, Response<Markets_Model> response) {

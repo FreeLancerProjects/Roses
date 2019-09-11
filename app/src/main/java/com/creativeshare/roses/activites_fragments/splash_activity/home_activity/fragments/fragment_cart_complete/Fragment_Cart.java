@@ -1,4 +1,4 @@
-package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
+package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_cart_complete;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.adapter.Cart_Adpter;
 import com.creativeshare.roses.adapter.Data_Cart_Adapter;
 import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.Send_Data;

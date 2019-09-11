@@ -1,4 +1,4 @@
-package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
+package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_main;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -166,7 +166,7 @@ if(cuurent_language.equals("en")){
         // rec_sent.setVisibility(View.GONE);
 progBar.setVisibility(View.VISIBLE);
         Api.getService(Tags.base_url)
-                .getMarkets(Send_Data.getCat_id())
+                .getmarketsbycat(Send_Data.getCat_id())
                 .enqueue(new Callback<Markets_Model>() {
                     @Override
                     public void onResponse(Call<Markets_Model> call, Response<Markets_Model> response) {

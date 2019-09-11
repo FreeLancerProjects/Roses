@@ -1,4 +1,4 @@
-package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments;
+package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_shop_profile;
 
 import android.animation.Animator;
 import android.app.ProgressDialog;
@@ -13,9 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -23,8 +21,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.creativeshare.roses.Animate.CircleAnimationUtil;
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_shop_profile.fragment_shop_data.fragment_shop_department.Fragment_Shop_Department;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_shop_profile.fragment_shop_data.Fragment_Shop_Offers;
 import com.creativeshare.roses.adapter.PageAdapter;
-import com.creativeshare.roses.adapter.Service_Adapter;
 import com.creativeshare.roses.adapter.Service_Profile_Adapter;
 import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.Send_Data;
