@@ -57,6 +57,10 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:layout_weight="1"
+            android:shadowColor="#000"
+            android:shadowDx="0"
+            android:shadowDy="30"
+            android:shadowRadius="50"
             >
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rec_depart"
