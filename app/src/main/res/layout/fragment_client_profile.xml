@@ -254,7 +254,10 @@ android:visibility="gone"
                     android:layout_height="1px"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:background="@color/gray4" />
+                    android:background="@color/gray4"
+                    android:layout_marginTop="8dp"
+
+                    />
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_orders"

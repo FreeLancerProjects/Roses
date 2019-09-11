@@ -45,18 +45,16 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:clickable="true"
-        android:paddingRight="3dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
 
         <ImageButton
             android:id="@+id/cartButtonIV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:background="@null"
             android:clickable="false"
-            android:padding="5dp"
             android:src="@drawable/cart" />
 
         <TextView
