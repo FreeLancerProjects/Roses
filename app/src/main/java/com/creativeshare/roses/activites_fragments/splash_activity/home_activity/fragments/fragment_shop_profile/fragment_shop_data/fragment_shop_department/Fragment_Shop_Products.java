@@ -92,13 +92,14 @@ public class Fragment_Shop_Products extends Fragment {
 
     public void gettotal() {
         amount=0;
+        if(preferences.getUserOrder(activity)!=null){
 
         for (int i = 0; i < preferences.getUserOrder(activity).size(); i++) {
             Add_Order_Model add_order_model = preferences.getUserOrder(activity).get(i);
             for (int j = 0; j < add_order_model.getOrder_details().size(); j++) {
                 amount += add_order_model.getOrder_details().get(j).getAmount();
             }
-        }
+        }}
         addItemToCart();
 
     }

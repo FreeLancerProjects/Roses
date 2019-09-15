@@ -6,7 +6,6 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,14 +45,15 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@id/im_cart"
             android:layout_alignTop="@id/im_cart"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="2dp"
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:minHeight="20dp"
             android:minWidth="20dp"
             android:padding="3dp"
             android:text="0"
-            android:textColor="#424242"
+            android:background="@drawable/circle_image"
+            android:textColor="@color/colorPrimary"
             android:textSize="15sp"
             />
         </RelativeLayout>

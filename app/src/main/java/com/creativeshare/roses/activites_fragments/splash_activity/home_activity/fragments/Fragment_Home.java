@@ -73,12 +73,13 @@ private ImageView im_cart,im_menu;
 
     public void gettotal() {
         amount=0;
+        if(preferences.getUserOrder(homeActivity)!=null){
         for (int i = 0; i < preferences.getUserOrder(homeActivity).size(); i++) {
             Add_Order_Model add_order_model = preferences.getUserOrder(homeActivity).get(i);
             for (int j = 0; j < add_order_model.getOrder_details().size(); j++) {
                 amount += add_order_model.getOrder_details().get(j).getAmount();
             }
-        }
+        }}
         addItemToCart();
 
     }
