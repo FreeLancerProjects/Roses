@@ -48,13 +48,14 @@ public class Fragment_Client_profile extends Fragment {
     private TextView tv_name, tv_phone;
     private CircleImageView im_profile;
     private ImageView imageInstagram,imageTwitter,im_snapchat;
+    private SocialDataModel socialDataModel;
+
     private Fragment_Client_Orders fragment_client_orders;
     private Fragment_Client_Ocasions fragment_client_ocasions;
     private List<Fragment> fragmentList;
     private PageAdapter pageAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private SocialDataModel socialDataModel;
 
     public static Fragment_Client_profile newInstance() {
         Fragment_Client_profile fragment = new Fragment_Client_profile();

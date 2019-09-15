@@ -88,5 +88,7 @@
     <string name="no_ocassions_found">No Ocassions Found</string>
     <string name="no_orders_found">No Orders Found</string>
     <string name="no_market_found">No Market Found</string>
+    <string name="connect">Connecting</string>
+    <string name="Search">Search</string>
 
 </resources>

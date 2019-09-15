@@ -89,5 +89,7 @@
     <string name="no_ocassions_found">لا يوجد مناسبات</string>
     <string name="no_orders_found">لا يوجد طلبات</string>
     <string name="no_market_found">لا يوجد متاجر</string>
+    <string name="connect">توصيل</string>
+    <string name="Search">بحث</string>
 
 </resources>

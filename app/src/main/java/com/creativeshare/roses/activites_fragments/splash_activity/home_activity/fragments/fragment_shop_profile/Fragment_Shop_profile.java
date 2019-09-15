@@ -2,13 +2,16 @@ package com.creativeshare.roses.activites_fragments.splash_activity.home_activit
 
 import android.animation.Animator;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +30,7 @@ import com.creativeshare.roses.adapter.PageAdapter;
 import com.creativeshare.roses.adapter.Service_Profile_Adapter;
 import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.Send_Data;
+import com.creativeshare.roses.models.SocialDataModel;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
@@ -62,14 +66,16 @@ public class Fragment_Shop_profile extends Fragment {
     private PageAdapter pageAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private TextView tv_name, tv_address;
+    private TextView tv_name, tv_address,tv_phone,tv_titlemain;
     private ImageView im_banner, im_back;
     private CircleImageView im_logo;
     private RecyclerView rec_service;
     private Service_Profile_Adapter service_profile_adapter;
     private List<Market_model.MarketService> marketServices;
     private RelativeLayout destView;
-
+    private ImageView imageInstagram,imageTwitter,im_snapchat;
+    private SocialDataModel socialDataModel;
+private LinearLayout  ll_service;
     public static Fragment_Shop_profile newInstance(int id) {
         Fragment_Shop_profile fragment_shop_profile = new Fragment_Shop_profile();
         Bundle bundle = new Bundle();
@@ -103,14 +109,16 @@ public class Fragment_Shop_profile extends Fragment {
         userModel = preferences.getUserData(homeActivity);
         current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         destView = view.findViewById(R.id.cartRelativeLayout);
-
+ll_service=view.findViewById(R.id.ll_service);
         tabLayout = view.findViewById(R.id.tab_orders);
         viewPager = view.findViewById(R.id.pager);
         tv_name = view.findViewById(R.id.tv_name);
         tv_address = view.findViewById(R.id.tv_address);
+        tv_phone=view.findViewById(R.id.tv_phone);
         im_banner = view.findViewById(R.id.im_banner);
         im_logo = view.findViewById(R.id.image);
         im_back = view.findViewById(R.id.arrow);
+        tv_titlemain=view.findViewById(R.id.tv_titlemain);
         if (current_lang.equals("en")) {
             im_back.setRotation(180.0f);
         }
@@ -127,6 +135,9 @@ destView.setOnClickListener(new View.OnClickListener() {
     }
 });
         rec_service = view.findViewById(R.id.rec_service);
+        imageInstagram=view.findViewById(R.id.image_instagram);
+        imageTwitter = view.findViewById(R.id.image_twitter);
+        im_snapchat=view.findViewById(R.id.image_snapchat);
         rec_service.setDrawingCacheEnabled(true);
         rec_service.setItemViewCacheSize(25);
         rec_service.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
@@ -156,7 +167,67 @@ destView.setOnClickListener(new View.OnClickListener() {
 
             }
         });
+        imageInstagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (socialDataModel!=null)
+                {
+                    if (socialDataModel.getInstagram()!=null&&!TextUtils.isEmpty(socialDataModel.getInstagram()) &&!socialDataModel.getInstagram().equals("0"))
+                    {
+                        createSocialIntent(socialDataModel.getInstagram());
+                    }
+                    else
+                    {
+                        Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
+                    }
+                }else {
+                    Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
 
+                }
+            }
+        });
+
+        imageTwitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (socialDataModel!=null)
+                {
+                    if (socialDataModel.getTwitter()!=null&&!TextUtils.isEmpty(socialDataModel.getTwitter()) &&!socialDataModel.getTwitter().equals("0"))
+                    {
+                        createSocialIntent(socialDataModel.getTwitter());
+                    }
+                    else
+                    {
+                        Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
+                    }
+                }else {
+                    Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
+
+                }
+            }
+        });
+        im_snapchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (socialDataModel!=null)
+                {
+                    if (socialDataModel.getSnapchat()!=null&&!TextUtils.isEmpty(socialDataModel.getSnapchat()) &&!socialDataModel.getSnapchat().equals("0"))
+                    {
+                        createSocialIntent(socialDataModel.getSnapchat());
+                    }
+                    else
+                    {
+                        Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
+                    }
+                }else {
+                    Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
+
+                }
+            }
+        });
+        ll_service.setVisibility(View.GONE);
+
+        getSocialMedia();
     }
 
 
@@ -206,6 +277,8 @@ destView.setOnClickListener(new View.OnClickListener() {
     private void updateprofile(Market_model body) {
         tv_name.setText(body.getName());
         tv_address.setText(body.getAddress());
+        tv_phone.setText(body.getPhone());
+        tv_titlemain.setText(body.getName());
         Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL + body.getBanner())).fit().placeholder(R.drawable.profile_client).into(im_banner);
         Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL + body.getLogo())).fit().placeholder(R.drawable.logo).into(im_logo);
         if (body.getMarketServices() != null) {
@@ -213,10 +286,12 @@ if(body.getMarketServices().size()>0){
             marketServices.clear();
             marketServices.addAll(body.getMarketServices());
             service_profile_adapter.notifyDataSetChanged();
+            ll_service.setVisibility(View.GONE);
 
 }
 else {
     rec_service.setVisibility(View.GONE);
+    ll_service.setVisibility(View.VISIBLE);
    // Log.e("kkkk","llllll");
 
 }
@@ -252,6 +327,45 @@ else {
         }).startAnimation();
 
 
+    }
+
+    private void getSocialMedia() {
+        ProgressDialog dialog = Common.createProgressDialog(homeActivity,getString(R.string.wait));
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .getSocial()
+                .enqueue(new Callback<SocialDataModel>() {
+                    @Override
+                    public void onResponse(Call<SocialDataModel> call, Response<SocialDataModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful())
+                        {
+                            socialDataModel = response.body();
+                        }else
+                        {
+                            try {
+                                Log.e("error_code",response.code()+"_"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SocialDataModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            Log.e("error",t.getMessage());
+
+                        }catch (Exception e){}
+                    }
+                });
+    }
+
+    private void createSocialIntent(String url)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(intent);
     }
 
 }

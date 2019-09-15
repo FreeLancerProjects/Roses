@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -13,16 +20,16 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorAccent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="270dp">
 
         <ImageView
             android:id="@+id/im_cart"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/cart"
-            android:tint="@color/white"
             android:padding="4dp"
-            />
+            android:src="@drawable/cart"
+            android:tint="@color/white" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -34,6 +41,17 @@
             android:text="@string/home"
             android:textColor="@color/white"
             android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/im_menu"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="4dp"
+            android:src="@drawable/menu"
+            android:tint="@color/white"
+            android:layout_gravity="end"
+
+            />
     </androidx.appcompat.widget.Toolbar>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -63,3 +81,22 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nvView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rec_depart"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

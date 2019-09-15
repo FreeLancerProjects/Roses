@@ -1,47 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/gray0"
-   >
+    android:background="@color/gray0">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray0"
-        >
+        android:background="@color/gray0">
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="400dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@null"
-            app:titleEnabled="false"
-            >
+            app:titleEnabled="false">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
                 >
+
                 <ImageView
                     android:id="@+id/im_banner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/profile_client"
                     android:scaleType="fitXY"
-                    />
+                    android:src="@drawable/profile_client" />
+
+                <LinearLayout
+                    android:id="@+id/ll_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="70dp"
+                    tools:ignore="RtlCompat">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/im_depart"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        app:civ_border_color="@color/colorPrimary"
+                        app:civ_border_width="1px"
+                        android:src="@drawable/ic_action_name"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/connect"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+
+                        />
+
+                </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cons_data"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="200dp"
                     android:background="@drawable/cons_shape"
                     android:padding="10dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="200dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
 
                     >
 
@@ -63,21 +95,36 @@
                         app:layout_constraintTop_toTopOf="parent"
 
                         />
+                    <TextView
+                        android:id="@+id/tv_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+
+                        android:paddingLeft="13dp"
+                        android:paddingRight="13dp"
+                        android:text="@string/user_name"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_name"/>
+
 
                     <LinearLayout
                         android:id="@+id/ll"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_name">
+                        app:layout_constraintTop_toBottomOf="@+id/tv_phone">
 
                         <ImageView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_gravity="center_vertical"
-                            android:src="@drawable/ic_placeholder"
                             android:padding="8dp"
-                            android:tint="@color/colorAccent"
-                            />
+                            android:src="@drawable/ic_placeholder"
+                            android:tint="@color/colorAccent" />
 
                         <TextView
                             android:id="@+id/tv_address"
@@ -85,24 +132,71 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
 
+                            android:gravity="center_vertical"
                             android:text="@string/logout"
                             android:textColor="@color/black"
                             android:textSize="15sp"
-                            android:gravity="center_vertical"
 
                             />
 
 
                     </LinearLayout>
-                   <androidx.recyclerview.widget.RecyclerView
-                       android:id="@+id/rec_service"
-                       android:layout_width="match_parent"
-                       android:layout_height="50dp"
-                       app:layout_constraintTop_toBottomOf="@+id/ll"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       >
 
-                   </androidx.recyclerview.widget.RecyclerView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rec_service"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ll">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                    <LinearLayout
+                        android:id="@+id/llll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ll">
+
+                        <ImageView
+                            android:id="@+id/image_twitter"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:src="@drawable/twitter" />
+
+                        <ImageView
+                            android:id="@+id/image_instagram"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:src="@drawable/instagram" />
+
+                        <ImageView
+                            android:id="@+id/image_snapchat"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:src="@drawable/ic_snapchat" />
+
+
+                    </LinearLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -119,6 +213,7 @@
                     app:layout_constraintTop_toTopOf="@+id/cons_data" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
@@ -146,15 +241,18 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_titlemain"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
                         android:text="@string/shop_profile"
-                        android:textColor="@color/white"                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/arrow"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="RtlCompat" />
+
                     <RelativeLayout
                         android:id="@+id/cartRelativeLayout"
                         android:layout_width="wrap_content"
@@ -162,9 +260,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:clickable="true"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        >
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <ImageButton
                             android:id="@+id/cartButtonIV"
@@ -172,9 +269,9 @@
                             android:layout_height="45dp"
                             android:background="@null"
                             android:clickable="false"
-                            android:src="@drawable/cart"
-                            android:scaleType="fitXY"
                             android:padding="5dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/cart"
 
                             />
 
@@ -182,51 +279,49 @@
                             android:id="@+id/textNotify"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignRight="@id/cartButtonIV"
                             android:layout_alignTop="@id/cartButtonIV"
-                            android:layout_marginRight="5dip"
+                            android:layout_alignRight="@id/cartButtonIV"
                             android:layout_marginTop="5dip"
+                            android:layout_marginRight="5dip"
                             android:gravity="center"
-                            android:minHeight="20dip"
                             android:minWidth="20dip"
+                            android:minHeight="20dip"
                             android:padding="3dip"
                             android:text="0"
                             android:textColor="#424242"
                             android:textSize="12sp"
-                            android:visibility="gone"
-                            />
+                            android:visibility="gone" />
                     </RelativeLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_orders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             app:layout_constraintTop_toTopOf="parent"
             app:tabBackground="@drawable/tab_selected"
-            app:tabSelectedTextColor="@color/white"
             app:tabIndicatorColor="@color/white"
-            app:tabTextColor="@color/white"
-            app:tabRippleColor="@color/colorPrimaryDark"
             app:tabIndicatorHeight="1dp"
-           android:background="@color/colorPrimary"
-            >
+            app:tabRippleColor="@color/colorPrimaryDark"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/white">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="@string/department"
-                />
+                android:text="@string/department" />
+
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:text="@string/Offers"
 
                 />
-
 
 
         </com.google.android.material.tabs.TabLayout>
@@ -241,15 +336,12 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
             />
-
-
 
 
     </androidx.core.widget.NestedScrollView>

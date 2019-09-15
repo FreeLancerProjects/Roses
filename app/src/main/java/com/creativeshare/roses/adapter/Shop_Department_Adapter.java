@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Home;
 import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.tags.Tags;
@@ -30,13 +31,14 @@ import io.paperdb.Paper;
 
 public class Shop_Department_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int ITEM_DATA = 1;
-    private final int ITEM_LOAD = 2;
 
     private List<Catogries_Model.Data> data;
     private Context context;
     private HomeActivity activity;
     private Fragment fragment;
-private String current_lang;
+    private Fragment_Home fragment_home;
+    private String current_lang;
+
     public Shop_Department_Adapter(List<Catogries_Model.Data> data, Context context, Fragment fragment) {
 
         this.data = data;
@@ -53,44 +55,45 @@ private String current_lang;
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType == ITEM_DATA) {
-            View view = LayoutInflater.from(context).inflate(R.layout.department_row, parent, false);
-            return new MyHolder(view);
-        } else {
-            View view = LayoutInflater.from(context).inflate(R.layout.load_more_row, parent, false);
-            return new LoadMoreHolder(view);
-        }
+        View view = LayoutInflater.from(context).inflate(R.layout.department_row, parent, false);
+        return new MyHolder(view);
+
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
 
-        if (holder instanceof MyHolder) {
 
-            final MyHolder myHolder = (MyHolder) holder;
-            final Catogries_Model.Data data1 = data.get(myHolder.getAdapterPosition());
-if(current_lang.equals("en")) {
-    ((MyHolder) holder).tv_title.setText(data1.getEn_title());
-}
-else {
-    ((MyHolder) holder).tv_title.setText(data1.getAr_title());
+        final MyHolder myHolder = (MyHolder) holder;
+        final Catogries_Model.Data data1 = data.get(myHolder.getAdapterPosition());
+        if (current_lang.equals("en")) {
+            ((MyHolder) holder).tv_title.setText(data1.getEn_title());
+        } else {
+            ((MyHolder) holder).tv_title.setText(data1.getAr_title());
 
-}
-            Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(  ((MyHolder) holder).im_depart);
-            ((MyHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        }
+        Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_depart);
+        ((MyHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (fragment instanceof Fragment_Home) {
+                    fragment_home = (Fragment_Home) fragment;
+                    fragment_home.mDrawer.closeDrawers();
+                    Send_Data.setCat_id(data.get(holder.getLayoutPosition()).getId());
+                    activity.DisplayFragmentMarkets();
+                    Send_Data.setCat_id(data.get(holder.getLayoutPosition()).getId());
+
+                } else {
                     Send_Data.setCat_id(data.get(holder.getLayoutPosition()).getId());
                     activity.DisplayFragmentProduct();
                 }
-            });
 
-            //Log.e("msg",advertsing.getMain_image());
-        } else {
-            LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;
-            loadMoreHolder.progBar.setIndeterminate(true);
-        }
+            }
+        });
+
+        //Log.e("msg",advertsing.getMain_image());
+
     }
 
 
@@ -114,26 +117,5 @@ else {
 
     }
 
-    public class LoadMoreHolder extends RecyclerView.ViewHolder {
-        private ProgressBar progBar;
 
-        public LoadMoreHolder(View itemView) {
-            super(itemView);
-            progBar = itemView.findViewById(R.id.progBar);
-            progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
-        }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-      Catogries_Model.Data data1 = data.get(position);
-        if (data1 == null) {
-            return ITEM_LOAD;
-        } else {
-            return ITEM_DATA;
-
-        }
-
-
-    }
 }
