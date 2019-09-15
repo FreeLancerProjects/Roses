@@ -85,6 +85,7 @@ private ImageView im_back;
             tv_total.setVisibility(View.VISIBLE);
 
         }
+        activity.getamount();
     }
     private void intitview(View view) {
       //  item_cart_model = new Item_Cart_Model();

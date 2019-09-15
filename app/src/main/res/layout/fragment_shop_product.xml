@@ -76,6 +76,7 @@
             android:textColor="#424242"
             android:textSize="15sp"
             />
+
     </RelativeLayout>
 
     <FrameLayout

@@ -90,7 +90,9 @@ public class Fragment_Shop_Products extends Fragment {
         return view;
     }
 
-    private void gettotal() {
+    public void gettotal() {
+        amount=0;
+
         for (int i = 0; i < preferences.getUserOrder(activity).size(); i++) {
             Add_Order_Model add_order_model = preferences.getUserOrder(activity).get(i);
             for (int j = 0; j < add_order_model.getOrder_details().size(); j++) {
@@ -366,8 +368,9 @@ public class Fragment_Shop_Products extends Fragment {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                addItemToCart();
                 amount += quantity;
+                addItemToCart();
+                activity.getamount();
 
                 Toast.makeText(activity, "Continue Shopping...", Toast.LENGTH_SHORT).show();
             }

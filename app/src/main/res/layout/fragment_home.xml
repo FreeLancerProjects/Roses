@@ -22,6 +22,14 @@
         android:background="@color/colorAccent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="270dp">
+        <RelativeLayout
+            android:id="@+id/cartRelativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+           >
 
         <ImageView
             android:id="@+id/im_cart"
@@ -29,8 +37,26 @@
             android:layout_height="45dp"
             android:padding="4dp"
             android:src="@drawable/cart"
-            android:tint="@color/white" />
-
+            android:tint="@color/white"
+            android:scaleType="fitXY"
+            />
+        <TextView
+            android:id="@+id/textNotify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/im_cart"
+            android:layout_alignTop="@id/im_cart"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:minHeight="20dp"
+            android:minWidth="20dp"
+            android:padding="3dp"
+            android:text="0"
+            android:textColor="#424242"
+            android:textSize="15sp"
+            />
+        </RelativeLayout>
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"

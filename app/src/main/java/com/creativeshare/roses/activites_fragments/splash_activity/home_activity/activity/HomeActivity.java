@@ -552,4 +552,16 @@ public class HomeActivity extends AppCompatActivity {
             fragment_shop_profile.makeFlyAnimation(im_cart,quantity);
         }
     }
+
+    public void getamount() {
+        if(fragment_home!=null&&fragment_home.isAdded()){
+            fragment_home.gettotal();
+        }
+        if(fragment_shop_profile!=null&&fragment_shop_profile.isAdded()){
+            fragment_shop_profile.gettotal();
+        }
+        if(fragment_shop_product!=null&&fragment_shop_product.isAdded()){
+            fragment_shop_product.gettotal();
+        }
+    }
 }

@@ -24,6 +24,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.Shop_Department_Adapter;
+import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
@@ -57,14 +58,33 @@ private ImageView im_cart,im_menu;
     private List<Catogries_Model.Data> dataList;
     private Shop_Department_Adapter shop_department_adapter;
     private GridLayoutManager gridLayoutManager;
+    private TextView textNotify;
+    private int amount=0;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initView(view);
         getDepartments();
-
+        gettotal();
         return view;
+    }
+
+    public void gettotal() {
+        amount=0;
+        for (int i = 0; i < preferences.getUserOrder(homeActivity).size(); i++) {
+            Add_Order_Model add_order_model = preferences.getUserOrder(homeActivity).get(i);
+            for (int j = 0; j < add_order_model.getOrder_details().size(); j++) {
+                amount += add_order_model.getOrder_details().get(j).getAmount();
+            }
+        }
+        addItemToCart();
+
+    }
+
+    private void addItemToCart() {
+        textNotify.setText(amount + "");
     }
 
     private void initView(View view) {
@@ -74,7 +94,7 @@ dataList=new ArrayList<>();
         userModel = preferences.getUserData(homeActivity);
         Paper.init(homeActivity);
         cuurent_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
+        textNotify=view.findViewById(R.id.textNotify);
         ah_bottom_nav = view.findViewById(R.id.ah_bottom_nav);
         tv_title = view.findViewById(R.id.tv_title);
         rec_depart = view.findViewById(R.id.rec_depart);

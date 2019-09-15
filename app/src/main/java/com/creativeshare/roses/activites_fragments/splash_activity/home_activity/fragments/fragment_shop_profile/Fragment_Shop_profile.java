@@ -101,7 +101,9 @@ public class Fragment_Shop_profile extends Fragment {
         return view;
     }
 
-    private void gettotal() {
+    public void gettotal() {
+        amount=0;
+
         for (int i = 0; i < preferences.getUserOrder(homeActivity).size(); i++) {
             Add_Order_Model add_order_model = preferences.getUserOrder(homeActivity).get(i);
             for (int j = 0; j < add_order_model.getOrder_details().size(); j++) {
@@ -322,6 +324,7 @@ public class Fragment_Shop_profile extends Fragment {
                 //     addItemToCart();
                 amount+=quantity;
                 addItemToCart();
+                homeActivity.getamount();
                 Toast.makeText(homeActivity, "Continue Shopping...", Toast.LENGTH_SHORT).show();
             }
 
