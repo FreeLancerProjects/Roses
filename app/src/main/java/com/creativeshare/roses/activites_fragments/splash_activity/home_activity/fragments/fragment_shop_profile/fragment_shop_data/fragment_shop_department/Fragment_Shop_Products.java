@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -61,8 +62,10 @@ public class Fragment_Shop_Products extends Fragment {
     private Shop_Products_Adapter shop_offers_adapter;
     private GridLayoutManager gridLayoutManager;
     private LinearLayout ll_no_store;
+    private TextView textNotify;
     private boolean isLoading = false;
     private int current_page_depart = 1;
+    private int amount = 0;
     private int cat_id;
     private ImageView im_back;
     private int quantity;
@@ -83,7 +86,19 @@ public class Fragment_Shop_Products extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shop_product, container, false);
         initview(view);
         getDepartments();
+        gettotal();
         return view;
+    }
+
+    private void gettotal() {
+        for (int i = 0; i < preferences.getUserOrder(activity).size(); i++) {
+            Add_Order_Model add_order_model = preferences.getUserOrder(activity).get(i);
+            for (int j = 0; j < add_order_model.getOrder_details().size(); j++) {
+                amount += add_order_model.getOrder_details().get(j).getAmount();
+            }
+        }
+        addItemToCart();
+
     }
 
 
@@ -95,7 +110,7 @@ public class Fragment_Shop_Products extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         cat_id = Send_Data.getCat_id();
-
+        textNotify = view.findViewById(R.id.textNotify);
         progBar = view.findViewById(R.id.progBar2);
         ll_no_store = view.findViewById(R.id.ll_no_store);
         rec_depart = view.findViewById(R.id.rec_offers);
@@ -113,12 +128,12 @@ public class Fragment_Shop_Products extends Fragment {
         rec_depart.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         rec_depart.setItemViewCacheSize(25);
 
-destView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        activity.display_Cart();
-    }
-});
+        destView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.display_Cart();
+            }
+        });
         gridLayoutManager = new GridLayoutManager(activity, 2);
         rec_depart.setLayoutManager(gridLayoutManager);
         shop_offers_adapter = new Shop_Products_Adapter(dataList, activity, this);
@@ -331,7 +346,6 @@ destView.setOnClickListener(new View.OnClickListener() {
         order_details.add(order_details1);
         add_order_model.setOrder_details(order_details);
         add_order_model.setname(data.getName_of_market());
-
         if (target == -1) {
             add_order_models.add(add_order_model);
         } else {
@@ -344,7 +358,7 @@ destView.setOnClickListener(new View.OnClickListener() {
     public void makeFlyAnimation(ImageView targetView) {
 
 
-        new CircleAnimationUtil().attachActivity(activity).setTargetView(targetView,cuurent_language).setMoveDuration(1000).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
+        new CircleAnimationUtil().attachActivity(activity).setTargetView(targetView, cuurent_language).setMoveDuration(1000).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 
@@ -352,7 +366,9 @@ destView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                //     addItemToCart();
+                addItemToCart();
+                amount += quantity;
+
                 Toast.makeText(activity, "Continue Shopping...", Toast.LENGTH_SHORT).show();
             }
 
@@ -368,6 +384,10 @@ destView.setOnClickListener(new View.OnClickListener() {
         }).startAnimation();
 
 
+    }
+
+    private void addItemToCart() {
+        textNotify.setText(amount + "");
     }
 
 }

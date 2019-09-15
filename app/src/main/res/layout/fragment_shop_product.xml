@@ -66,16 +66,15 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@id/cartButtonIV"
             android:layout_alignTop="@id/cartButtonIV"
-            android:layout_marginRight="5dip"
-            android:layout_marginTop="5dip"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
-            android:minHeight="20dip"
-            android:minWidth="20dip"
-            android:padding="3dip"
+            android:minHeight="20dp"
+            android:minWidth="20dp"
+            android:padding="3dp"
             android:text="0"
             android:textColor="#424242"
-            android:textSize="12sp"
-            android:visibility="gone"
+            android:textSize="15sp"
             />
     </RelativeLayout>
 

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ import com.creativeshare.roses.tags.Tags;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.IOException;
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +62,8 @@ public class Fragment_Shop_Offers extends Fragment {
     private int market_id;
     private int quantity;
     private String desc;
+
+
     public static Fragment_Shop_Offers newInstance() {
         Fragment_Shop_Offers fragment_shop_offers = new Fragment_Shop_Offers();
 
@@ -77,13 +81,14 @@ public class Fragment_Shop_Offers extends Fragment {
     }
 
 
+
+
     private void initview(View view) {
         dataList = new ArrayList<>();
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         market_id = Send_Data.getMarket_id();
-
         progBar = view.findViewById(R.id.progBar2);
         ll_no_store = view.findViewById(R.id.ll_no_store);
         rec_depart = view.findViewById(R.id.rec_offers);
@@ -242,7 +247,7 @@ CreateSignAlertDialog(activity,im_cart);
                     addtocart();
                     dialog.dismiss();
                    // Common.CreateSignAlertDialog(activity,getResources().getString(R.string.add_to_cart_suc));
-                    activity.animate(im_cart);
+                    activity.animate(im_cart,quantity);
 
                 } else {
                     if (TextUtils.isEmpty(quant)) {

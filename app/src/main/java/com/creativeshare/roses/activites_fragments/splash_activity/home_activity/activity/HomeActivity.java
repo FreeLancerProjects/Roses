@@ -547,9 +547,9 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void animate(RoundedImageView im_cart) {
+    public void animate(RoundedImageView im_cart, int quantity) {
         if(fragment_shop_profile!=null&&fragment_shop_profile.isAdded()){
-            fragment_shop_profile.makeFlyAnimation(im_cart);
+            fragment_shop_profile.makeFlyAnimation(im_cart,quantity);
         }
     }
 }

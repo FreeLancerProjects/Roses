@@ -28,6 +28,7 @@ import com.creativeshare.roses.activites_fragments.splash_activity.home_activity
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_shop_profile.fragment_shop_data.Fragment_Shop_Offers;
 import com.creativeshare.roses.adapter.PageAdapter;
 import com.creativeshare.roses.adapter.Service_Profile_Adapter;
+import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.models.SocialDataModel;
@@ -66,16 +67,19 @@ public class Fragment_Shop_profile extends Fragment {
     private PageAdapter pageAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private TextView tv_name, tv_address,tv_phone,tv_titlemain;
+    private TextView tv_name, tv_address, tv_phone, tv_titlemain;
     private ImageView im_banner, im_back;
     private CircleImageView im_logo;
     private RecyclerView rec_service;
     private Service_Profile_Adapter service_profile_adapter;
     private List<Market_model.MarketService> marketServices;
     private RelativeLayout destView;
-    private ImageView imageInstagram,imageTwitter,im_snapchat;
+    private ImageView imageInstagram, imageTwitter, im_snapchat;
     private SocialDataModel socialDataModel;
-private LinearLayout  ll_service;
+    private LinearLayout ll_service;
+    private int amount = 0;
+    private TextView textNotify;
+
     public static Fragment_Shop_profile newInstance(int id) {
         Fragment_Shop_profile fragment_shop_profile = new Fragment_Shop_profile();
         Bundle bundle = new Bundle();
@@ -93,7 +97,23 @@ private LinearLayout  ll_service;
         View view = inflater.inflate(R.layout.fragment_shop_profile, container, false);
         initview(view);
         getsinglemarket();
+        gettotal();
         return view;
+    }
+
+    private void gettotal() {
+        for (int i = 0; i < preferences.getUserOrder(homeActivity).size(); i++) {
+            Add_Order_Model add_order_model = preferences.getUserOrder(homeActivity).get(i);
+            for (int j = 0; j < add_order_model.getOrder_details().size(); j++) {
+                amount += add_order_model.getOrder_details().get(j).getAmount();
+            }
+        }
+        addItemToCart();
+
+    }
+
+    private void addItemToCart() {
+        textNotify.setText(amount + "");
     }
 
     private void initview(View view) {
@@ -109,16 +129,17 @@ private LinearLayout  ll_service;
         userModel = preferences.getUserData(homeActivity);
         current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         destView = view.findViewById(R.id.cartRelativeLayout);
-ll_service=view.findViewById(R.id.ll_service);
+        textNotify = view.findViewById(R.id.textNotify);
+        ll_service = view.findViewById(R.id.ll_service);
         tabLayout = view.findViewById(R.id.tab_orders);
         viewPager = view.findViewById(R.id.pager);
         tv_name = view.findViewById(R.id.tv_name);
         tv_address = view.findViewById(R.id.tv_address);
-        tv_phone=view.findViewById(R.id.tv_phone);
+        tv_phone = view.findViewById(R.id.tv_phone);
         im_banner = view.findViewById(R.id.im_banner);
         im_logo = view.findViewById(R.id.image);
         im_back = view.findViewById(R.id.arrow);
-        tv_titlemain=view.findViewById(R.id.tv_titlemain);
+        tv_titlemain = view.findViewById(R.id.tv_titlemain);
         if (current_lang.equals("en")) {
             im_back.setRotation(180.0f);
         }
@@ -128,16 +149,16 @@ ll_service=view.findViewById(R.id.ll_service);
                 homeActivity.Back();
             }
         });
-destView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        homeActivity.display_Cart();
-    }
-});
+        destView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homeActivity.display_Cart();
+            }
+        });
         rec_service = view.findViewById(R.id.rec_service);
-        imageInstagram=view.findViewById(R.id.image_instagram);
+        imageInstagram = view.findViewById(R.id.image_instagram);
         imageTwitter = view.findViewById(R.id.image_twitter);
-        im_snapchat=view.findViewById(R.id.image_snapchat);
+        im_snapchat = view.findViewById(R.id.image_snapchat);
         rec_service.setDrawingCacheEnabled(true);
         rec_service.setItemViewCacheSize(25);
         rec_service.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
@@ -170,18 +191,14 @@ destView.setOnClickListener(new View.OnClickListener() {
         imageInstagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (socialDataModel!=null)
-                {
-                    if (socialDataModel.getInstagram()!=null&&!TextUtils.isEmpty(socialDataModel.getInstagram()) &&!socialDataModel.getInstagram().equals("0"))
-                    {
+                if (socialDataModel != null) {
+                    if (socialDataModel.getInstagram() != null && !TextUtils.isEmpty(socialDataModel.getInstagram()) && !socialDataModel.getInstagram().equals("0")) {
                         createSocialIntent(socialDataModel.getInstagram());
+                    } else {
+                        Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
                     }
-                    else
-                    {
-                        Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
-                    }
-                }else {
-                    Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
+                } else {
+                    Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
 
                 }
             }
@@ -190,18 +207,14 @@ destView.setOnClickListener(new View.OnClickListener() {
         imageTwitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (socialDataModel!=null)
-                {
-                    if (socialDataModel.getTwitter()!=null&&!TextUtils.isEmpty(socialDataModel.getTwitter()) &&!socialDataModel.getTwitter().equals("0"))
-                    {
+                if (socialDataModel != null) {
+                    if (socialDataModel.getTwitter() != null && !TextUtils.isEmpty(socialDataModel.getTwitter()) && !socialDataModel.getTwitter().equals("0")) {
                         createSocialIntent(socialDataModel.getTwitter());
+                    } else {
+                        Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
                     }
-                    else
-                    {
-                        Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
-                    }
-                }else {
-                    Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
+                } else {
+                    Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
 
                 }
             }
@@ -209,18 +222,14 @@ destView.setOnClickListener(new View.OnClickListener() {
         im_snapchat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (socialDataModel!=null)
-                {
-                    if (socialDataModel.getSnapchat()!=null&&!TextUtils.isEmpty(socialDataModel.getSnapchat()) &&!socialDataModel.getSnapchat().equals("0"))
-                    {
+                if (socialDataModel != null) {
+                    if (socialDataModel.getSnapchat() != null && !TextUtils.isEmpty(socialDataModel.getSnapchat()) && !socialDataModel.getSnapchat().equals("0")) {
                         createSocialIntent(socialDataModel.getSnapchat());
+                    } else {
+                        Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
                     }
-                    else
-                    {
-                        Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
-                    }
-                }else {
-                    Common.CreateSignAlertDialog(homeActivity,getString(R.string.not_avail));
+                } else {
+                    Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
 
                 }
             }
@@ -282,28 +291,27 @@ destView.setOnClickListener(new View.OnClickListener() {
         Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL + body.getBanner())).fit().placeholder(R.drawable.profile_client).into(im_banner);
         Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL + body.getLogo())).fit().placeholder(R.drawable.logo).into(im_logo);
         if (body.getMarketServices() != null) {
-if(body.getMarketServices().size()>0){
-            marketServices.clear();
-            marketServices.addAll(body.getMarketServices());
-            service_profile_adapter.notifyDataSetChanged();
-            ll_service.setVisibility(View.GONE);
+            if (body.getMarketServices().size() > 0) {
+                marketServices.clear();
+                marketServices.addAll(body.getMarketServices());
+                service_profile_adapter.notifyDataSetChanged();
+                ll_service.setVisibility(View.GONE);
 
-}
-else {
-    rec_service.setVisibility(View.GONE);
-    ll_service.setVisibility(View.VISIBLE);
-   // Log.e("kkkk","llllll");
+            } else {
+                rec_service.setVisibility(View.GONE);
+                ll_service.setVisibility(View.VISIBLE);
+                // Log.e("kkkk","llllll");
 
-}
-        }
-        else {
+            }
+        } else {
             rec_service.setVisibility(View.GONE);
         }
     }
-    public void makeFlyAnimation(RoundedImageView targetView) {
+
+    public void makeFlyAnimation(RoundedImageView targetView, int quantity) {
 
 
-        new CircleAnimationUtil().attachActivity(homeActivity).setTargetView(targetView,current_lang).setMoveDuration(1000).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
+        new CircleAnimationUtil().attachActivity(homeActivity).setTargetView(targetView, current_lang).setMoveDuration(1000).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 
@@ -312,6 +320,8 @@ else {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //     addItemToCart();
+                amount+=quantity;
+                addItemToCart();
                 Toast.makeText(homeActivity, "Continue Shopping...", Toast.LENGTH_SHORT).show();
             }
 
@@ -330,7 +340,7 @@ else {
     }
 
     private void getSocialMedia() {
-        ProgressDialog dialog = Common.createProgressDialog(homeActivity,getString(R.string.wait));
+        ProgressDialog dialog = Common.createProgressDialog(homeActivity, getString(R.string.wait));
         dialog.show();
         Api.getService(Tags.base_url)
                 .getSocial()
@@ -338,13 +348,11 @@ else {
                     @Override
                     public void onResponse(Call<SocialDataModel> call, Response<SocialDataModel> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful())
-                        {
+                        if (response.isSuccessful()) {
                             socialDataModel = response.body();
-                        }else
-                        {
+                        } else {
                             try {
-                                Log.e("error_code",response.code()+"_"+response.errorBody().string());
+                                Log.e("error_code", response.code() + "_" + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -355,15 +363,15 @@ else {
                     public void onFailure(Call<SocialDataModel> call, Throwable t) {
                         try {
                             dialog.dismiss();
-                            Log.e("error",t.getMessage());
+                            Log.e("error", t.getMessage());
 
-                        }catch (Exception e){}
+                        } catch (Exception e) {
+                        }
                     }
                 });
     }
 
-    private void createSocialIntent(String url)
-    {
+    private void createSocialIntent(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
     }
