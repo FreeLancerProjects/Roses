@@ -20,6 +20,7 @@ import com.creativeshare.roses.activites_fragments.splash_activity.home_activity
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_client_profile.fragmnet_client_order.Fragment_Client_Ocasions;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_client_profile.fragmnet_client_order.Fragment_Client_Orders;
 import com.creativeshare.roses.adapter.PageAdapter;
+import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.models.SocialDataModel;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
@@ -103,6 +104,12 @@ public class Fragment_Client_profile extends Fragment {
         pageAdapter = new PageAdapter(getChildFragmentManager());
         pageAdapter.addfragments(fragmentList);
         viewPager.setAdapter(pageAdapter);
+        if(Send_Data.getType()==2){
+            viewPager.setCurrentItem(1);
+        }
+        else {
+            viewPager.setCurrentItem(0);
+        }
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override

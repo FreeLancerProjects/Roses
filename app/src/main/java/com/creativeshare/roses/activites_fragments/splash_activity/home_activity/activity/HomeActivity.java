@@ -575,6 +575,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void refresh(int type) {
+        getamount();
         if (fragment_client_profile != null ) {
             if(fragment_shop_product!=null&&fragment_shop_product.isVisible()){
                 Back();
