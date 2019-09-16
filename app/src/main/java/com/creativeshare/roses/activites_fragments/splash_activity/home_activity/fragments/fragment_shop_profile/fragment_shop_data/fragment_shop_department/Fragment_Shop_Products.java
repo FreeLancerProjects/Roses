@@ -391,7 +391,14 @@ public class Fragment_Shop_Products extends Fragment {
     }
 
     private void addItemToCart() {
-        textNotify.setText(amount + "");
+        if(amount>0){
+            textNotify.setText(amount + "");
+            textNotify.setVisibility(View.VISIBLE);
+
+        }
+        else {
+            textNotify.setVisibility(View.GONE);
+        }
     }
 
 }

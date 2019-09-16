@@ -28,7 +28,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:clickable="true"
-           >
+            android:layout_marginTop="5dp"
+
+            >
 
         <ImageView
             android:id="@+id/im_cart"
@@ -38,23 +40,22 @@
             android:src="@drawable/cart"
             android:tint="@color/white"
             android:scaleType="fitXY"
+
             />
         <TextView
             android:id="@+id/textNotify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@id/im_cart"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignLeft="@id/im_cart"
             android:layout_alignTop="@id/im_cart"
-            android:layout_marginRight="2dp"
-            android:layout_marginTop="5dp"
             android:gravity="center"
-            android:minHeight="20dp"
-            android:minWidth="20dp"
-            android:padding="3dp"
+            android:singleLine="true"
+            android:textSize="13sp"
+            android:background="@drawable/not_edt_tv"
+            android:layout_gravity="start"
             android:text="0"
-            android:background="@drawable/circle_image"
-            android:textColor="@color/colorPrimary"
-            android:textSize="15sp"
+            android:textColor="@color/white"
+
             />
         </RelativeLayout>
         <TextView

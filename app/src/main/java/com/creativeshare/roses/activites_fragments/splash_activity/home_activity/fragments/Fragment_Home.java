@@ -85,9 +85,16 @@ private ImageView im_cart,im_menu;
     }
 
     private void addItemToCart() {
-        textNotify.setText(amount + "");
-    }
+        if(amount>0){
 
+            textNotify.setText(amount + "");
+            textNotify.setVisibility(View.VISIBLE);
+
+        }
+        else {
+            textNotify.setVisibility(View.GONE);
+        }
+    }
     private void initView(View view) {
 dataList=new ArrayList<>();
         homeActivity = (HomeActivity) getActivity();

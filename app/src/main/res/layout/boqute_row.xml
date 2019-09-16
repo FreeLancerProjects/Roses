@@ -5,17 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginTop="1dp"
     android:layout_marginLeft="5dp"
-    android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
     android:layout_marginBottom="5dp"
     app:cardCornerRadius="10dp"
-
     app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+
+        >
 
         <TextView
             android:id="@+id/tv_offer"
@@ -52,7 +53,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="150dp"
+                android:layout_width="180dp"
                 android:layout_height="90dp">
 
                 <com.makeramen.roundedimageview.RoundedImageView
@@ -72,8 +73,8 @@
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/im_offer"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="180dp"
+                    android:layout_height="90dp"
                     android:layout_gravity="center"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"

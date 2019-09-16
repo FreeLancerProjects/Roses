@@ -261,6 +261,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:clickable="true"
+                        android:layout_marginTop="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
@@ -278,20 +279,19 @@
 
                         <TextView
                             android:id="@+id/textNotify"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignLeft="@id/cartButtonIV"
                             android:layout_alignTop="@id/cartButtonIV"
-                            android:layout_alignRight="@id/cartButtonIV"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="5dp"
                             android:gravity="center"
-                            android:minWidth="20dip"
-                            android:minHeight="20dip"
-                            android:padding="3dp"
+                            android:singleLine="true"
+                            android:textSize="13sp"
+                            android:background="@drawable/not_edt_tv"
+                            android:layout_gravity="start"
                             android:text="0"
-                            android:textColor="#424242"
-                            android:textSize="15sp"
-                           />
+                            android:textColor="@color/white"
+
+                            />
                     </RelativeLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
