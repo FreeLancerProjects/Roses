@@ -115,7 +115,7 @@ public class HomeActivity extends AppCompatActivity {
         String date = dateFormat.format(new Date(timeNow));
 
         if (!date.equals(visitTime)) {
-             addVisit(date);
+            addVisit(date);
         }
     }
 
@@ -239,7 +239,7 @@ public class HomeActivity extends AppCompatActivity {
     public void DisplayFragmentShopprofile(int id) {
         fragment_count += 1;
 
-            fragment_shop_profile = Fragment_Shop_profile.newInstance(id);
+        fragment_shop_profile = Fragment_Shop_profile.newInstance(id);
 
 
         if (fragment_shop_profile.isAdded()) {
@@ -251,6 +251,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+
     public void DisplayFragmentEditprofile() {
         fragment_count += 1;
 
@@ -262,11 +263,12 @@ public class HomeActivity extends AppCompatActivity {
 
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_edit_profile, "fragment_edit_profile").addToBackStack("fragment_edit_profile").commit();
-          //  Log.e("llll","edits");
+            //  Log.e("llll","edits");
 
         }
 
     }
+
     public void DisplayFragmentProductdetials() {
         fragment_count += 1;
 
@@ -282,6 +284,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+
     public void DisplayFragmentMarkets() {
         fragment_count += 1;
 
@@ -297,6 +300,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+
     public void DisplayFragmentTerms_Condition() {
 
         fragment_count += 1;
@@ -312,6 +316,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
     public void DisplayFragmentUgrade() {
 
         fragment_count += 1;
@@ -327,6 +332,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
     public void DisplayFragmentabout() {
 
         fragment_count += 1;
@@ -342,10 +348,10 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
-    public void DisplayFragmentContactUS()
-    {
 
-        fragment_count +=1;
+    public void DisplayFragmentContactUS() {
+
+        fragment_count += 1;
 
         fragment_contact_us = Fragment_Contact_Us.newInstance();
 
@@ -358,10 +364,10 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
-    public void DisplayFragmentBankAccount()
-    {
 
-        fragment_count+=1;
+    public void DisplayFragmentBankAccount() {
+
+        fragment_count += 1;
 
         fragment_bank_account = Fragment_Bank_Account.newInstance();
 
@@ -374,6 +380,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+
     public void DisplayFragmentProduct() {
 
         fragment_count += 1;
@@ -405,6 +412,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
     public void onBackPressed() {
         Back();
     }
@@ -418,7 +426,7 @@ public class HomeActivity extends AppCompatActivity {
             if (fragment_home != null && fragment_home.isVisible()) {
                 if (fragment_main != null && fragment_main.isVisible()) {
                     if (userModel == null) {
-                           Common.CreateUserNotSignInAlertDialog(this);
+                        Common.CreateUserNotSignInAlertDialog(this);
                     } else {
                         finish();
                     }
@@ -435,16 +443,17 @@ public class HomeActivity extends AppCompatActivity {
     public void NavigateToSignInActivity(boolean isSignIn) {
 
         Intent intent = new Intent(this, Login_Activity.class);
-        intent.putExtra("sign_up",isSignIn);
+        intent.putExtra("sign_up", isSignIn);
         startActivity(intent);
         finish();
 
     }
+
     public void Logout() {
         final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.show();
         Api.getService(Tags.base_url)
-                .Logout(userModel.getId()+"")
+                .Logout(userModel.getId() + "")
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -513,6 +522,7 @@ public class HomeActivity extends AppCompatActivity {
                 });
 
     }
+
     public void display_Cart() {
         fragment_count += 1;
         fragment_cart = Fragment_Cart.newInstance();
@@ -524,44 +534,53 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
-    public void RefreshActivity(String lang)
-    {
+
+    public void RefreshActivity(String lang) {
         //Log.e("lang",selected_language);
-        Paper.book().write("lang",lang);
-        preferences.create_update_language(this,lang);
+        Paper.book().write("lang", lang);
+        preferences.create_update_language(this, lang);
         preferences.setIsLanguageSelected(this);
-        Language.setNewLocale(this,lang);
+        Language.setNewLocale(this, lang);
 
         new Handler()
                 .postDelayed(new Runnable() {
                     @Override
                     public void run() {
 
-                        Intent intent =  getIntent();
+                        Intent intent = getIntent();
                         finish();
                         startActivity(intent);
                     }
-                },1050);
-
+                }, 1050);
 
 
     }
 
     public void animate(RoundedImageView im_cart, int quantity) {
-        if(fragment_shop_profile!=null&&fragment_shop_profile.isAdded()){
-            fragment_shop_profile.makeFlyAnimation(im_cart,quantity);
+        if (fragment_shop_profile != null && fragment_shop_profile.isAdded()) {
+            fragment_shop_profile.makeFlyAnimation(im_cart, quantity);
         }
     }
 
     public void getamount() {
-        if(fragment_home!=null&&fragment_home.isAdded()){
+        if (fragment_home != null && fragment_home.isAdded()) {
             fragment_home.gettotal();
         }
-        if(fragment_shop_profile!=null&&fragment_shop_profile.isAdded()){
+        if (fragment_shop_profile != null && fragment_shop_profile.isAdded()) {
             fragment_shop_profile.gettotal();
         }
-        if(fragment_shop_product!=null&&fragment_shop_product.isAdded()){
+        if (fragment_shop_product != null && fragment_shop_product.isAdded()) {
             fragment_shop_product.gettotal();
+        }
+    }
+
+    public void refresh() {
+        if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
+            fragment_client_profile.refresh();
+            Back();
+            Back();
+            DisplayFragmentclientprofile();
+
         }
     }
 }

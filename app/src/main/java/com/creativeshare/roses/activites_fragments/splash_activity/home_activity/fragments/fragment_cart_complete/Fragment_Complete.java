@@ -586,9 +586,8 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
                     add_order_models.remove(Send_Data.getIndex());
                     preferences.create_update_order(activity, add_order_models);
                     // Common.CreateSignAlertDialog(activity, getResources().getString(R.string.sucess));
-                    activity.Back();
-                    activity.Back();
-                    activity.DisplayFragmentclientprofile();
+
+                    activity.refresh();
                 } else {
                     Common.CreateSignAlertDialog(activity, getString(R.string.failed));
 

@@ -227,4 +227,13 @@ im_snapchat.setOnClickListener(new View.OnClickListener() {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
     }
+
+    public void refresh() {
+        if(fragment_client_ocasions!=null){
+            fragment_client_ocasions.getOrders();
+        }
+        if(fragment_client_orders!=null){
+            fragment_client_orders.getOrders();
+        }
+    }
 }
