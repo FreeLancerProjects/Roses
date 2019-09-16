@@ -575,7 +575,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void refresh(int type) {
-        if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
+        if (fragment_client_profile != null ) {
             fragment_client_profile.refresh(type);
 
             Back();
