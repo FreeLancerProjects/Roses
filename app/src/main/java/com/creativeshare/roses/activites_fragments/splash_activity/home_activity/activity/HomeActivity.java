@@ -603,8 +603,7 @@ public class HomeActivity extends AppCompatActivity {
             Back();
 
             DisplayFragmentclientprofile();
-            if(fragment_client_profile!=null){
-           fragment_client_profile.refresh(type);}
+
         }
     }
 }
