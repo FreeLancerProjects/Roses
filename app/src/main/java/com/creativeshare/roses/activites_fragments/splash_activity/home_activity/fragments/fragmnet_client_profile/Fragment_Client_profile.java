@@ -228,12 +228,19 @@ im_snapchat.setOnClickListener(new View.OnClickListener() {
         startActivity(intent);
     }
 
-    public void refresh() {
+    public void refresh(int type) {
+        if(type==2){
         if(fragment_client_ocasions!=null){
             fragment_client_ocasions.getOrders();
         }
+        viewPager.setCurrentItem(1);
+        }
+        else {
         if(fragment_client_orders!=null){
             fragment_client_orders.getOrders();
+        }
+            viewPager.setCurrentItem(0);
+
         }
     }
 }
