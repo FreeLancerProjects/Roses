@@ -576,19 +576,35 @@ public class HomeActivity extends AppCompatActivity {
 
     public void refresh(int type) {
         if (fragment_client_profile != null ) {
-            fragment_client_profile.refresh(type);
-
-            Back();
-
-            Back();
             if(fragment_shop_product!=null&&fragment_shop_product.isVisible()){
                 Back();
             }
-            if(fragment_shop_profile!=null&&fragment_shop_profile.isAdded()){
+            if(fragment_shop_profile!=null&&fragment_shop_profile.isVisible()){
                 Back();
             }
-            DisplayFragmentclientprofile();
+            Back();
 
+            Back();
+
+            DisplayFragmentclientprofile();
+            fragment_client_profile.refresh(type);
+
+
+        }
+        else {
+            if(fragment_shop_product!=null&&fragment_shop_product.isVisible()){
+                Back();
+            }
+            if(fragment_shop_profile!=null&&fragment_shop_profile.isVisible()){
+                Back();
+            }
+            Back();
+
+            Back();
+
+            DisplayFragmentclientprofile();
+            if(fragment_client_profile!=null){
+           fragment_client_profile.refresh(type);}
         }
     }
 }
