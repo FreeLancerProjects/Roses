@@ -136,8 +136,9 @@ public class Fragment_Shop_Department extends Fragment {
 
                             }
                         } else {
+                            ll_no_store.setVisibility(View.VISIBLE);
 
-                            Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             try {
                                 Log.e("Error_code", response.code() + "_" + response.errorBody().string());
                             } catch (IOException e) {

@@ -91,5 +91,6 @@
     <string name="no_market_found">لا يوجد متاجر</string>
     <string name="connect">توصيل</string>
     <string name="Search">بحث</string>
+    <string name="Market_Location">موقع المتجر</string>
 
 </resources>

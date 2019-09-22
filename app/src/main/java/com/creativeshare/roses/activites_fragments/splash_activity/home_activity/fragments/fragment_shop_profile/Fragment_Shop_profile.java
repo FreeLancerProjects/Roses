@@ -76,9 +76,10 @@ public class Fragment_Shop_profile extends Fragment {
     private RelativeLayout destView;
     private ImageView imageInstagram, imageTwitter, im_snapchat;
     private SocialDataModel socialDataModel;
-    private LinearLayout ll_service;
+    private LinearLayout ll_service,ll;
     private int amount = 0;
     private TextView textNotify;
+    private double lat,lang;
 
     public static Fragment_Shop_profile newInstance(int id) {
         Fragment_Shop_profile fragment_shop_profile = new Fragment_Shop_profile();
@@ -142,6 +143,7 @@ public class Fragment_Shop_profile extends Fragment {
         destView = view.findViewById(R.id.cartRelativeLayout);
         textNotify = view.findViewById(R.id.textNotify);
         ll_service = view.findViewById(R.id.ll_service);
+        ll=view.findViewById(R.id.ll);
         tabLayout = view.findViewById(R.id.tab_orders);
         viewPager = view.findViewById(R.id.pager);
         tv_name = view.findViewById(R.id.tv_name);
@@ -246,7 +248,14 @@ public class Fragment_Shop_profile extends Fragment {
             }
         });
         ll_service.setVisibility(View.GONE);
-
+ll.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+      Send_Data.setLat(lat);
+      Send_Data.setLang(lang);
+      homeActivity.DisplayFragmentMap();
+    }
+});
         getSocialMedia();
     }
 
@@ -295,6 +304,9 @@ public class Fragment_Shop_profile extends Fragment {
     }
 
     private void updateprofile(Market_model body) {
+        lat=body.getLatitude();
+        lang=body.getLongitude();
+
         tv_name.setText(body.getName());
         tv_address.setText(body.getAddress());
         tv_phone.setText(body.getPhone());

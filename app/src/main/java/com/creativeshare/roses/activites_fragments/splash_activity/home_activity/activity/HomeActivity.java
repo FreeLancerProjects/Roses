@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 
 import com.creativeshare.roses.R;
+import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_shop_profile.Fragment_Map;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_more.Fragment_About;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_more.Fragment_Bank_Account;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_cart_complete.Fragment_Cart;
@@ -73,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_Product_Details fragment_product_detials;
     private Fragment_Markets Fragment_markets;
     private Fragment_Edit_profile fragment_edit_profile;
+    private Fragment_Map fragment_map;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -131,6 +133,21 @@ public class HomeActivity extends AppCompatActivity {
 
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_home, "fragment_home").addToBackStack("fragment_home").commit();
+
+        }
+
+    }
+    public void DisplayFragmentMap() {
+        fragment_count += 1;
+
+            fragment_map = Fragment_Map.newInstance();
+
+
+        if (fragment_map.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_map).commit();
+
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_map, "fragment_map").addToBackStack("fragment_map").commit();
 
         }
 

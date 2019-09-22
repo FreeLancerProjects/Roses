@@ -6,6 +6,23 @@ private static  int cat_id;
 private static int type;
 private static Order_Model.Data data;
     private static int index;
+private static double lat,lang;
+
+    public static double getLat() {
+        return lat;
+    }
+
+    public static void setLat(double lat) {
+        Send_Data.lat = lat;
+    }
+
+    public static double getLang() {
+        return lang;
+    }
+
+    public static void setLang(double lang) {
+        Send_Data.lang = lang;
+    }
 
     public static int getIndex() {
         return index;
