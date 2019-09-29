@@ -129,7 +129,7 @@ public class Fragment_Shop_Offers extends Fragment {
         rec_depart.setAdapter(shop_offers_adapter);
     }
 
-    public void getDepartments() {
+    private void getDepartments() {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
         progBar.setVisibility(View.VISIBLE);
         // rec_sent.setVisibility(View.GONE);
