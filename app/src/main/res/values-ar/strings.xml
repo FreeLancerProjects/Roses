@@ -31,7 +31,6 @@
     <string name="inc_phone_pas">رقم الجوال وا كلمة المرور خطأ</string>
     <string name="inc_phone">رقم الجوال  خطأ</string>
     <string name="inc_pass">كلمة المرور خطأ</string>
-
     <string name="user_not_found">هذا المستخدم لم يسجل من قبل</string>
     <string name="notifications">الاشعارات</string>
     <string name="my_profile">حسابى</string>

@@ -18,7 +18,6 @@ public class Fragment_Upgrade extends Fragment {
 private WebView mWebView;
     public static Fragment_Upgrade newInstance() {
         return new Fragment_Upgrade();
-
     }
     @Nullable
     @Override
