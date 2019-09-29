@@ -43,12 +43,12 @@ import retrofit2.Response;
 public class Fragment_Login extends Fragment  implements OnCountryPickerListener {
     private Button btn_login;
     private ImageView image_phone_code;
-    private TextView tv_skip, tv_sign_up,tv_code;
+    private TextView tv_skip, tv_sign_up,tv_code,tv_upgrade;
     private EditText edt_phone, edt_password;
     private CountryPicker picker;
     private String code = "";
     private String current_language;
-
+    private HomeActivity homeActivity;
     private Login_Activity activity;
     private Preferences preferences;
 
@@ -77,6 +77,7 @@ public class Fragment_Login extends Fragment  implements OnCountryPickerListener
         tv_skip = view.findViewById(R.id.tv_skip);
         tv_sign_up = view.findViewById(R.id.tv_sign_in);
         edt_password = view.findViewById(R.id.edt_password);
+        tv_upgrade=view.findViewById(R.id.tv_upgrade);
         CreateCountryDialog();
         if (current_language.equals("ar")) {
             image_phone_code.setRotation(180.0f);
@@ -105,6 +106,12 @@ public class Fragment_Login extends Fragment  implements OnCountryPickerListener
             @Override
             public void onClick(View v) {
                 checkData();
+            }
+        });
+        tv_upgrade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.DisplayFragmentUpgrade();
             }
         });
     }

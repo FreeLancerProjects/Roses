@@ -1,4 +1,4 @@
-package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragmnet_more;
+package com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.creativeshare.roses.R;
-import com.creativeshare.roses.tags.Tags;
 
 
 public class Fragment_Upgrade extends Fragment {

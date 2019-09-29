@@ -221,6 +221,18 @@ android:tint="@color/colorPrimary"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     />
+                <TextView
+                    android:id="@+id/tv_upgrade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="10dp"
+                    android:text="@string/register_as_a_company"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    />
             </LinearLayout>
             <TextView
                 android:id="@+id/tv_skip"
@@ -238,6 +250,7 @@ android:tint="@color/colorPrimary"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+
                 android:textStyle="bold"
 
                 />

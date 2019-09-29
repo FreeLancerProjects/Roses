@@ -244,7 +244,7 @@ dataList=new ArrayList<>();
         if (pos == 0) {
             tv_title.setText(getResources().getString(R.string.Shops));
         } else if (pos == 1) {
-            tv_title.setText(getResources().getString(R.string.department));
+            tv_title.setText(getResources().getString(R.string.Search));
         } else if (pos == 2) {
             tv_title.setText(getResources().getString(R.string.my_profile));
         } else if (pos == 3) {

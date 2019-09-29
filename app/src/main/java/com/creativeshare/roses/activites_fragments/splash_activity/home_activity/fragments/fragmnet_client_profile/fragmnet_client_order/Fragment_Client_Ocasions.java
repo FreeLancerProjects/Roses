@@ -199,7 +199,7 @@ public class Fragment_Client_Ocasions extends Fragment {
                             client_order_adapter.notifyDataSetChanged();
 
                         } else {
-                            Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             try {
                                 Log.e("Error_code", response.code() + "_" + response.errorBody().string());
                             } catch (IOException e) {

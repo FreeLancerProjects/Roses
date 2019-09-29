@@ -14,6 +14,7 @@ import com.creativeshare.roses.activites_fragments.splash_activity.home_activity
 import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.fragments.Fragment_Language;
 import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.fragments.Fragment_Login;
 import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.fragments.Fragment_Signup;
+import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.fragments.Fragment_Upgrade;
 import com.creativeshare.roses.language.Language;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.tags.Tags;
@@ -25,6 +26,8 @@ public class Login_Activity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private Fragment_Login fragmentLogin;
     private Fragment_Signup fragmentSignup;
+    private Fragment_Upgrade fragment_upgrade;
+
     private Fragment_Language fragment_language;
 
     private int fragment_counter = 0;
@@ -120,6 +123,20 @@ public class Login_Activity extends AppCompatActivity {
             fragmentManager.beginTransaction().show(fragmentSignup).commit();
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragmentSignup, "fragmentSignup").addToBackStack("fragmentSignup").commit();
+        }
+    }
+    public void DisplayFragmentUpgrade()
+    {
+
+        fragment_counter += 1;
+
+        if (fragment_upgrade == null) {
+            fragment_upgrade = Fragment_Upgrade.newInstance();
+        }
+        if (fragment_upgrade.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_upgrade).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_container, fragment_upgrade, "fragment_upgrade").addToBackStack("fragment_upgrade").commit();
         }
     }
 
