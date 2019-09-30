@@ -318,11 +318,11 @@ ll.setOnClickListener(new View.OnClickListener() {
                 marketServices.clear();
                 marketServices.addAll(body.getMarketServices());
                 service_profile_adapter.notifyDataSetChanged();
-                ll_service.setVisibility(View.GONE);
+                ll_service.setVisibility(View.VISIBLE);
 
             } else {
                 rec_service.setVisibility(View.GONE);
-                ll_service.setVisibility(View.VISIBLE);
+                ll_service.setVisibility(View.GONE);
                 // Log.e("kkkk","llllll");
 
             }
