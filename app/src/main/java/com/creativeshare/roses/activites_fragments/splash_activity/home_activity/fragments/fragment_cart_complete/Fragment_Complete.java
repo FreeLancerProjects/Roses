@@ -109,6 +109,7 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
     private double total_cost = 0;
     private DatePickerDialog datePickerDialog;
     private RecyclerView rec_service;
+    private TextView tv_service;
     private Service_Adapter service_adapter;
     private List<Market_model.MarketService> marketServices;
     private Long date;
@@ -152,6 +153,7 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
 
         edt_title = view.findViewById(R.id.edtTitle);
         rec_service = view.findViewById(R.id.rec_service);
+        tv_service=view.findViewById(R.id.tv_service);
         edt_address = view.findViewById(R.id.edtAddress);
         ll_date = view.findViewById(R.id.llStartdate);
         tv1 = view.findViewById(R.id.tv1);
@@ -650,7 +652,13 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
     private void updateprofile(Market_model body) {
         marketServices.clear();
         if (body.getMarketServices() != null) {
+            tv_service.setVisibility(View.VISIBLE);
+            rec_service.setVisibility(View.VISIBLE);
             marketServices.addAll(body.getMarketServices());
+        }
+        else {
+            tv_service.setVisibility(View.GONE);
+            rec_service.setVisibility(View.GONE);
         }
         service_adapter.notifyDataSetChanged();
     }
