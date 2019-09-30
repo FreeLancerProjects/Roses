@@ -158,6 +158,8 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
         ll_date = view.findViewById(R.id.llStartdate);
         tv1 = view.findViewById(R.id.tv1);
         tv2 = view.findViewById(R.id.tv2);
+        tv_service.setVisibility(View.GONE);
+        rec_service.setVisibility(View.GONE);
         rec_service.setDrawingCacheEnabled(true);
         rec_service.setItemViewCacheSize(25);
         rec_service.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
