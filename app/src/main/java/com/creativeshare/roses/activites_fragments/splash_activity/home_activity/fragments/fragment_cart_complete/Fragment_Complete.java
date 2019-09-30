@@ -652,9 +652,14 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
     private void updateprofile(Market_model body) {
         marketServices.clear();
         if (body.getMarketServices() != null) {
+            if(body.getMarketServices().size()>0){
             tv_service.setVisibility(View.VISIBLE);
             rec_service.setVisibility(View.VISIBLE);
-            marketServices.addAll(body.getMarketServices());
+            marketServices.addAll(body.getMarketServices());}
+            else {
+                tv_service.setVisibility(View.GONE);
+                rec_service.setVisibility(View.GONE);
+            }
         }
         else {
             tv_service.setVisibility(View.GONE);
