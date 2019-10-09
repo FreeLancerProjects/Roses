@@ -99,7 +99,7 @@ public class Fragment_Client_profile extends Fragment {
         viewPager = view.findViewById(R.id.pager);
         imageInstagram=view.findViewById(R.id.image_instagram);
         imageTwitter = view.findViewById(R.id.image_twitter);
-        im_snapchat=view.findViewById(R.id.image_snapchat);
+        im_snapchat=view.findViewById(R.id.image_facebook);
         intitfragmentspage();
         pageAdapter = new PageAdapter(getChildFragmentManager());
         pageAdapter.addfragments(fragmentList);

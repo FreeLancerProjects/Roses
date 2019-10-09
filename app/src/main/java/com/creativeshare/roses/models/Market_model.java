@@ -25,6 +25,7 @@ public class Market_model implements Serializable {
     private String email_verified_at;
     private String created_at;
     private String updated_at;
+
     private List<Market_model.MarketService> marketService;
 
     public int getId() {

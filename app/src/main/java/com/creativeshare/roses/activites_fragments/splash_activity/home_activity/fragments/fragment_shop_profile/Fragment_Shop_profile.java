@@ -74,12 +74,13 @@ public class Fragment_Shop_profile extends Fragment {
     private Service_Profile_Adapter service_profile_adapter;
     private List<Market_model.MarketService> marketServices;
     private RelativeLayout destView;
-    private ImageView imageInstagram, imageTwitter, im_snapchat;
+    private ImageView imageInstagram, imageTwitter, im_facebook;
     private SocialDataModel socialDataModel;
     private LinearLayout ll_service,ll;
     private int amount = 0;
     private TextView textNotify;
     private double lat,lang;
+    private Market_model marketmodel;
 
     public static Fragment_Shop_profile newInstance(int id) {
         Fragment_Shop_profile fragment_shop_profile = new Fragment_Shop_profile();
@@ -171,7 +172,7 @@ public class Fragment_Shop_profile extends Fragment {
         rec_service = view.findViewById(R.id.rec_service);
         imageInstagram = view.findViewById(R.id.image_instagram);
         imageTwitter = view.findViewById(R.id.image_twitter);
-        im_snapchat = view.findViewById(R.id.image_snapchat);
+        im_facebook = view.findViewById(R.id.image_facebook);
         rec_service.setDrawingCacheEnabled(true);
         rec_service.setItemViewCacheSize(25);
         rec_service.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
@@ -204,9 +205,9 @@ public class Fragment_Shop_profile extends Fragment {
         imageInstagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (socialDataModel != null) {
-                    if (socialDataModel.getInstagram() != null && !TextUtils.isEmpty(socialDataModel.getInstagram()) && !socialDataModel.getInstagram().equals("0")) {
-                        createSocialIntent(socialDataModel.getInstagram());
+                if (marketmodel != null) {
+                    if (marketmodel.getInstagram() != null && !TextUtils.isEmpty(marketmodel.getInstagram()) && !marketmodel.getInstagram().equals("0")) {
+                        createSocialIntent(marketmodel.getInstagram());
                     } else {
                         Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
                     }
@@ -220,9 +221,9 @@ public class Fragment_Shop_profile extends Fragment {
         imageTwitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (socialDataModel != null) {
-                    if (socialDataModel.getTwitter() != null && !TextUtils.isEmpty(socialDataModel.getTwitter()) && !socialDataModel.getTwitter().equals("0")) {
-                        createSocialIntent(socialDataModel.getTwitter());
+                if (marketmodel != null) {
+                    if (marketmodel.getTwitter() != null && !TextUtils.isEmpty(marketmodel.getTwitter()) && !marketmodel.getTwitter().equals("0")) {
+                        createSocialIntent(marketmodel.getTwitter());
                     } else {
                         Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
                     }
@@ -232,12 +233,12 @@ public class Fragment_Shop_profile extends Fragment {
                 }
             }
         });
-        im_snapchat.setOnClickListener(new View.OnClickListener() {
+        im_facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (socialDataModel != null) {
-                    if (socialDataModel.getSnapchat() != null && !TextUtils.isEmpty(socialDataModel.getSnapchat()) && !socialDataModel.getSnapchat().equals("0")) {
-                        createSocialIntent(socialDataModel.getSnapchat());
+                if (marketmodel != null) {
+                    if (marketmodel.getFacebook() != null && !TextUtils.isEmpty(marketmodel.getFacebook()) && !marketmodel.getFacebook().equals("0")) {
+                        createSocialIntent(marketmodel.getFacebook());
                     } else {
                         Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
                     }
@@ -304,6 +305,7 @@ ll.setOnClickListener(new View.OnClickListener() {
     }
 
     private void updateprofile(Market_model body) {
+        this.marketmodel=body;
         lat=body.getLatitude();
         lang=body.getLongitude();
 

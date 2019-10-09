@@ -187,13 +187,13 @@
                             android:src="@drawable/instagram" />
 
                         <ImageView
-                            android:id="@+id/image_snapchat"
+                            android:id="@+id/image_facebook"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
 
                             android:clickable="false"
                             android:longClickable="false"
-                            android:src="@drawable/ic_snapchat" />
+                            android:src="@drawable/facebook" />
 
 
                     </LinearLayout>
