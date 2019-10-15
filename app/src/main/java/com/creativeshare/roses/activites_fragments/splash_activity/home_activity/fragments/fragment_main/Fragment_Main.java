@@ -124,7 +124,7 @@ public class Fragment_Main extends Fragment {
         rec_markets.setDrawingCacheEnabled(true);
         rec_markets.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         rec_markets.setItemViewCacheSize(25);
-
+rec_markets.setNestedScrollingEnabled(false);
         manager=new LinearLayoutManager((activity), RecyclerView.HORIZONTAL, false);
         gridLayoutManager=new GridLayoutManager(activity,3);
         rec_depart.setLayoutManager(manager);
@@ -371,8 +371,8 @@ progBar.setVisibility(View.GONE);
                 .enqueue(new Callback<Markets_Model>() {
                     @Override
                     public void onResponse(Call<Markets_Model> call, Response<Markets_Model> response) {
-                        dataList.remove(dataList.size() - 1);
-                        catogries_adapter.notifyItemRemoved(dataList.size() - 1);
+                        dataListmarkets.remove(dataList.size() - 1);
+                        market_adapter.notifyItemRemoved(dataListmarkets.size() - 1);
                         isLoading = false;
                         if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
 
@@ -395,7 +395,7 @@ progBar.setVisibility(View.GONE);
                     public void onFailure(Call<Markets_Model> call, Throwable t) {
                         try {
                             dataListmarkets.remove(dataList.size() - 1);
-                            market_adapter.notifyItemRemoved(dataList.size() - 1);
+                            market_adapter.notifyItemRemoved(dataListmarkets.size() - 1);
                             isLoading = false;
                             //    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
                             Log.e("error", t.getMessage());
