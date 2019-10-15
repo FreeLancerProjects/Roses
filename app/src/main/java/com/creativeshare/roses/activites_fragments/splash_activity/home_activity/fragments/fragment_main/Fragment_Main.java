@@ -371,7 +371,7 @@ progBar.setVisibility(View.GONE);
                 .enqueue(new Callback<Markets_Model>() {
                     @Override
                     public void onResponse(Call<Markets_Model> call, Response<Markets_Model> response) {
-                        dataListmarkets.remove(dataList.size() - 1);
+                        dataListmarkets.remove(dataListmarkets.size() - 1);
                         market_adapter.notifyItemRemoved(dataListmarkets.size() - 1);
                         isLoading = false;
                         if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
@@ -394,7 +394,7 @@ progBar.setVisibility(View.GONE);
                     @Override
                     public void onFailure(Call<Markets_Model> call, Throwable t) {
                         try {
-                            dataListmarkets.remove(dataList.size() - 1);
+                            dataListmarkets.remove(dataListmarkets.size() - 1);
                             market_adapter.notifyItemRemoved(dataListmarkets.size() - 1);
                             isLoading = false;
                             //    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
