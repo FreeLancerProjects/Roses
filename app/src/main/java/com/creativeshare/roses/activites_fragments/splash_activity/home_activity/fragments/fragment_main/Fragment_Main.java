@@ -52,7 +52,7 @@ public class Fragment_Main extends Fragment {
     private int current_page = 0,NUM_PAGES;
     private ProgressBar progBar, progBarAds;
     private RecyclerView rec_depart,rec_markets;
-    private List<Catogries_Model.Data> dataList;
+    private List<Catogries_Model.Data> catogrylist;
     private Catogries_Adapter catogries_adapter;
     private LinearLayoutManager manager;
     private boolean isLoading = false;
@@ -101,7 +101,7 @@ public class Fragment_Main extends Fragment {
         }, 3000, 3000);
     }
     private void initview(View view) {
-        dataList=new ArrayList<>();
+        catogrylist =new ArrayList<>();
         dataListmarkets=new ArrayList<>();
         activity = (HomeActivity) getActivity();
 
@@ -129,7 +129,7 @@ rec_markets.setNestedScrollingEnabled(false);
         gridLayoutManager=new GridLayoutManager(activity,3);
         rec_depart.setLayoutManager(manager);
         rec_markets.setLayoutManager(gridLayoutManager);
-        catogries_adapter=new Catogries_Adapter(dataList,activity,this);
+        catogries_adapter=new Catogries_Adapter(catogrylist,activity,this);
         market_adapter=new Market_Adapter(dataListmarkets,activity,this);
       /*  rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -141,8 +141,8 @@ rec_markets.setNestedScrollingEnabled(false);
                     //  Log.e("msg", total_item + "  " + last_item_pos);
                     if (last_item_pos >= (total_item - 5) && !isLoading ) {
                         isLoading = true;
-                        dataList.add(null);
-                        catogries_adapter.notifyItemInserted(dataList.size() - 1);
+                        catogrylist.add(null);
+                        catogries_adapter.notifyItemInserted(catogrylist.size() - 1);
                         int page = current_page_depart + 1;
 
                         loadMore(page);
@@ -238,8 +238,8 @@ rec_markets.setNestedScrollingEnabled(false);
                     public void onResponse(Call<Catogries_Model> call, Response<Catogries_Model> response) {
                      //   progBar.setVisibility(View.GONE);
                         if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
-                            dataList.clear();
-                            dataList.addAll(response.body().getData());
+                            catogrylist.clear();
+                            catogrylist.addAll(response.body().getData());
                             if (response.body().getData().size() > 0) {
                                 // rec_sent.setVisibility(View.VISIBLE);
 
@@ -282,12 +282,12 @@ rec_markets.setNestedScrollingEnabled(false);
                 .enqueue(new Callback<Catogries_Model>() {
                     @Override
                     public void onResponse(Call<Catogries_Model> call, Response<Catogries_Model> response) {
-                        dataList.remove(dataList.size() - 1);
-                        catogries_adapter.notifyItemRemoved(dataList.size() - 1);
+                        catogrylist.remove(catogrylist.size() - 1);
+                        catogries_adapter.notifyItemRemoved(catogrylist.size() - 1);
                         isLoading = false;
                         if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
 
-                            dataList.addAll(response.body().getData());
+                            catogrylist.addAll(response.body().getData());
                             // categories.addAll(response.body().getCategories());
                             current_page_depart = response.body().getCurrent_page();
                             catogries_adapter.notifyDataSetChanged();
@@ -305,8 +305,8 @@ rec_markets.setNestedScrollingEnabled(false);
                     @Override
                     public void onFailure(Call<Catogries_Model> call, Throwable t) {
                         try {
-                            dataList.remove(dataList.size() - 1);
-                            catogries_adapter.notifyItemRemoved(dataList.size() - 1);
+                            catogrylist.remove(catogrylist.size() - 1);
+                            catogries_adapter.notifyItemRemoved(catogrylist.size() - 1);
                             isLoading = false;
                             //    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
                             Log.e("error", t.getMessage());
