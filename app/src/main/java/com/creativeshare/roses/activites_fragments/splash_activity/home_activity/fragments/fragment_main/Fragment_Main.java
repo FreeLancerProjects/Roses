@@ -126,7 +126,7 @@ public class Fragment_Main extends Fragment {
         rec_markets.setDrawingCacheEnabled(true);
         rec_markets.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         rec_markets.setItemViewCacheSize(25);
-        rec_markets.setNestedScrollingEnabled(false);
+        rec_markets.setNestedScrollingEnabled(true);
         manager = new LinearLayoutManager((activity), RecyclerView.HORIZONTAL, false);
         gridLayoutManager = new GridLayoutManager(activity, 3);
         rec_depart.setLayoutManager(manager);
