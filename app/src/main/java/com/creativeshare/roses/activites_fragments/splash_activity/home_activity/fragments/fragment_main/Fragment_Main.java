@@ -49,9 +49,9 @@ public class Fragment_Main extends Fragment {
     private ViewPager mPager;
     private TabLayout indicator;
     private HomeActivity activity;
-    private int current_page = 0,NUM_PAGES;
+    private int current_page = 0, NUM_PAGES;
     private ProgressBar progBar, progBarAds;
-    private RecyclerView rec_depart,rec_markets;
+    private RecyclerView rec_depart, rec_markets;
     private List<Catogries_Model.Data> catogrylist;
     private Catogries_Adapter catogries_adapter;
     private LinearLayoutManager manager;
@@ -63,6 +63,7 @@ public class Fragment_Main extends Fragment {
     private boolean isLoadingmarket = false;
     private int current_page_market = 1;
     private LinearLayout ll_no_store;
+
     public static Fragment_Main newInstance() {
         Fragment_Main fragment = new Fragment_Main();
 
@@ -73,20 +74,20 @@ public class Fragment_Main extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-    View view= inflater.inflate(R.layout.fragment__main, container, false);
-    initview(view);
-    get_slider();
-    change_slide_image();
-    getDepartments();
-    getMarkets();
-    return view;
+        View view = inflater.inflate(R.layout.fragment__main, container, false);
+        initview(view);
+        get_slider();
+        change_slide_image();
+        getDepartments();
+        getMarkets();
+        return view;
     }
 
     private void change_slide_image() {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (current_page==NUM_PAGES){
+                if (current_page == NUM_PAGES) {
                     current_page = 0;
                 }
                 mPager.setCurrentItem(current_page++, true);
@@ -100,17 +101,18 @@ public class Fragment_Main extends Fragment {
             }
         }, 3000, 3000);
     }
+
     private void initview(View view) {
-        catogrylist =new ArrayList<>();
-        dataListmarkets=new ArrayList<>();
+        catogrylist = new ArrayList<>();
+        dataListmarkets = new ArrayList<>();
         activity = (HomeActivity) getActivity();
 
         mPager = view.findViewById(R.id.pager);
         indicator = view.findViewById(R.id.tablayout);
         progBar = view.findViewById(R.id.progBar2);
-        ll_no_store=view.findViewById(R.id.ll_no_store);
-        rec_depart=view.findViewById(R.id.rec_depart);
-        rec_markets=view.findViewById(R.id.rec_stores);
+        ll_no_store = view.findViewById(R.id.ll_no_store);
+        rec_depart = view.findViewById(R.id.rec_depart);
+        rec_markets = view.findViewById(R.id.rec_stores);
 
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
@@ -124,13 +126,13 @@ public class Fragment_Main extends Fragment {
         rec_markets.setDrawingCacheEnabled(true);
         rec_markets.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         rec_markets.setItemViewCacheSize(25);
-rec_markets.setNestedScrollingEnabled(false);
-        manager=new LinearLayoutManager((activity), RecyclerView.HORIZONTAL, false);
-        gridLayoutManager=new GridLayoutManager(activity,3);
+        rec_markets.setNestedScrollingEnabled(false);
+        manager = new LinearLayoutManager((activity), RecyclerView.HORIZONTAL, false);
+        gridLayoutManager = new GridLayoutManager(activity, 3);
         rec_depart.setLayoutManager(manager);
         rec_markets.setLayoutManager(gridLayoutManager);
-        catogries_adapter=new Catogries_Adapter(catogrylist,activity,this);
-        market_adapter=new Market_Adapter(dataListmarkets,activity,this);
+        catogries_adapter = new Catogries_Adapter(catogrylist, activity, this);
+        market_adapter = new Market_Adapter(dataListmarkets, activity, this);
       /*  rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -155,11 +157,11 @@ rec_markets.setNestedScrollingEnabled(false);
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (dy> 0) {
+                if (dy > 0) {
                     int total_item = market_adapter.getItemCount();
                     int last_item_pos = gridLayoutManager.findLastCompletelyVisibleItemPosition();
                     //  Log.e("msg", total_item + "  " + last_item_pos);
-                    if (last_item_pos >= (total_item - 15) && !isLoading ) {
+                    if (last_item_pos >= (total_item - 15) && !isLoading) {
                         isLoading = true;
                         dataListmarkets.add(null);
                         market_adapter.notifyItemInserted(dataListmarkets.size() - 1);
@@ -180,20 +182,18 @@ rec_markets.setNestedScrollingEnabled(false);
             @Override
             public void onResponse(Call<Slider_Model> call, Response<Slider_Model> response) {
                 progBarAds.setVisibility(View.GONE);
-                if(response.isSuccessful()){
-                    if(response.body().getData().size()>0){
-                        NUM_PAGES=response.body().getData().size();
-                        slidingImage__adapter = new SlidingImage_Adapter(activity,response.body().getData());
+                if (response.isSuccessful()) {
+                    if (response.body().getData().size() > 0) {
+                        NUM_PAGES = response.body().getData().size();
+                        slidingImage__adapter = new SlidingImage_Adapter(activity, response.body().getData());
                         mPager.setAdapter(slidingImage__adapter);
                         indicator.setupWithViewPager(mPager);
-                    }
-                    else {
+                    } else {
                         //    error.setText("No data Found");
                         // recc.setVisibility(View.GONE);
                         mPager.setVisibility(View.GONE);
                     }
-                }
-                else if (response.code() == 404) {
+                } else if (response.code() == 404) {
                     //  error.setText(activity.getString(R.string.no_data));
                     //recc.setVisibility(View.GONE);
                     mPager.setVisibility(View.GONE);
@@ -217,8 +217,7 @@ rec_markets.setNestedScrollingEnabled(false);
                     //error.setText(activity.getString(R.string.faild));
                     //recc.setVisibility(View.GONE);
                     mPager.setVisibility(View.GONE);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
 
                 }
 
@@ -226,6 +225,7 @@ rec_markets.setNestedScrollingEnabled(false);
         });
 
     }
+
     public void getDepartments() {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
 
@@ -236,19 +236,19 @@ rec_markets.setNestedScrollingEnabled(false);
                 .enqueue(new Callback<Catogries_Model>() {
                     @Override
                     public void onResponse(Call<Catogries_Model> call, Response<Catogries_Model> response) {
-                     //   progBar.setVisibility(View.GONE);
+                        //   progBar.setVisibility(View.GONE);
                         if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                             catogrylist.clear();
                             catogrylist.addAll(response.body().getData());
                             if (response.body().getData().size() > 0) {
                                 // rec_sent.setVisibility(View.VISIBLE);
 
-                             //   ll_no_order.setVisibility(View.GONE);
+                                //   ll_no_order.setVisibility(View.GONE);
                                 catogries_adapter.notifyDataSetChanged();
                                 //   total_page = response.body().getMeta().getLast_page();
 
                             } else {
-                              //  ll_no_order.setVisibility(View.VISIBLE);
+                                //  ll_no_order.setVisibility(View.VISIBLE);
 
                             }
                         } else {
@@ -275,6 +275,7 @@ rec_markets.setNestedScrollingEnabled(false);
                 });
 
     }
+
     /*
     private void loadMore(int page) {
         Api.getService(Tags.base_url)
@@ -333,12 +334,12 @@ rec_markets.setNestedScrollingEnabled(false);
                             if (response.body().getData().size() > 0) {
                                 // rec_sent.setVisibility(View.VISIBLE);
 
-                                  ll_no_store.setVisibility(View.GONE);
+                                ll_no_store.setVisibility(View.GONE);
                                 market_adapter.notifyDataSetChanged();
                                 //   total_page = response.body().getMeta().getLast_page();
 
                             } else {
-                                 ll_no_store.setVisibility(View.VISIBLE);
+                                ll_no_store.setVisibility(View.VISIBLE);
 
                             }
                         } else {
@@ -356,7 +357,7 @@ rec_markets.setNestedScrollingEnabled(false);
                     public void onFailure(Call<Markets_Model> call, Throwable t) {
                         try {
 
-progBar.setVisibility(View.GONE);
+                            progBar.setVisibility(View.GONE);
                             //    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
                             Log.e("error", t.getMessage());
                         } catch (Exception e) {
@@ -365,6 +366,7 @@ progBar.setVisibility(View.GONE);
                 });
 
     }
+
     private void loadMoremarket(int page) {
         Api.getService(Tags.base_url)
                 .getMarkets(page)

@@ -206,7 +206,7 @@ public class Fragment_Shop_profile extends Fragment {
             @Override
             public void onClick(View view) {
                 if (marketmodel != null) {
-                    if (marketmodel.getInstagram() != null && !TextUtils.isEmpty(marketmodel.getInstagram()) && !marketmodel.getInstagram().equals("0")) {
+                    if (marketmodel.getInstagram() != null && !TextUtils.isEmpty(marketmodel.getInstagram()) && !marketmodel.getInstagram().equals("0")&& !marketmodel.getInstagram().equals("#")) {
                         createSocialIntent(marketmodel.getInstagram());
                     } else {
                         Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
@@ -222,7 +222,7 @@ public class Fragment_Shop_profile extends Fragment {
             @Override
             public void onClick(View view) {
                 if (marketmodel != null) {
-                    if (marketmodel.getTwitter() != null && !TextUtils.isEmpty(marketmodel.getTwitter()) && !marketmodel.getTwitter().equals("0")) {
+                    if (marketmodel.getTwitter() != null && !TextUtils.isEmpty(marketmodel.getTwitter()) && !marketmodel.getTwitter().equals("0")&& !marketmodel.getTwitter().equals("#")) {
                         createSocialIntent(marketmodel.getTwitter());
                     } else {
                         Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
@@ -237,7 +237,7 @@ public class Fragment_Shop_profile extends Fragment {
             @Override
             public void onClick(View view) {
                 if (marketmodel != null) {
-                    if (marketmodel.getFacebook() != null && !TextUtils.isEmpty(marketmodel.getFacebook()) && !marketmodel.getFacebook().equals("0")) {
+                    if (marketmodel.getFacebook() != null && !TextUtils.isEmpty(marketmodel.getFacebook()) && !marketmodel.getFacebook().equals("0")&& !marketmodel.getFacebook().equals("#")) {
                         createSocialIntent(marketmodel.getFacebook());
                     } else {
                         Common.CreateSignAlertDialog(homeActivity, getString(R.string.not_avail));
