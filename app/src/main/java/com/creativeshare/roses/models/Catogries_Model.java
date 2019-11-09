@@ -4,12 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Catogries_Model implements Serializable {
-private int current_page;
 private List<Data> data;
 
-    public int getCurrent_page() {
-        return current_page;
-    }
 
     public List<Data> getData() {
         return data;

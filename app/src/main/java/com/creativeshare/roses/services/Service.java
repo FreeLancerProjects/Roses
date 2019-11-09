@@ -57,6 +57,7 @@ public interface Service {
     );
     @GET("api/slider")
     Call<Slider_Model> get_slider();
+
     @GET("api/categories")
     Call<Catogries_Model> getDepartment(
 
