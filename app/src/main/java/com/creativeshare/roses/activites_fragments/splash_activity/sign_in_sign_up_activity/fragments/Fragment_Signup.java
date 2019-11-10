@@ -177,7 +177,10 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
             edt_name.setError(null);
             edt_phone.setError(null);
             edt_password.setError(null);
-
+            if (m_phone.startsWith("0"))
+            {
+                m_phone=m_phone.replaceFirst("0","");
+            }
 
             sign_up(m_name, code, m_phone,  m_password);
 

@@ -165,7 +165,11 @@ public class Fragment_Login extends Fragment  implements OnCountryPickerListener
             edt_phone.setError(null);
             edt_password.setError(null);
             Common.CloseKeyBoard(activity, edt_phone);
-
+Log.e("mmm",m_phone);
+            if (m_phone.startsWith("0"))
+            {
+                m_phone=m_phone.replaceFirst("0","");
+            }
             Login(m_phone, m_password);
 
         } else {
