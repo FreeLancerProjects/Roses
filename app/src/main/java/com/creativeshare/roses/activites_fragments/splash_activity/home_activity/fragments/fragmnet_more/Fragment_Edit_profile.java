@@ -231,7 +231,7 @@ public class Fragment_Edit_profile extends Fragment {
 
 
        // Log.e("data",name+" "+phone+" "+phonecode+" "+pass+" "+uri.toString());
-if(uri==null){
+if(uri!=null){
         try {
 
             RequestBody token_part = Common.getRequestBodyText(userModel.getId() + "");
