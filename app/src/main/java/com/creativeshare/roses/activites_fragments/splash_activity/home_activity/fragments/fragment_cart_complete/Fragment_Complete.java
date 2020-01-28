@@ -593,7 +593,7 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
 
                     activity.refresh(Send_Data.getType());
                 } else {
-                    Common.CreateSignAlertDialog(activity, getString(R.string.failed));
+                   // Common.CreateSignAlertDialog(activity, getString(R.string.failed));
 
                     try {
                         Log.e("Error_code", response.code() + "_" + response.errorBody().string());
