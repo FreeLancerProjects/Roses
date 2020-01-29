@@ -91,5 +91,11 @@
     <string name="connect">توصيل</string>
     <string name="Search">بحث</string>
     <string name="Market_Location">موقع المتجر</string>
+    <string name="verfication_code">كود التفعيل</string>
+    <string name="a_message_will_appear_on_your_phone_by_barely_waiting_your_seconds">ستظهر رسالة على هاتفك بالكاد تنتظر ثواني</string>
+    <string name="confirm">تحقق</string>
+    <string name="image">الصوره</string>
+    <string name="forgot_password">هل نسيت كلمة المرور</string>
+    <string name="change">تغيير</string>
 
 </resources>

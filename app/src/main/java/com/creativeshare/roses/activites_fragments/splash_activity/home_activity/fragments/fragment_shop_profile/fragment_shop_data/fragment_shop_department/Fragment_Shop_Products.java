@@ -2,6 +2,7 @@ package com.creativeshare.roses.activites_fragments.splash_activity.home_activit
 
 import android.animation.Animator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.Animate.CircleAnimationUtil;
 import com.creativeshare.roses.R;
+import com.creativeshare.roses.activites_fragments.activity_image.Order_Image_Activity;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.Shop_Products_Adapter;
 import com.creativeshare.roses.models.Add_Order_Model;
@@ -401,5 +403,10 @@ public class Fragment_Shop_Products extends Fragment {
             textNotify.setVisibility(View.GONE);
         }
     }
+    public void showimage(Product_Model.Data data) {
+        Intent intent = new Intent(activity, Order_Image_Activity.class);
+        intent.putExtra("detials",data);
 
+        startActivityForResult(intent, 1003);
+    }
 }

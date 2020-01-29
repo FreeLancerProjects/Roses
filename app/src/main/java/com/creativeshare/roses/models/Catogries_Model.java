@@ -11,7 +11,7 @@ private List<Data> data;
         return data;
     }
 
-    public  class Data implements Serializable
+    public static class Data implements Serializable
     {
        private int id;
            private String ar_title;
@@ -20,6 +20,12 @@ private List<Data> data;
             private String is_deleted;
             private String created_at;
             private String updated_at;
+
+        public Data(int id, String ar_title, String en_title) {
+            this.id = id;
+            this.ar_title = ar_title;
+            this.en_title = en_title;
+        }
 
         public int getId() {
             return id;

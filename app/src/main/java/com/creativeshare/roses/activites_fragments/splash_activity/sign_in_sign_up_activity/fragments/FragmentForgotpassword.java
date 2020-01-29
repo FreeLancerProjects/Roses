@@ -1,13 +1,11 @@
 package com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.fragments;
 
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +17,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.activity.Login_Activity;
 import com.creativeshare.roses.models.UserModel;
-import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
@@ -40,66 +36,43 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Fragment_Signup extends Fragment implements OnCountryPickerListener {
-
-
-    private ImageView image_back, image_phone_code;
-    private EditText edt_name, edt_phone, edt_password;
-    //edt_email,
+public class FragmentForgotpassword extends Fragment  implements OnCountryPickerListener {
+    private Button btn_login;
+    private ImageView image_phone_code;
     private TextView tv_code;
-    private Button btn_sign_up;
+    private EditText edt_phone;
     private CountryPicker picker;
-    private Login_Activity activity;
-    private String current_language;
     private String code = "";
-    private Preferences preferences;
+    private String current_language;
+    private Login_Activity activity;
 
+    public static FragmentForgotpassword newInstance() {
 
-    public static Fragment_Signup newInstance() {
-        return new Fragment_Signup();
+        return new FragmentForgotpassword();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_signup, container, false);
+        View view = inflater.inflate(R.layout.fragment_forgetpassword, container, false);
         initView(view);
         return view;
     }
 
-    private void initView(View view) {
+    private void initView(final View view) {
         activity = (Login_Activity) getActivity();
         Paper.init(activity);
         current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        btn_login = view.findViewById(R.id.btn_login);
+        image_phone_code=view.findViewById(R.id.image_phone_code);
+        edt_phone=view.findViewById(R.id.edt_phone);
+        tv_code=view.findViewById(R.id.tv_code);
 
-        image_back = view.findViewById(R.id.image_back);
-        image_phone_code = view.findViewById(R.id.image_phone_code);
-
+        CreateCountryDialog();
         if (current_language.equals("ar")) {
             image_phone_code.setRotation(180.0f);
         }
-        else {
-            image_back.setRotation(180.0f);
-
-        }
-
-
-        edt_name = view.findViewById(R.id.edt_name);
-        edt_phone = view.findViewById(R.id.edt_phone);
-        tv_code = view.findViewById(R.id.tv_code);
-    //    edt_email = view.findViewById(R.id.edt_email);
-        edt_password = view.findViewById(R.id.edt_password);
-        btn_sign_up = view.findViewById(R.id.btn_sign_up);
-
-        CreateCountryDialog();
-
-        image_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.Back();
-            }
-        });
-
 
         image_phone_code.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,14 +80,12 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
                 picker.showDialog(activity);
             }
         });
-
-        btn_sign_up.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkData();
             }
         });
-
 
     }
     private void updateUi(Country country) {
@@ -124,7 +95,6 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
 
 
     }
-
     private void CreateCountryDialog() {
         CountryPicker.Builder builder = new CountryPicker.Builder()
                 .canSearch(true)
@@ -157,44 +127,26 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
     public void onSelectCountry(Country country) {
         updateUi(country);
     }
+ private void checkData() {
+     String m_phone = edt_phone.getText().toString().trim();
 
-
-
-    private void checkData() {
-
-        String m_name = edt_name.getText().toString().trim();
-        String m_phone = edt_phone.getText().toString().trim();
-        String m_password = edt_password.getText().toString().trim();
-
-        if (!TextUtils.isEmpty(m_name) &&
-                !TextUtils.isEmpty(m_phone) &&
-
-                !TextUtils.isEmpty(m_password) &&
+        if (!TextUtils.isEmpty(m_phone) &&
                 !TextUtils.isEmpty(code)
-
         ) {
-            Common.CloseKeyBoard(activity, edt_name);
-            edt_name.setError(null);
             edt_phone.setError(null);
-            edt_password.setError(null);
+            Common.CloseKeyBoard(activity, edt_phone);
+Log.e("mmm",m_phone);
             if (m_phone.startsWith("0"))
             {
                 m_phone=m_phone.replaceFirst("0","");
             }
-
-            sign_up(m_name, code, m_phone,  m_password);
+            forgotpass(m_phone);
 
         } else {
-            if (TextUtils.isEmpty(m_name)) {
-               edt_name.setError(getString(R.string.field_req));
-            } else {
-                edt_name.setError(null);
-
-            }
 
 
             if (TextUtils.isEmpty(m_phone)) {
-                edt_phone.setError(getString(R.string.field_req));
+            //    edt_username.setError(getString(R.string.field_req));
             } else {
                 edt_phone.setError(null);
 
@@ -203,32 +155,23 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
 
 
 
-            if (TextUtils.isEmpty(m_password)) {
-                edt_password.setError(getString(R.string.field_req));
-            } else {
-                edt_password.setError(null);
-
-            }
-
-
             if (TextUtils.isEmpty(code)) {
                 tv_code.setError(getString(R.string.field_req));
             } else {
                 tv_code.setError(null);
 
             }
-
         }
-
     }
 
-
-  private void sign_up(String m_name, String code, String m_phone,  String m_password) {
+    private void forgotpass(String m_phone) {
         final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
+        Log.e("mmm",m_phone+" "+code);
+
         Api.getService(Tags.base_url)
-                .Signup( m_name, m_phone, code.replace("+", "00"), "1", m_password)
+                .forgot( m_phone, code.replace("+","00"))
                 .enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -236,8 +179,11 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
                         if (response.isSuccessful()&&response.body()!=null) {
 
 
-                            activity.sendverficationcode(m_phone,code,response.body(),0);
-                        }  else {
+                            activity.sendverficationcode(m_phone,code,response.body(),1);
+                        } else if (response.code() == 404) {
+                            Common.CreateSignAlertDialog(activity,getString(R.string.user_not_found));
+                        } else {
+                           // Common.CreateSignAlertDialog(activity,getString(R.string.inc_phone_pas));
 
                             try {
                                 Log.e("Error_code",response.code()+"_"+response.errorBody().string());
@@ -258,6 +204,7 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
                     }
                 });
     }
+
 
 
 

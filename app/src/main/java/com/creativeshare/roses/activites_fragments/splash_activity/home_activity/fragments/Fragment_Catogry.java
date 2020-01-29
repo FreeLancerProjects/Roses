@@ -112,19 +112,16 @@ public class Fragment_Catogry extends Fragment implements OnMapReadyCallback {
                         //   progBar.setVisibility(View.GONE);
                         if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                             dataList.clear();
+                            dataList.add(new Catogries_Model.Data(0,"الكل","all"));
                             dataList.addAll(response.body().getData());
-                            if (response.body().getData().size() > 0) {
                                 // rec_sent.setVisibility(View.VISIBLE);
 
                                 //   ll_no_order.setVisibility(View.GONE);
                                 catogries_adapter.notifyDataSetChanged();
-                                getMarkets(response.body().getData().get(0).getId());
+                                getMarkets(dataList.get(0).getId());
                                 //   total_page = response.body().getMeta().getLast_page();
 
-                            } else {
-                                //  ll_no_order.setVisibility(View.VISIBLE);
 
-                            }
                         } else {
 
                         //    Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();

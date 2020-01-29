@@ -43,7 +43,7 @@ import retrofit2.Response;
 public class Fragment_Login extends Fragment  implements OnCountryPickerListener {
     private Button btn_login;
     private ImageView image_phone_code;
-    private TextView tv_skip, tv_sign_up,tv_code,tv_upgrade;
+    private TextView tv_skip, tv_sign_up,tv_code,tv_upgrade,tv_newpass;
     private EditText edt_phone, edt_password;
     private CountryPicker picker;
     private String code = "";
@@ -78,6 +78,8 @@ public class Fragment_Login extends Fragment  implements OnCountryPickerListener
         tv_sign_up = view.findViewById(R.id.tv_sign_in);
         edt_password = view.findViewById(R.id.edt_password);
         tv_upgrade=view.findViewById(R.id.tv_upgrade);
+        tv_newpass=view.findViewById(R.id.tv_newpass);
+
         CreateCountryDialog();
         if (current_language.equals("ar")) {
             image_phone_code.setRotation(180.0f);
@@ -112,6 +114,12 @@ public class Fragment_Login extends Fragment  implements OnCountryPickerListener
             @Override
             public void onClick(View v) {
                 activity.DisplayFragmentUpgrade();
+            }
+        });
+        tv_newpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.DisplayFragmentForgotPass();
             }
         });
     }
@@ -212,9 +220,8 @@ Log.e("mmm",m_phone);
                         dialog.dismiss();
                         if (response.isSuccessful()&&response.body()!=null) {
 
-                            preferences = Preferences.getInstance();
-                            preferences.create_update_userdata(activity,response.body());
-                            activity.NavigateToHomeActivity();
+
+                            activity.sendverficationcode(m_phone,code,response.body(),0);
                         } else if (response.code() == 404) {
                             Common.CreateSignAlertDialog(activity,getString(R.string.user_not_found));
                         } else {

@@ -95,6 +95,15 @@ pr=Preferences.getInstance();
                     }
                 }
             });
+            myHolder.im_offer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(fragment instanceof  Fragment_Shop_Products) {
+                        fragment_shop_products = (Fragment_Shop_Products) fragment;
+                        fragment_shop_products.showimage(data.get(holder.getLayoutPosition()));
+                    }
+                }
+            });
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_cart);
 
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_offer);

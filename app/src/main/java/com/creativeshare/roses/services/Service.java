@@ -51,9 +51,24 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/login")
     Call<UserModel> Signin(
+                    @Field("phone") String phone,
+                    @Field("phone_code") String phone_code,
+                    @Field("password") String password
+            );
+    @FormUrlEncoded
+    @POST("api/checkUserPhone")
+    Call<UserModel> forgot(
             @Field("phone") String phone,
-            @Field("phone_code") String phone_code,
-            @Field("password") String password
+            @Field("phone_code") String phone_code
+    );
+    @FormUrlEncoded
+    @POST("api/changePassword")
+    Call<ResponseBody> NewPass(
+
+            @Field("password") String password,
+            @Field("user_id") String user_id
+
+
     );
     @GET("api/slider")
     Call<Slider_Model> get_slider();

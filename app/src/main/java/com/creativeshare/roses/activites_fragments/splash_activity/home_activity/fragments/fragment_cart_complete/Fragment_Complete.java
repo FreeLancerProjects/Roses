@@ -125,11 +125,11 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_complete, container, false);
-        updateUI();
+       // updateUI();
         intitview(view);
         gettotal();
         getsinglemarket();
-        CheckPermission();
+        //CheckPermission();
         // Inflate the layout for this fragment
 
         return view;
@@ -167,19 +167,19 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
         rec_service.setLayoutManager(new GridLayoutManager(activity, 1));
         rec_service.setAdapter(service_adapter);
         tv_date = view.findViewById(R.id.tvStartDate);
-        edt_address.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    String query = edt_address.getText().toString();
-                    if (!TextUtils.isEmpty(query)) {
-                        Search(query);
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
+//        edt_address.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+//                if (i == EditorInfo.IME_ACTION_SEARCH) {
+//                    String query = edt_address.getText().toString();
+//                    if (!TextUtils.isEmpty(query)) {
+//                        Search(query);
+//                        return true;
+//                    }
+//                }
+//                return false;
+//            }
+//        });
         if (Send_Data.getType() == 1) {
             tv1.setVisibility(View.GONE);
             tv2.setVisibility(View.GONE);
@@ -259,6 +259,7 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
         Common.CloseKeyBoard(activity, edt_address);
         String title = edt_title.getText().toString();
         String dated = tv_date.getText().toString();
+        formated_address=edt_address.getText().toString();
         List<Add_Order_Model.Services> services = new ArrayList<>();
         for (int i = 0; i < services.size(); i++) {
             View view = rec_service.getChildAt(i);
@@ -270,10 +271,14 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
             }
         }
         if (Send_Data.getType() == 1) {
-            if (!TextUtils.isEmpty(dated) && !TextUtils.isEmpty(formated_address)) {
+            if (!TextUtils.isEmpty(dated)
+                   // && !TextUtils.isEmpty(formated_address)
+            ) {
                 tv_date.setError(null);
-                edt_address.setError(null);
-
+                //edt_address.setError(null);
+if(formated_address==null){
+    formated_address="";
+}
                 add_order_model1.setAddress(formated_address);
                 add_order_model1.setLatitude(lat);
                 add_order_model1.setLongitude(lang);
@@ -294,11 +299,13 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
                 }
             }
         } else {
-            if (!TextUtils.isEmpty(dated) && !TextUtils.isEmpty(formated_address) && !TextUtils.isEmpty(title)) {
+            if (!TextUtils.isEmpty(dated) //&& !TextUtils.isEmpty(formated_address)
+                    && !TextUtils.isEmpty(title)) {
 
-
+                if(formated_address==null){
+                    formated_address="";
+                }
                 tv_date.setError(null);
-                edt_address.setError(null);
                 edt_title.setError(null);
                 add_order_model1.setAddress(formated_address);
                 add_order_model1.setLatitude(lat);
@@ -462,8 +469,8 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
 
     private void updateUI() {
 
-        SupportMapFragment fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        fragment.getMapAsync(this);
+//        SupportMapFragment fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+//        fragment.getMapAsync(this);
 
     }
 
@@ -499,9 +506,9 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
 
                             if (response.body().getCandidates().size() > 0) {
 
-                                formated_address = response.body().getCandidates().get(0).getFormatted_address().replace("Unnamed Road,", "");
+                               // formated_address = response.body().getCandidates().get(0).getFormatted_address().replace("Unnamed Road,", "");
                                 //place_id = response.body().getCandidates().get(0).getPlace_id();
-                                edt_address.setText(formated_address);
+                                //edt_address.setText(formated_address);
                                 AddMarker(response.body().getCandidates().get(0).getGeometry().getLocation().getLat(), response.body().getCandidates().get(0).getGeometry().getLocation().getLng());
                             }
                         } else {
@@ -542,9 +549,9 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
 
 
                             if (response.body().getResults().size() > 0) {
-                                formated_address = response.body().getResults().get(0).getFormatted_address().replace("Unnamed Road,", "");
+                                //formated_address = response.body().getResults().get(0).getFormatted_address().replace("Unnamed Road,", "");
                                 // address.setText(formatedaddress);
-                                edt_address.setText(formated_address);
+                               // edt_address.setText(formated_address);
                                 AddMarker(lat, lng);
                                 //place_id = response.body().getCandidates().get(0).getPlace_id();
                                 //   Log.e("kkk", formatedaddress);
@@ -629,7 +636,7 @@ public class Fragment_Complete extends Fragment implements GoogleApiClient.OnCon
                             updateprofile(response.body());
 
                         } else {
-                            Common.CreateSignAlertDialog(activity, getString(R.string.failed));
+                           // Common.CreateSignAlertDialog(activity, getString(R.string.failed));
 
                             try {
                                 Log.e("Error_code", response.code() + "_" + response.errorBody().string());
