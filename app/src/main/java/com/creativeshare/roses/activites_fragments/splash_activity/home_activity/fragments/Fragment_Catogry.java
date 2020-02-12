@@ -262,7 +262,7 @@ mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
         marker.setTag(index);
         marker.showInfoWindow();
         if(index==0) {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lang), zoom));
+          //  mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lang), zoom));
         }
     }
 

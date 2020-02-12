@@ -97,5 +97,6 @@
     <string name="image">الصوره</string>
     <string name="forgot_password">هل نسيت كلمة المرور</string>
     <string name="change">تغيير</string>
+    <string name="user_exit_or_might_be_marketer">هذا المستخدم موجود او تم تحويله لتاجر</string>
 
 </resources>

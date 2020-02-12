@@ -95,4 +95,5 @@
     <string name="image">Image</string>
     <string name="forgot_password">Forgot password ?</string>
     <string name="change">Change</string>
+    <string name="user_exit_or_might_be_marketer">User Exists Or Might Be Marketer</string>
 </resources>

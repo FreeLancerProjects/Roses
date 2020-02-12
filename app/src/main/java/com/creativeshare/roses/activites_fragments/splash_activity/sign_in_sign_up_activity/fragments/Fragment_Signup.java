@@ -238,6 +238,9 @@ public class Fragment_Signup extends Fragment implements OnCountryPickerListener
 
                             activity.sendverficationcode(m_phone,code,response.body(),0);
                         }  else {
+if(response.code()==405){
+    Toast.makeText(activity,activity.getResources().getString(R.string.user_exit_or_might_be_marketer),Toast.LENGTH_LONG).show();
+}
 
                             try {
                                 Log.e("Error_code",response.code()+"_"+response.errorBody().string());
