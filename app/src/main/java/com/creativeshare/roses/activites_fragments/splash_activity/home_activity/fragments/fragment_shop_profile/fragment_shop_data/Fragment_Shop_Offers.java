@@ -224,7 +224,7 @@ public class Fragment_Shop_Offers extends Fragment {
 
     public void setproduct(Offer_Model.Data data, RoundedImageView im_cart) {
         this.data=data;
-CreateSignAlertDialog(activity,im_cart);
+//CreateSignAlertDialog(activity,im_cart);
     }
 
     public void CreateSignAlertDialog(Context context, RoundedImageView im_cart) {
