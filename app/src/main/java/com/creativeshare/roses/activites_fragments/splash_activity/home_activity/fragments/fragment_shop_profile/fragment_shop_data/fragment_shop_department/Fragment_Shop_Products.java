@@ -396,7 +396,7 @@ public class Fragment_Shop_Products extends Fragment {
     private void addItemToCart() {
         if(amount>0){
             textNotify.setText(amount + "");
-            textNotify.setVisibility(View.VISIBLE);
+            textNotify.setVisibility(View.GONE);
 
         }
         else {

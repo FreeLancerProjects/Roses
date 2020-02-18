@@ -96,7 +96,7 @@
             android:layout_marginRight="15dp"
             android:background="@drawable/cons_shape2"
             android:orientation="vertical"
-
+android:visibility="gone"
             >
             <LinearLayout
                 android:id="@+id/llll"
@@ -295,6 +295,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/gray3"
+                android:visibility="gone"
                 />
 
     </androidx.core.widget.NestedScrollView>

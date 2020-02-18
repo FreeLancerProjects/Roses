@@ -73,6 +73,7 @@
             android:textSize="13sp"
             android:background="@drawable/not_edt_tv"
             android:layout_gravity="start"
+            android:visibility="gone"
             android:text="0"
             android:textColor="@color/white"
 

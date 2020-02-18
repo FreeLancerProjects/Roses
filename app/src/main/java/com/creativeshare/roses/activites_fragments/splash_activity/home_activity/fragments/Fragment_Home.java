@@ -88,7 +88,7 @@ private ImageView im_cart,im_menu;
         if(amount>0){
 
             textNotify.setText(amount + "");
-            textNotify.setVisibility(View.VISIBLE);
+            textNotify.setVisibility(View.GONE);
 
         }
         else {

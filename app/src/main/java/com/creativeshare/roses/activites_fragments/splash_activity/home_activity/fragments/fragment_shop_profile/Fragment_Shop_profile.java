@@ -121,7 +121,7 @@ public class Fragment_Shop_profile extends Fragment {
         if(amount>0){
 
         textNotify.setText(amount + "");
-            textNotify.setVisibility(View.VISIBLE);
+            textNotify.setVisibility(View.GONE);
 
         }
         else {
