@@ -1,9 +1,12 @@
 package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_shop_profile;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -81,7 +86,8 @@ public class Fragment_Shop_profile extends Fragment {
     private TextView textNotify;
     private double lat,lang;
     private Market_model marketmodel;
-
+    Intent intent ;
+    private static final int REQUEST_PHONE_CALL = 1;
     public static Fragment_Shop_profile newInstance(int id) {
         Fragment_Shop_profile fragment_shop_profile = new Fragment_Shop_profile();
         Bundle bundle = new Bundle();
@@ -261,6 +267,49 @@ ll.setOnClickListener(new View.OnClickListener() {
     }
 });
         getSocialMedia();
+        tv_phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(intent!=null){
+                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ContextCompat.checkSelfPermission(homeActivity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(homeActivity, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                        } else {
+                            startActivity(intent);
+                        }
+                    } else {
+                        startActivity(intent);
+                    }
+                }}
+        });
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_PHONE_CALL: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (homeActivity.checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    Activity#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for Activity#requestPermissions for more details.
+                            return;
+                        }
+                    }
+                    startActivity(intent);
+                }
+                else {
+
+                }
+                return;
+            }
+        }
     }
 
 
@@ -316,6 +365,7 @@ ll.setOnClickListener(new View.OnClickListener() {
         tv_address.setText(body.getAddress());
         tv_phone.setText(body.getPhone());
         tv_titlemain.setText(body.getName());
+        intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", body.getPhone_code().replace("00","+")+body.getPhone(),null));
         Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL + body.getBanner())).fit().placeholder(R.drawable.profile_client).into(im_banner);
         Picasso.with(homeActivity).load(Uri.parse(Tags.IMAGE_URL + body.getLogo())).fit().placeholder(R.drawable.logo).into(im_logo);
         if (body.getMarketServices() != null) {

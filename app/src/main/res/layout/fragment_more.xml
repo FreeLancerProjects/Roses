@@ -296,7 +296,7 @@ android:orientation="horizontal"
             android:id="@+id/ll_bank"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-
+android:visibility="gone"
             >
 
             <ImageView
@@ -335,7 +335,9 @@ android:orientation="horizontal"
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/gray4" />
+            android:background="@color/gray4"
+            android:visibility="gone"
+            />
         <LinearLayout
             android:id="@+id/ll_register_as_a_company"
             android:layout_width="match_parent"
