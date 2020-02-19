@@ -1,5 +1,6 @@
 package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_shop_profile.fragment_shop_data;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -27,10 +28,12 @@ import com.creativeshare.roses.activites_fragments.splash_activity.home_activity
 import com.creativeshare.roses.adapter.Shop_Offers_Adapter;
 import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.Offer_Model;
+import com.creativeshare.roses.models.One_Order_Model;
 import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
+import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -39,6 +42,7 @@ import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -89,9 +93,9 @@ public class Fragment_Shop_Offers extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         market_id = Send_Data.getMarket_id();
-        progBar = view.findViewById(R.id.progBar2);
         ll_no_store = view.findViewById(R.id.ll_no_store);
         rec_depart = view.findViewById(R.id.rec_offers);
+        progBar = view.findViewById(R.id.progBar2);
 
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
@@ -224,7 +228,43 @@ public class Fragment_Shop_Offers extends Fragment {
 
     public void setproduct(Offer_Model.Data data, RoundedImageView im_cart) {
         this.data=data;
+        accept_order();
 //CreateSignAlertDialog(activity,im_cart);
+    }
+    private void accept_order() {
+
+        final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url).setfavourite(userModel.getId()+"",data.getProduct_id()+"").enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                dialog.dismiss();
+                if (response.isSuccessful()) {
+                    Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+
+                } else {
+                    // Common.CreateSignAlertDialog(activity, getString(R.string.failed));
+
+                    try {
+                        Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                try {
+                    dialog.dismiss();
+                    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                    Log.e("Error", t.getMessage());
+                } catch (Exception e) {
+                }
+            }
+        });
     }
 
     public void CreateSignAlertDialog(Context context, RoundedImageView im_cart) {

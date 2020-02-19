@@ -117,6 +117,16 @@ public interface Service {
 
             );
     @FormUrlEncoded
+    @POST("api/myFavouriteProducts")
+    Call<Product_Model> getproducts(
+            @Field("user_id") int user_id
+
+
+
+
+
+    );
+    @FormUrlEncoded
     @POST("api/my-orders/type")
     Call<Order_Model> getorders(
             @Field("page") int page,
@@ -177,6 +187,12 @@ public interface Service {
                                   @Field("email") String email,
                                   @Field("message") String message,
                                   @Field("subject") String subject
+
+    );
+    @FormUrlEncoded
+    @POST("api/product/favourite")
+    Call<ResponseBody> setfavourite(@Field("user_id") String user_id,
+                                  @Field("product_id") String product_id
 
     );
     @GET("api/banks")

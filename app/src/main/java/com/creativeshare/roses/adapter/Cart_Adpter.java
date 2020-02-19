@@ -103,9 +103,10 @@ viewHolder.im_increase.setOnClickListener(new View.OnClickListener() {
             tv_name = itemView.findViewById(R.id.tv_name);
             tv_price = itemView.findViewById(R.id.tv_price);
             tv_amount = itemView.findViewById(R.id.tv_amount);
+            im_produce = itemView.findViewById(R.id.image);
+
             // frameLayout = itemView.findViewById(R.id.image_cart);
             im_delete = itemView.findViewById(R.id.image_delete);
-            im_produce = itemView.findViewById(R.id.image);
             im_increase = itemView.findViewById(R.id.image_increase);
             im_decrease = itemView.findViewById(R.id.image_decrease);
         }

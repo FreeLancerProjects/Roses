@@ -87,7 +87,7 @@ android:inputType="number"
         <Button
             android:id="@+id/btn_add"
             android:layout_width="180dp"
-            android:layout_height="40dp"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/linear_shape"
             android:textColor="@color/colorPrimary"

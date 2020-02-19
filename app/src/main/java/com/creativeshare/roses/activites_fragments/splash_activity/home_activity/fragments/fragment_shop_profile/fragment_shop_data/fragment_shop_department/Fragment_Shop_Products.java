@@ -1,6 +1,7 @@
 package com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_shop_profile.fragment_shop_data.fragment_shop_department;
 
 import android.animation.Animator;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -37,6 +38,7 @@ import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.models.UserModel;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
+import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -46,6 +48,7 @@ import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -93,15 +96,16 @@ public class Fragment_Shop_Products extends Fragment {
     }
 
     public void gettotal() {
-        amount=0;
-        if(preferences.getUserOrder(activity)!=null){
+        amount = 0;
+        if (preferences.getUserOrder(activity) != null) {
 
-        for (int i = 0; i < preferences.getUserOrder(activity).size(); i++) {
-            Add_Order_Model add_order_model = preferences.getUserOrder(activity).get(i);
-            for (int j = 0; j < add_order_model.getOrder_details().size(); j++) {
-                amount += add_order_model.getOrder_details().get(j).getAmount();
+            for (int i = 0; i < preferences.getUserOrder(activity).size(); i++) {
+                Add_Order_Model add_order_model = preferences.getUserOrder(activity).get(i);
+                for (int j = 0; j < add_order_model.getOrder_details().size(); j++) {
+                    amount += add_order_model.getOrder_details().get(j).getAmount();
+                }
             }
-        }}
+        }
         addItemToCart();
 
     }
@@ -201,7 +205,7 @@ public class Fragment_Shop_Products extends Fragment {
                         } else {
                             ll_no_store.setVisibility(View.VISIBLE);
 
-                         //   Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            //   Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             try {
                                 Log.e("Error_code", response.code() + "_" + response.errorBody().string());
                             } catch (IOException e) {
@@ -267,8 +271,44 @@ public class Fragment_Shop_Products extends Fragment {
 
     public void setproduct(Product_Model.Data data, RoundedImageView im_cart) {
         this.data = data;
-      //  CreateSignAlertDialog(activity, im_cart);
+        //  CreateSignAlertDialog(activity, im_cart);
+        accept_order();
+    }
 
+    private void accept_order() {
+
+        final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url).setfavourite(userModel.getId() + "", data.getId() + "").enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                dialog.dismiss();
+                if (response.isSuccessful()) {
+                    Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+
+                } else {
+                    // Common.CreateSignAlertDialog(activity, getString(R.string.failed));
+
+                    try {
+                        Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                try {
+                    dialog.dismiss();
+                    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                    Log.e("Error", t.getMessage());
+                } catch (Exception e) {
+                }
+            }
+        });
     }
 
     public void CreateSignAlertDialog(Context context, RoundedImageView im_cart) {
@@ -394,18 +434,18 @@ public class Fragment_Shop_Products extends Fragment {
     }
 
     private void addItemToCart() {
-        if(amount>0){
+        if (amount > 0) {
             textNotify.setText(amount + "");
             textNotify.setVisibility(View.GONE);
 
-        }
-        else {
+        } else {
             textNotify.setVisibility(View.GONE);
         }
     }
+
     public void showimage(Product_Model.Data data) {
         Intent intent = new Intent(activity, Order_Image_Activity.class);
-        intent.putExtra("detials",data);
+        intent.putExtra("detials", data);
 
         startActivityForResult(intent, 1003);
     }

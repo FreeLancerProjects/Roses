@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/cart"
+            android:text="@string/favourites"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-
+android:visibility="gone"
            >
 
             <ImageView
@@ -69,7 +69,12 @@
 
 
         </LinearLayout>
-
+        <ProgressBar
+            android:id="@+id/progBar2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:visibility="visible" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rec_cart"
             android:layout_width="match_parent"
@@ -84,6 +89,7 @@
         android:layout_height="45dp"
         app:layout_constraintBottom_toTopOf="@+id/bt_com"
         android:layout_marginBottom="8dp"
+        android:visibility="gone"
         />
     <Button
         android:id="@+id/bt_com"

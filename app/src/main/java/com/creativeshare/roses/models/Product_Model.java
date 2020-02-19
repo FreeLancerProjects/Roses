@@ -15,18 +15,17 @@ public class Product_Model  implements Serializable {
         return data;
     }
 
-    public class  Data implements Serializable
-    {
+    public class Data implements Serializable {
         private int id;
-            private String slug;
+        private String slug;
         private String ar_title;
         private String en_title;
         private String ar_des;
         private String en_des;
         private String price;
         private String image;
-           private int market_id;
-            private int cat_id;
+        private int market_id;
+        private int cat_id;
         private String created_at;
         private String updated_at;
         private String cat_en_name;
@@ -117,9 +116,13 @@ public class Product_Model  implements Serializable {
         public List<Offer_Model.Data.Product_images> getProduct_images() {
             return product_images;
         }
+private Market market;
 
-        public class Product_images implements Serializable
-        {
+        public Market getMarket() {
+            return market;
+        }
+
+        public class Product_images implements Serializable {
             private int id;
             private int product_id;
             private String image;
@@ -148,4 +151,11 @@ public class Product_Model  implements Serializable {
         }
     }
 
+    public class Market implements Serializable {
+                private String name;
+
+        public String getName() {
+            return name;
+        }
+    }
 }
