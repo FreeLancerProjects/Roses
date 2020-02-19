@@ -35,23 +35,22 @@
                     android:id="@+id/ll_service"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="70dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginRight="20dp"
                     android:orientation="vertical"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="70dp"
                     tools:ignore="RtlCompat">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/im_depart"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
+                        android:src="@drawable/ic_action_name"
                         app:civ_border_color="@color/colorPrimary"
                         app:civ_border_width="1px"
-                        android:src="@drawable/ic_action_name"
-                        app:civ_circle_background_color="@color/white"
-                        />
+                        app:civ_circle_background_color="@color/white" />
 
                     <TextView
                         android:id="@+id/tv_title"
@@ -96,6 +95,7 @@
                         app:layout_constraintTop_toTopOf="parent"
 
                         />
+
                     <TextView
                         android:id="@+id/tv_phone"
                         android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_name"/>
+                        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
 
                     <LinearLayout
@@ -260,20 +260,21 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:clickable="true"
                         android:layout_marginTop="5dp"
+                        android:clickable="true"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <ImageButton
+                        <ImageView
                             android:id="@+id/cartButtonIV"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:background="@null"
                             android:clickable="false"
-                            android:padding="5dp"
-                            android:scaleType="fitXY"
+                            android:padding="8dp"
+
                             android:src="@drawable/cart"
+                            android:tint="@color/white"
 
                             />
 
@@ -283,14 +284,14 @@
                             android:layout_height="20dp"
                             android:layout_alignLeft="@id/cartButtonIV"
                             android:layout_alignTop="@id/cartButtonIV"
+                            android:layout_gravity="start"
+                            android:background="@drawable/not_edt_tv"
                             android:gravity="center"
                             android:singleLine="true"
-                            android:textSize="13sp"
-                            android:visibility="gone"
-                            android:background="@drawable/not_edt_tv"
-                            android:layout_gravity="start"
                             android:text="0"
                             android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:visibility="gone"
 
                             />
                     </RelativeLayout>

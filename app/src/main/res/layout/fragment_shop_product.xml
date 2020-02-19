@@ -51,15 +51,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         >
 
-        <ImageButton
+        <ImageView
             android:id="@+id/cartButtonIV"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:background="@null"
             android:clickable="false"
+            android:padding="8dp"
+
             android:src="@drawable/cart"
-            android:scaleType="fitXY"
-            android:padding="5dp"
+            android:tint="@color/white"
             />
 
         <TextView

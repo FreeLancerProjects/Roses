@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -82,6 +83,7 @@ pr=Preferences.getInstance();
                 //Log.e("lll", data1.getAr_title());
 
             }
+
             ((MyHolder) holder).tv_price.setText(context.getResources().getString(R.string.price) + " " + data1.getPrice());
             ((MyHolder) holder).cons_cart.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -107,7 +109,13 @@ pr=Preferences.getInstance();
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_cart);
 
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_offer);
+if(data1.getIs_favourite()==0){
+    ((MyHolder) holder).imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_cart));
+}
+else {
+    ((MyHolder) holder).imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.cart));
 
+}
 
             //Log.e("msg",advertsing.getMain_image());
         } else {
@@ -127,7 +135,7 @@ pr=Preferences.getInstance();
         private ConstraintLayout cons_cart;
         private View view;
         private RoundedImageView im_offer,im_cart;
-
+private ImageView imageView;
         public MyHolder(View itemView) {
             super(itemView);
             cons_cart = itemView.findViewById(R.id.cons_cart);
@@ -136,7 +144,7 @@ pr=Preferences.getInstance();
 
             im_offer = itemView.findViewById(R.id.im_offer);
             im_cart = itemView.findViewById(R.id.im_cart);
-
+imageView=itemView.findViewById(R.id.image);
             tv_offer = itemView.findViewById(R.id.tv_offer);
            view = itemView.findViewById(R.id.view);
             tv_offer.setVisibility(View.GONE);

@@ -154,6 +154,9 @@ public class Fragment_Shop_profile extends Fragment {
         im_logo = view.findViewById(R.id.image);
         im_back = view.findViewById(R.id.arrow);
         tv_titlemain = view.findViewById(R.id.tv_titlemain);
+        if(userModel==null){
+            destView.setVisibility(View.GONE);
+        }
         if (current_lang.equals("en")) {
             im_back.setRotation(180.0f);
         }

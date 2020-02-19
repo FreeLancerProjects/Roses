@@ -100,6 +100,7 @@ dataList=new ArrayList<>();
         homeActivity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(homeActivity);
+
         Paper.init(homeActivity);
         cuurent_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
         textNotify=view.findViewById(R.id.textNotify);
@@ -114,7 +115,9 @@ dataList=new ArrayList<>();
         rec_depart.setDrawingCacheEnabled(true);
         rec_depart.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         rec_depart.setItemViewCacheSize(25);
-
+if(userModel==null){
+    im_cart.setVisibility(View.GONE);
+}
 
         gridLayoutManager = new GridLayoutManager(homeActivity, 2);
         rec_depart.setLayoutManager(gridLayoutManager);

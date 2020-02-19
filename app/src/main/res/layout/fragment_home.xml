@@ -36,10 +36,10 @@
             android:id="@+id/im_cart"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:padding="4dp"
-            android:src="@drawable/cart"
-            android:scaleType="fitXY"
+            android:padding="8dp"
 
+            android:src="@drawable/cart"
+android:tint="@color/white"
             />
         <TextView
             android:id="@+id/textNotify"

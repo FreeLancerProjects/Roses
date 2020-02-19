@@ -166,7 +166,9 @@ public class Fragment_Shop_Products extends Fragment {
                 }
             }
         });
-
+        if(userModel==null){
+            destView.setVisibility(View.GONE);
+        }
         rec_depart.setAdapter(shop_offers_adapter);
         im_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,7 +274,11 @@ public class Fragment_Shop_Products extends Fragment {
     public void setproduct(Product_Model.Data data, RoundedImageView im_cart) {
         this.data = data;
         //  CreateSignAlertDialog(activity, im_cart);
-        accept_order();
+        if(userModel!=null){
+        accept_order();}
+        else {
+            Common.CreateUserNotSignInAlertDialog(activity);
+        }
     }
 
     private void accept_order() {

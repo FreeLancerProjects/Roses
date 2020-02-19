@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -104,7 +105,13 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                 }
             });
+            if(data1.getIs_favourite()==0){
+                ((MyHolder) holder).imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_cart));
+            }
+            else {
+                ((MyHolder) holder).imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.cart));
 
+            }
             //Log.e("msg",advertsing.getMain_image());
         } else {
             LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;
@@ -122,7 +129,9 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private TextView tv_name, tv_price, tv_offer;
         private RoundedImageView im_offer,im_cart;
         private ConstraintLayout cons_cart;
-private View view;
+        private ImageView imageView;
+
+        private View view;
         public MyHolder(View itemView) {
             super(itemView);
 
@@ -131,6 +140,7 @@ private View view;
 
             im_offer = itemView.findViewById(R.id.im_offer);
             im_cart = itemView.findViewById(R.id.im_cart);
+            imageView=itemView.findViewById(R.id.image);
 
             tv_offer = itemView.findViewById(R.id.tv_offer);
             cons_cart = itemView.findViewById(R.id.cons_cart);

@@ -18,6 +18,7 @@ public class Offer_Model implements Serializable {
 
     public class  Data implements Serializable
         {
+            private int is_favourite;
            private int id;
                private String ar_title;
             private String en_title;
@@ -30,6 +31,7 @@ public class Offer_Model implements Serializable {
                private int market_id;
                 private int product_id;
                 private String created_at;
+
             private String updated_at;
             private String product_en_title;
             private String product_ar_title;
@@ -46,6 +48,10 @@ public class Offer_Model implements Serializable {
 
             public int getId() {
                 return id;
+            }
+
+            public int getIs_favourite() {
+                return is_favourite;
             }
 
             public String getAr_title() {

@@ -228,8 +228,11 @@ public class Fragment_Shop_Offers extends Fragment {
 
     public void setproduct(Offer_Model.Data data, RoundedImageView im_cart) {
         this.data=data;
-        accept_order();
-//CreateSignAlertDialog(activity,im_cart);
+        if(userModel!=null){
+            accept_order();}
+        else {
+            Common.CreateUserNotSignInAlertDialog(activity);
+        }//CreateSignAlertDialog(activity,im_cart);
     }
     private void accept_order() {
 

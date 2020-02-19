@@ -25,6 +25,7 @@ public class Product_Model  implements Serializable {
         private String price;
         private String image;
         private int market_id;
+        private int is_favourite;
         private int cat_id;
         private String created_at;
         private String updated_at;
@@ -36,6 +37,10 @@ public class Product_Model  implements Serializable {
         private String phone_of_market;
         private String address_of_market;
         private List<Offer_Model.Data.Product_images> product_images;
+
+        public int getIs_favourite() {
+            return is_favourite;
+        }
 
         public int getId() {
             return id;
