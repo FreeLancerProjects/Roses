@@ -27,6 +27,7 @@ import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
 import com.creativeshare.roses.adapter.Shop_Offers_Adapter;
 import com.creativeshare.roses.models.Add_Order_Model;
+import com.creativeshare.roses.models.FavouriteIdsModel;
 import com.creativeshare.roses.models.Offer_Model;
 import com.creativeshare.roses.models.One_Order_Model;
 import com.creativeshare.roses.models.Send_Data;
@@ -58,6 +59,7 @@ public class Fragment_Shop_Offers extends Fragment {
     private ProgressBar progBar;
     private RecyclerView rec_depart;
     private List<Offer_Model.Data> dataList;
+    private List<Integer> ids;
     private Shop_Offers_Adapter shop_offers_adapter;
     private GridLayoutManager gridLayoutManager;
     private LinearLayout ll_no_store;
@@ -81,6 +83,8 @@ public class Fragment_Shop_Offers extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shop_offers, container, false);
         initview(view);
         getDepartments();
+        if(userModel!=null){
+        getFavids();}
         return view;
     }
 
@@ -89,6 +93,7 @@ public class Fragment_Shop_Offers extends Fragment {
 
     private void initview(View view) {
         dataList = new ArrayList<>();
+        ids=new ArrayList<>();
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
@@ -108,7 +113,7 @@ public class Fragment_Shop_Offers extends Fragment {
 
         gridLayoutManager = new GridLayoutManager(activity, 2);
         rec_depart.setLayoutManager(gridLayoutManager);
-        shop_offers_adapter = new Shop_Offers_Adapter(dataList, activity, this);
+        shop_offers_adapter = new Shop_Offers_Adapter(dataList,ids, activity, this);
         rec_depart.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -245,8 +250,9 @@ public class Fragment_Shop_Offers extends Fragment {
 
                 dialog.dismiss();
                 if (response.isSuccessful()) {
-                    Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-
+                    if (userModel!=null){
+                        getFavids();
+                    }
                 } else {
                     // Common.CreateSignAlertDialog(activity, getString(R.string.failed));
 
@@ -361,4 +367,50 @@ public class Fragment_Shop_Offers extends Fragment {
         preferences.create_update_order(activity, add_order_models);
 
     }
+
+    public void getFavids() {
+        //   Common.CloseKeyBoard(homeActivity, edt_name);
+        // rec_sent.setVisibility(View.GONE);
+        Api.getService(Tags.base_url)
+                .getfavouriteids(userModel.getId())
+                .enqueue(new Callback<FavouriteIdsModel>() {
+                    @Override
+                    public void onResponse(Call<FavouriteIdsModel> call, Response<FavouriteIdsModel> response) {
+                        if (response.isSuccessful() && response.body() != null && response.body().getIds() != null) {
+                            ids.clear();
+                            ids.addAll(response.body().getIds());
+                            if (response.body().getIds().size() > 0) {
+                                // rec_sent.setVisibility(View.VISIBLE);
+
+                                shop_offers_adapter.notifyDataSetChanged();
+                                //   total_page = response.body().getMeta().getLast_page();
+
+                            } else {
+
+                            }
+                        } else {
+
+                            //   Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            try {
+                                Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FavouriteIdsModel> call, Throwable t) {
+                        try {
+
+
+                           // Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Log.e("error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
+    }
+
 }

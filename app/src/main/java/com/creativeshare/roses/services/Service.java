@@ -7,6 +7,7 @@ import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.AppDataModel;
 import com.creativeshare.roses.models.BankDataModel;
 import com.creativeshare.roses.models.Catogries_Model;
+import com.creativeshare.roses.models.FavouriteIdsModel;
 import com.creativeshare.roses.models.Market_model;
 import com.creativeshare.roses.models.Markets_Model;
 import com.creativeshare.roses.models.Offer_Model;
@@ -120,11 +121,11 @@ public interface Service {
     @POST("api/myFavouriteProducts")
     Call<Product_Model> getproducts(
             @Field("user_id") int user_id
-
-
-
-
-
+    );
+    @FormUrlEncoded
+    @POST("api/favouriteProductsIds")
+    Call<FavouriteIdsModel> getfavouriteids(
+            @Field("user_id") int user_id
     );
     @FormUrlEncoded
     @POST("api/my-orders/type")

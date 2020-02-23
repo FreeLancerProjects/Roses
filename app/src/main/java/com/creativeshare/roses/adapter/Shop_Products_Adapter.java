@@ -42,13 +42,15 @@ public class Shop_Products_Adapter extends RecyclerView.Adapter<RecyclerView.Vie
     private String current_lang;
     private Fragment_Shop_Products fragment_shop_products;
 private Preferences pr;
-    public Shop_Products_Adapter(List<Product_Model.Data> data, Context context, Fragment fragment) {
+private List<Integer> ids;
+    public Shop_Products_Adapter(List<Product_Model.Data> data,List<Integer> ids, Context context, Fragment fragment) {
 
         this.data = data;
         this.context = context;
         activity = (HomeActivity) context;
         this.fragment = fragment;
         Paper.init(activity);
+        this.ids=ids;
         current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
 pr=Preferences.getInstance();
 
@@ -109,7 +111,7 @@ pr=Preferences.getInstance();
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_cart);
 
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_offer);
-if(data1.getIs_favourite()==0){
+if(!ids.contains(data1.getId())){
     ((MyHolder) holder).imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_cart));
 }
 else {

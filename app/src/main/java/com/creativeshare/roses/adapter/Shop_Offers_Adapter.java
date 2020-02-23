@@ -26,6 +26,7 @@ import com.creativeshare.roses.tags.Tags;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Locale;
 
@@ -42,13 +43,14 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private String current_lang;
     private Fragment_Shop_Offers fragment_shop_offers;
     private Preferences pr;
-
-    public Shop_Offers_Adapter(List<Offer_Model.Data> data, Context context, Fragment fragment) {
+    private List<Integer> ids;
+    public Shop_Offers_Adapter(List<Offer_Model.Data> data,List<Integer> ids, Context context, Fragment fragment) {
 
         this.data = data;
         this.context = context;
         activity = (HomeActivity) context;
         this.fragment = fragment;
+        this.ids=ids;
         Paper.init(activity);
         current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         pr = Preferences.getInstance();
@@ -105,7 +107,7 @@ public class Shop_Offers_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                 }
             });
-            if(data1.getIs_favourite()==0){
+            if(!ids.contains(data1.getProduct_id())){
                 ((MyHolder) holder).imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_cart));
             }
             else {
