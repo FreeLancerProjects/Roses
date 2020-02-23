@@ -25,7 +25,7 @@ import androidx.core.content.ContextCompat;
 
 
 import com.creativeshare.roses.R;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.home_activity.activity.HomeActivity;
 
 import java.io.File;
 

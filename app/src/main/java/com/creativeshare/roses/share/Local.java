@@ -5,11 +5,13 @@ import android.app.Application;
 import android.content.Context;
 
 
+import androidx.multidex.MultiDexApplication;
+
 import com.creativeshare.roses.language.Language;
 import com.creativeshare.roses.preferences.Preferences;
 
 
-public class Local extends Application {
+public class Local extends MultiDexApplication {
     @Override
     protected void attachBaseContext(Context base)
     {

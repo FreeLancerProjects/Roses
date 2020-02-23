@@ -2,18 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.creativeshare.roses">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission
-        android:name="android.permission.GET_TASKS"
-        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.GET_TASKS" >
+    </uses-permission>
+    <uses-sdk tools:overrideLibrary="android.support.v17.leanback" />
 
     <application
         android:largeHeap="true"
@@ -33,13 +34,27 @@
             android:name="org.apache.http.legacy"
             android:required="false"/>
 
+        <service
+            android:name=".notifications.FireBaseMessaging"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_api_key" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/white" />
         <activity
             android:name=".activites_fragments.splash_activity.splash.SplashActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -51,7 +66,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activites_fragments.splash_activity.sign_in_sign_up_activity.activity.Login_Activity"
+            android:name=".activites_fragments.sign_in_sign_up_activity.activity.Login_Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
@@ -63,7 +78,7 @@
 
         </activity>
         <activity
-            android:name=".activites_fragments.splash_activity.home_activity.activity.HomeActivity"
+            android:name=".activites_fragments.home_activity.activity.HomeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 

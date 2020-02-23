@@ -1,22 +1,19 @@
 package com.creativeshare.roses.adapter;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.Fragment_Home;
+import com.creativeshare.roses.activites_fragments.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.home_activity.fragments.Fragment_Home;
 import com.creativeshare.roses.models.Catogries_Model;
 import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.tags.Tags;
@@ -26,7 +23,6 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 import java.util.Locale;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
 public class Shop_Department_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

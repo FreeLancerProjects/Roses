@@ -223,5 +223,13 @@ public interface Service {
 
 
     );
+    @FormUrlEncoded
+    @POST("api/phone-tokens")
+    Call<ResponseBody> updateToken(
+            @Field("user_id") int user_id,
+            @Field("phone_token") String phone_token,
+
+            @Field("software_type") int software_type
+    );
 }
 

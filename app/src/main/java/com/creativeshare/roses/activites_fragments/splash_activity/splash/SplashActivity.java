@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.creativeshare.roses.R;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.activites_fragments.splash_activity.sign_in_sign_up_activity.activity.Login_Activity;
+import com.creativeshare.roses.activites_fragments.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.sign_in_sign_up_activity.activity.Login_Activity;
 import com.creativeshare.roses.language.Language;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.tags.Tags;

@@ -18,15 +18,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_shop_profile.fragment_shop_data.Fragment_Shop_Offers;
+import com.creativeshare.roses.activites_fragments.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.home_activity.fragments.fragment_shop_profile.fragment_shop_data.Fragment_Shop_Offers;
 import com.creativeshare.roses.models.Offer_Model;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.tags.Tags;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Locale;
 

@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.activity.HomeActivity;
-import com.creativeshare.roses.activites_fragments.splash_activity.home_activity.fragments.fragment_cart_complete.Fragment_Cart;
+import com.creativeshare.roses.activites_fragments.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.home_activity.fragments.fragment_cart_complete.Fragment_Cart;
 import com.creativeshare.roses.models.Add_Order_Model;
 import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.preferences.Preferences;
