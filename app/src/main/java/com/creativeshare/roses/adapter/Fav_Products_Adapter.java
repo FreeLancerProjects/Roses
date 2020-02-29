@@ -39,11 +39,12 @@ public class Fav_Products_Adapter extends RecyclerView.Adapter<RecyclerView.View
     private Fragment fragment;
     private String current_lang;
 private Preferences pr;
-    public Fav_Products_Adapter(List<Product_Model.Data> data, Context context) {
+    public Fav_Products_Adapter(List<Product_Model.Data> data, Context context,Fragment fragment) {
 
         this.data = data;
         this.context = context;
         activity = (HomeActivity) context;
+        this.fragment=fragment;
         Paper.init(activity);
         current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
 pr=Preferences.getInstance();

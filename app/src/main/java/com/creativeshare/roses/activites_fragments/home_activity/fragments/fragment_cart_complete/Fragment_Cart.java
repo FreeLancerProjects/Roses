@@ -151,7 +151,7 @@ private ImageView im_back;
 //    bt_com.setVisibility(View.INVISIBLE);
 //}
         cart_adpter = new Data_Cart_Adapter(add_order_model, activity,this);
-            fav_products_adapter=new Fav_Products_Adapter(dataList,activity);
+            fav_products_adapter=new Fav_Products_Adapter(dataList,activity,this);
             cart.setLayoutManager(new GridLayoutManager(activity, 1));
             cart.setAdapter(fav_products_adapter);
 bt_com.setOnClickListener(new View.OnClickListener() {

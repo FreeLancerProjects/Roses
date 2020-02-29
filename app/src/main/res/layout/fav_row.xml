@@ -51,7 +51,24 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <FrameLayout
+                    android:id="@+id/fl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   android:layout_gravity="end"
 
+                    >
+
+                    <ImageView
+                        android:id="@+id/image_delete"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:gravity="center"
+                        android:src="@drawable/close_red_color"
+                        android:padding="6dp"
+                        />
+
+                </FrameLayout>
 
 
                     <TextView
@@ -185,24 +202,6 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-    <FrameLayout
-        android:id="@+id/fl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
 
-        >
-
-        <ImageView
-            android:id="@+id/image_delete"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:gravity="center"
-            android:src="@drawable/close_red_color"
-            android:padding="6dp"
-            />
-
-    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
