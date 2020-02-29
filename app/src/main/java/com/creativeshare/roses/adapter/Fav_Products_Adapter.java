@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.roses.R;
 import com.creativeshare.roses.activites_fragments.home_activity.activity.HomeActivity;
+import com.creativeshare.roses.activites_fragments.home_activity.fragments.fragment_cart_complete.Fragment_Cart;
 import com.creativeshare.roses.models.Product_Model;
 import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.tags.Tags;
@@ -34,6 +35,7 @@ public class Fav_Products_Adapter extends RecyclerView.Adapter<RecyclerView.View
     private List<Product_Model.Data> data;
     private Context context;
     private HomeActivity activity;
+    private Fragment_Cart fragment_cart;
     private Fragment fragment;
     private String current_lang;
 private Preferences pr;
@@ -82,7 +84,15 @@ pr=Preferences.getInstance();
             ((MyHolder) holder).tv_amount.setText(context.getResources().getString(R.string.store_name)+":"+data1.getMarket().getName()+ "");
 
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL + data1.getImage())).fit().into(((MyHolder) holder).im_produce);
-
+((MyHolder) holder).imagedelete.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(fragment instanceof  Fragment_Cart){
+            fragment_cart=(Fragment_Cart)fragment;
+            fragment_cart.setproduct(data.get(holder.getLayoutPosition()));
+        }
+    }
+});
 
 
             //Log.e("msg",advertsing.getMain_image());
@@ -100,7 +110,7 @@ pr=Preferences.getInstance();
 
     public class MyHolder extends RecyclerView.ViewHolder {
         private TextView tv_name, tv_price, tv_amount;
-        private ImageView im_produce;
+        private ImageView im_produce,imagedelete;
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -108,6 +118,7 @@ pr=Preferences.getInstance();
             tv_price = itemView.findViewById(R.id.tv_price);
             tv_amount = itemView.findViewById(R.id.tv_amount);
             im_produce = itemView.findViewById(R.id.image);
+            imagedelete = itemView.findViewById(R.id.image_delete);
 
         }
 

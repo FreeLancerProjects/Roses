@@ -1,6 +1,7 @@
 package com.creativeshare.roses.activites_fragments.home_activity.fragments.fragment_cart_complete;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ import com.creativeshare.roses.activites_fragments.home_activity.activity.HomeAc
 import com.creativeshare.roses.adapter.Data_Cart_Adapter;
 import com.creativeshare.roses.adapter.Fav_Products_Adapter;
 import com.creativeshare.roses.models.Add_Order_Model;
+import com.creativeshare.roses.models.Offer_Model;
 import com.creativeshare.roses.models.Product_Model;
 import com.creativeshare.roses.models.Send_Data;
 import com.creativeshare.roses.models.UserModel;
@@ -33,6 +35,7 @@ import com.creativeshare.roses.preferences.Preferences;
 import com.creativeshare.roses.remote.Api;
 import com.creativeshare.roses.share.Common;
 import com.creativeshare.roses.tags.Tags;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,6 +43,7 @@ import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,6 +72,7 @@ private ImageView im_back;
     private double total_cost;
     private TextView tv_total;
     private ProgressBar progBar;
+    private Product_Model.Data data;
 
     public static Fragment_Cart newInstance() {
         return new Fragment_Cart();
@@ -262,5 +267,50 @@ bt_com.setOnClickListener(new View.OnClickListener() {
                 });
 
     }
+    public void setproduct(Product_Model.Data data) {
+        this.data=data;
+        if(userModel!=null){
+            accept_order();}
+        else {
+            Common.CreateUserNotSignInAlertDialog(activity);
+        }//CreateSignAlertDialog(activity,im_cart);
+    }
+    private void accept_order() {
 
+        final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url).setfavourite(userModel.getId()+"",data.getId()+"").enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                dialog.dismiss();
+                if (response.isSuccessful()) {
+                    if (userModel!=null){
+                       // getFavids();
+                        dataList.remove(data);
+                        fav_products_adapter.notifyDataSetChanged();
+                    }
+                } else {
+                    // Common.CreateSignAlertDialog(activity, getString(R.string.failed));
+
+                    try {
+                        Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                try {
+                    dialog.dismiss();
+                    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                    Log.e("Error", t.getMessage());
+                } catch (Exception e) {
+                }
+            }
+        });
+    }
 }
