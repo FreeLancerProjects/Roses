@@ -224,105 +224,101 @@ public class Fragment_Edit_profile extends Fragment {
         final Dialog dialog = Common.createProgressDialog(homeActivity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-        if (uri == null&&userModel.getLogo()!=null) {
+        if (uri == null && userModel.getLogo() != null) {
             uri = Uri.parse(Tags.IMAGE_URL + userModel.getLogo());
 
         }
 
 
-       // Log.e("data",name+" "+phone+" "+phonecode+" "+pass+" "+uri.toString());
-if(uri!=null){
-        try {
+        // Log.e("data",name+" "+phone+" "+phonecode+" "+pass+" "+uri.toString());
+        if (uri != null) {
+            try {
 
-            RequestBody token_part = Common.getRequestBodyText(userModel.getId() + "");
-            RequestBody name_part = Common.getRequestBodyText(name);
-            RequestBody phone_part = Common.getRequestBodyText(phone);
-            RequestBody phone_code_part = Common.getRequestBodyText( phonecode.replace("+", "00"));
-            RequestBody pass_part = Common.getRequestBodyText(pass);
-            MultipartBody.Part avatar_part = Common.getMultiPart(homeActivity, uri, "logo");
-            Api.getService(Tags.base_url)
-                    .udateprofile(token_part, name_part, phone_part, phone_code_part, pass_part, avatar_part)
-                    .enqueue(new Callback<UserModel>() {
-                        @Override
-                        public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                RequestBody token_part = Common.getRequestBodyText(userModel.getId() + "");
+                RequestBody name_part = Common.getRequestBodyText(name);
+                RequestBody phone_part = Common.getRequestBodyText(phone);
+                RequestBody phone_code_part = Common.getRequestBodyText(phonecode.replace("+", "00"));
+                RequestBody pass_part = Common.getRequestBodyText(pass);
+                MultipartBody.Part avatar_part = Common.getMultiPart(homeActivity, uri, "logo");
+                Api.getService(Tags.base_url)
+                        .udateprofile(token_part, name_part, phone_part, phone_code_part, pass_part, avatar_part)
+                        .enqueue(new Callback<UserModel>() {
+                            @Override
+                            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
 
-                            dialog.dismiss();
+                                dialog.dismiss();
 
-                            if (response.isSuccessful()) {
+                                if (response.isSuccessful()) {
 
-                                if (response.body() != null) {
-                                    Toast.makeText(homeActivity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-                                    userModel = response.body();
-                                    preferences.create_update_userdata(homeActivity, userModel);
-                                    updateprofile();
+                                    if (response.body() != null) {
+                                        Toast.makeText(homeActivity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                                        userModel = response.body();
+                                        preferences.create_update_userdata(homeActivity, userModel);
+                                        updateprofile();
 
+                                    }
+
+                                } else {
+                                    Common.CreateSignAlertDialog(homeActivity, getString(R.string.something));
                                 }
 
-                            } else {
-                                Common.CreateSignAlertDialog(homeActivity, getString(R.string.something));
                             }
 
-                        }
+                            @Override
+                            public void onFailure(Call<UserModel> call, Throwable t) {
+                                try {
+                                    dialog.dismiss();
+                                    Log.e("Error", t.getMessage());
+                                    Toast.makeText(homeActivity, R.string.failed, Toast.LENGTH_SHORT).show();
 
-                        @Override
-                        public void onFailure(Call<UserModel> call, Throwable t) {
-                            try {
-                                dialog.dismiss();
-                                Log.e("Error", t.getMessage());
-                                Toast.makeText(homeActivity, R.string.failed, Toast.LENGTH_SHORT).show();
-
-                            } catch (Exception e) {
+                                } catch (Exception e) {
+                                }
                             }
+                        });
+            } catch (
+                    Exception e) {
+            }
+        } else {
+            Api.getService(Tags.base_url).updateprofile(userModel.getId() + "", name, phone, phonecode.replace("+", "00"), pass).enqueue(new Callback<UserModel>() {
+                @Override
+                public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                    dialog.dismiss();
+                    if (response.isSuccessful() && response.body() != null) {
+                        Toast.makeText(homeActivity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                        userModel = response.body();
+                        preferences.create_update_userdata(homeActivity, userModel);
+                        updateprofile();
+
+                        // Common.CreateSignAlertDialog(homeActivity, getResources().getString(R.string.suc));
+
+                        // edt_pass.setText("");
+                        updateprofile();
+                    } else {
+
+                        try {
+                            Toast.makeText(homeActivity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                            Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                    });
-        } catch (
-                Exception e) {
-        }
-    }
-
-    else {
-    Api.getService(Tags.base_url).updateprofile(userModel.getId()+"",  name, phone, phonecode.replace("+", "00"),  pass).enqueue(new Callback<UserModel>() {
-        @Override
-        public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-            dialog.dismiss();
-            if (response.isSuccessful() && response.body() != null) {
-                Toast.makeText(homeActivity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-                userModel = response.body();
-                preferences.create_update_userdata(homeActivity, userModel);
-                updateprofile();
-
-                // Common.CreateSignAlertDialog(homeActivity, getResources().getString(R.string.suc));
-
-                // edt_pass.setText("");
-                 updateprofile();
-            } else {
-
-                try {
-                    Toast.makeText(homeActivity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-
-                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    }
                 }
-            }
+
+                @Override
+                public void onFailure(Call<UserModel> call, Throwable t) {
+                    dialog.dismiss();
+                    try {
+                        Toast.makeText(homeActivity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                        Log.e("Error", t.getMessage());
+                    } catch (Exception e) {
+
+                    }
+
+                }
+            });
         }
-
-        @Override
-        public void onFailure(Call<UserModel> call, Throwable t) {
-            dialog.dismiss();
-            try {
-                Toast.makeText(homeActivity, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                Log.e("Error", t.getMessage());
-            }
-            catch (Exception e){
-
-            }
-
-        }
-    });
     }
-    }
-
 
 
 }

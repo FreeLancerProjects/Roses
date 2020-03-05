@@ -67,13 +67,13 @@ public class Login_Activity extends AppCompatActivity {
     private Runnable mUpdateResults;
     private FragmentForgotpassword fragment_forgotpass;
     private FragmentNewPassword fragmentnewpass;
-private int type;
+    private int type;
 
     @Override
-    protected void attachBaseContext(Context base)
-    {
+    protected void attachBaseContext(Context base) {
         super.attachBaseContext(Language.updateResources(base, Preferences.getInstance().getLanguage(base)));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,21 +85,17 @@ private int type;
         if (savedInstanceState == null) {
             fragmentManager = this.getSupportFragmentManager();
 
-            if (preferences.isLanguageSelected(this))
-            {
-                if (preferences.getSession(this).equals(Tags.session_login))
-                {
+            if (preferences.isLanguageSelected(this)) {
+                if (preferences.getSession(this).equals(Tags.session_login)) {
                     NavigateToHomeActivity();
-                }else
-                    {
-                        DisplayFragmentLogin();
+                } else {
+                    DisplayFragmentLogin();
 
-                    }
-
-            }else
-                {
-                   DisplayFragmentLanguage();
                 }
+
+            } else {
+                DisplayFragmentLanguage();
+            }
 
         }
 
@@ -109,11 +105,9 @@ private int type;
 
     private void getDataFromIntent() {
         Intent intent = getIntent();
-        if (intent!=null && intent.hasExtra("sign_up"))
-        {
-            boolean isSign_in = intent.getBooleanExtra("sign_up",true);
-            if (!isSign_in)
-            {
+        if (intent != null && intent.hasExtra("sign_up")) {
+            boolean isSign_in = intent.getBooleanExtra("sign_up", true);
+            if (!isSign_in) {
                 DisplayFragmentSignUp();
 
             }
@@ -126,61 +120,61 @@ private int type;
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_dialog_login);
         LinearLayout ll = dialog.findViewById(R.id.ll);
-        verificationCodeEditText=dialog.findViewById(R.id.edt_ver);
+        verificationCodeEditText = dialog.findViewById(R.id.edt_ver);
         ll.setBackgroundResource(R.drawable.custom_bg_login);
-        Button confirm=dialog.findViewById(R.id.btn_confirm);
+        Button confirm = dialog.findViewById(R.id.btn_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vercode=verificationCodeEditText.getText().toString();
-                if(TextUtils.isEmpty(vercode)){
+                vercode = verificationCodeEditText.getText().toString();
+                if (TextUtils.isEmpty(vercode)) {
                     verificationCodeEditText.setError(getResources().getString(R.string.field_req));
-                }
-                else {
-                    Log.e("code",vercode);
+                } else {
+                    Log.e("code", vercode);
                     verfiycode(vercode);
 
                 }
             }
         });
     }
+
     private void authn() {
 
-        mAuth= FirebaseAuth.getInstance();
-        mCallbacks=new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+        mAuth = FirebaseAuth.getInstance();
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             @Override
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 //  super.onCodeSent(s, forceResendingToken);
-                id=s;
-                mResendToken=forceResendingToken;
-                Log.e("authid",id);
+                id = s;
+                mResendToken = forceResendingToken;
+                Log.e("authid", id);
             }
 
             @Override
-            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) { ;
+            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                ;
 //phoneAuthCredential.getProvider();
 
-                if(phoneAuthCredential.getSmsCode()!=null){
+                if (phoneAuthCredential.getSmsCode() != null) {
                     verificationCodeEditText.setText(phoneAuthCredential.getSmsCode());
-                    siginwithcredental(phoneAuthCredential);}
-                else {
+                    siginwithcredental(phoneAuthCredential);
+                } else {
                     siginwithcredental(phoneAuthCredential);
                 }
-
 
 
             }
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
-                Log.e("llll",e.getMessage());
+                Log.e("llll", e.getMessage());
             }
 
             @Override
             public void onCodeAutoRetrievalTimeOut(@NonNull String s) {
                 //   super.onCodeAutoRetrievalTimeOut(s);
-                Log.e("data",s);
+                Log.e("data", s);
                 //   mUpdateResults.run();
 
 
@@ -188,16 +182,18 @@ private int type;
         };
 
     }
+
     private void verfiycode(String code) {
 
-        if(id!=null){
-            PhoneAuthCredential credential=PhoneAuthProvider.getCredential(id,code);
+        if (id != null) {
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(id, code);
 
-            siginwithcredental(credential);}
+            siginwithcredental(credential);
+        }
     }
 
     private void siginwithcredental(PhoneAuthCredential credential) {
-        dialo = Common.createProgressDialog(this,getString(R.string.wait));
+        dialo = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialo.setProgressStyle(R.style.MyAlertDialogStyle);
         dialog.show();
@@ -206,15 +202,15 @@ private int type;
             public void onComplete(@NonNull Task<AuthResult> task) {
                 dialo.dismiss();
                 dialog.dismiss();
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
 
                     // activity.NavigateToHomeActivity();
                     //  mAuth.signOut();
 
                     mAuth.signOut();
-                    if(type==0){
-                    NavigateToHomeActivity();}
-                    else {
+                    if (type == 0) {
+                        NavigateToHomeActivity();
+                    } else {
                         DisplayFragmentNewPass(userModel);
                     }
                 }
@@ -223,21 +219,21 @@ private int type;
         });
     }
 
-    public void sendverficationcode(String phone, String phone_code, UserModel userModel,int type) {
+    public void sendverficationcode(String phone, String phone_code, UserModel userModel, int type) {
         dialog.show();
-        this.userModel=userModel;
-        this.type=type;
-        Log.e("kkk",phone_code+phone);
+        this.userModel = userModel;
+        this.type = type;
+        Log.e("kkk", phone_code + phone);
         mUpdateResults = new Runnable() {
             public void run() {
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(phone_code+phone,10, TimeUnit.SECONDS, TaskExecutors.MAIN_THREAD,  mCallbacks);
+                PhoneAuthProvider.getInstance().verifyPhoneNumber(phone_code + phone, 10, TimeUnit.SECONDS, TaskExecutors.MAIN_THREAD, mCallbacks);
             }
         };
         mUpdateResults.run();
 
     }
-    private void DisplayFragmentLanguage()
-    {
+
+    private void DisplayFragmentLanguage() {
 
         fragment_language = Fragment_Language.newInstance();
 
@@ -248,11 +244,10 @@ private int type;
         }
     }
 
-    public void DisplayFragmentLogin()
-    {
+    public void DisplayFragmentLogin() {
 
         fragment_counter += 1;
-            fragmentLogin = Fragment_Login.newInstance();
+        fragmentLogin = Fragment_Login.newInstance();
 
         if (fragmentLogin.isAdded()) {
             fragmentManager.beginTransaction().show(fragmentLogin).commit();
@@ -260,8 +255,8 @@ private int type;
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragmentLogin, "fragmentLogin").addToBackStack("fragmentLogin").commit();
         }
     }
-    public void DisplayFragmentForgotPass()
-    {
+
+    public void DisplayFragmentForgotPass() {
 
         fragment_counter += 1;
         if (fragment_forgotpass == null) {
@@ -273,8 +268,8 @@ private int type;
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragment_forgotpass, "fragment_forgotpass").addToBackStack("fragment_forgotpass").commit();
         }
     }
-    public void DisplayFragmentNewPass(UserModel userModel)
-    {
+
+    public void DisplayFragmentNewPass(UserModel userModel) {
 
         fragment_counter += 1;
         if (fragmentnewpass == null) {
@@ -286,8 +281,8 @@ private int type;
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragmentnewpass, "fragmentnewpass").addToBackStack("fragmentnewpass").commit();
         }
     }
-    public void DisplayFragmentSignUp()
-    {
+
+    public void DisplayFragmentSignUp() {
 
         fragment_counter += 1;
 
@@ -300,8 +295,8 @@ private int type;
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragmentSignup, "fragmentSignup").addToBackStack("fragmentSignup").commit();
         }
     }
-    public void DisplayFragmentUpgrade()
-    {
+
+    public void DisplayFragmentUpgrade() {
 
         fragment_counter += 1;
 
@@ -315,15 +310,13 @@ private int type;
         }
     }
 
-    public void NavigateToHomeActivity()
-    {
+    public void NavigateToHomeActivity() {
         preferences = Preferences.getInstance();
-        preferences.create_update_userdata(this,userModel);
+        preferences.create_update_userdata(this, userModel);
         Intent intent = new Intent(Login_Activity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
-
 
 
     public void Back() {
@@ -342,11 +335,11 @@ private int type;
 
 
     public void RefreshActivity(String selected_language) {
-        Log.e("lang",selected_language);
-        Paper.book().write("lang",selected_language);
-        preferences.create_update_language(this,selected_language);
+        Log.e("lang", selected_language);
+        Paper.book().write("lang", selected_language);
+        preferences.create_update_language(this, selected_language);
         preferences.setIsLanguageSelected(this);
-        Language.setNewLocale(this,selected_language);
+        Language.setNewLocale(this, selected_language);
         Intent intent = getIntent();
         finish();
         startActivity(intent);

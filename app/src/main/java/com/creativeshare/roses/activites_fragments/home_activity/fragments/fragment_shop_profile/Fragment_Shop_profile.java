@@ -270,7 +270,12 @@ ll.setOnClickListener(new View.OnClickListener() {
         tv_phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(intent!=null){
+
+                Log.e("nnnn",tv_phone.getText()+"00");
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tv_phone.getText()));
+                startActivity(intent);
+
+                /*if(intent!=null){
                     if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (ContextCompat.checkSelfPermission(homeActivity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                             ActivityCompat.requestPermissions(homeActivity, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
@@ -279,8 +284,9 @@ ll.setOnClickListener(new View.OnClickListener() {
                         }
                     } else {
                         startActivity(intent);
-                    }
-                }}
+                   } }*/
+
+            }
         });
     }
     @Override
