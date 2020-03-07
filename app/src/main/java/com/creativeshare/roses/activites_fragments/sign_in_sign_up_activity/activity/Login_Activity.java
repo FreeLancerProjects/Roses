@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -298,7 +299,11 @@ public class Login_Activity extends AppCompatActivity {
 
     public void DisplayFragmentUpgrade() {
 
-        fragment_counter += 1;
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://rosemart.store/market_register"));
+        startActivity(browserIntent);
+
+
+       /* fragment_counter += 1;
 
         if (fragment_upgrade == null) {
             fragment_upgrade = Fragment_Upgrade.newInstance();
@@ -307,7 +312,7 @@ public class Login_Activity extends AppCompatActivity {
             fragmentManager.beginTransaction().show(fragment_upgrade).commit();
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragment_upgrade, "fragment_upgrade").addToBackStack("fragment_upgrade").commit();
-        }
+        }*/
     }
 
     public void NavigateToHomeActivity() {
