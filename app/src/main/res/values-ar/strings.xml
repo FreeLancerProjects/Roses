@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">بوكيه</string>
-    <string name="map_api_key">AIzaSyDpKuqnfRbLGJRfy3lUZc_WqWLsd73yis8</string>
+    <string name="map_api_key">AIzaSyArjmbYWTWZhDFFtPOLRLKYwjtBDkOEGrY</string>
     <string name="code">كود</string>
     <string name="sign_up2">انشاء حساب </string>
     <string name="login">تسجيل الدخول</string>

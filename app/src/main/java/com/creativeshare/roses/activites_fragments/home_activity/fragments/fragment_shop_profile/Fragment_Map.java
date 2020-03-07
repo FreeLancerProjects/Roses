@@ -35,7 +35,7 @@ private HomeActivity activity;
     private String cuurent_language;
     private GoogleMap mMap;
     private Marker marker;
-    private float zoom = 15.0f;
+    private float zoom = 12.0f;
     private Preferences preferences;
     public static Fragment_Map newInstance() {
         Fragment_Map fragment = new Fragment_Map();
