@@ -3,6 +3,7 @@ package com.creativeshare.roses.activites_fragments.home_activity.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -341,7 +342,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void DisplayFragmentUgrade() {
 
-        fragment_count += 1;
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://rosemart.store/market_register"));
+        startActivity(browserIntent);
+
+
+    /*    fragment_count += 1;
         fragment_upgrade = Fragment_Upgrade.newInstance();
 
 
@@ -350,7 +355,7 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_upgrade, "fragment_upgrade").addToBackStack("fragment_upgrade").commit();
 
-        }
+        }*/
 
 
     }
