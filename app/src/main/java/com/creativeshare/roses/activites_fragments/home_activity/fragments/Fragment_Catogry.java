@@ -81,8 +81,7 @@ public class Fragment_Catogry extends Fragment implements  GoogleApiClient.OnCon
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
     private Location location;
-    private static final int MAP_ZOOM_LEVEL = 4;
-    private Marker marker;
+
 
     public static Fragment_Catogry newInstance() {
         Fragment_Catogry fragment = new Fragment_Catogry();
@@ -229,7 +228,7 @@ public class Fragment_Catogry extends Fragment implements  GoogleApiClient.OnCon
             Markets_Model.Data data = body.getData().get(i);
             AddMarker(data.getLatitude(), data.getLongitude(), i, data.getName());
         }
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(body.getData().get(0).getLatitude(), body.getData().get(0).getLongitude()), zoom));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lang), zoom));
 
 
     }
@@ -238,8 +237,9 @@ public class Fragment_Catogry extends Fragment implements  GoogleApiClient.OnCon
     @Override
     public void onMapReady(GoogleMap googleMap) {
         if (googleMap != null) {
+          //  Log.e(";llllll",googleMap.getMapType()+"");
             mMap = googleMap;
-//    mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(activity, R.raw.maps));
+   // mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(activity, R.raw.maps));
             mMap.setTrafficEnabled(false);
             mMap.setBuildingsEnabled(false);
             mMap.setIndoorEnabled(true);
@@ -280,8 +280,7 @@ mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
     private void AddMarker(double lat, double lang, int index, String title) {
         Marker marker;
 
-        this.lat = lat;
-        this.lang = lang;
+
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(new LatLng(lat, lang));
         marker = mMap.addMarker(markerOptions.title(title));
